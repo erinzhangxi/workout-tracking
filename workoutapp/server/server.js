@@ -31,4 +31,7 @@ app.get('/', function (req, res) {
     res.send('Hello World')
 })
 
+var userService = require('./services/user.service.server')(app);
+
+
 app.listen(4000);

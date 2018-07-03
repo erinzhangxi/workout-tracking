@@ -6,7 +6,19 @@ var userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
-    sections: [String]
+    workouts: [],
+    meals: [
+        {
+            food: String,
+            calories: Number
+        }
+    ],
+    weights: [
+        {
+            date: Date,
+            weight: Number
+        }
+    ]
 }, {collection: 'user'});
 
 module.exports = userSchema;

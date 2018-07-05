@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Home, Login } from './components/screens'
+import { Home, Register } from './components/screens'
+import { createStackNavigator } from 'react-navigation'
 
-const App = props => {
-    return <Home />;
 
-};
+const App = createStackNavigator({
+    Home,Register
+
+});
+
 
 export default App;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
+import BottomNavBar from '../../elements/BottomNavBar'
 
 class Home extends Component {
     static navigationOptions = {
@@ -17,9 +18,9 @@ class Home extends Component {
     }
 
     componentDidMount() {
-       this.workoutService
-           .findAllWorkouts()
-           .then((workouts) => {this.setWorkouts(workouts)});
+        this.workoutService
+            .findAllWorkouts()
+            .then((workouts) => {this.setWorkouts(workouts)});
     }
 
     handleSubmit() {
@@ -44,6 +45,9 @@ class Home extends Component {
                     ))}
                 </View>
 
+                <View style={{flex: 1, justifyContent: 'flex-end'}}>
+                    <BottomNavBar/>
+                </View>
             </ScrollView>
         )
     }

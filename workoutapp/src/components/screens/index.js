@@ -1,9 +1,10 @@
-import Home from './Home.js'
+import Login from './Login.js'
 import Register from './Register.js'
+import Home from './Home.js'
 
 
 export {
-    Home,
-    Register
-
+    Login,
+    Register,
+    Home
 }

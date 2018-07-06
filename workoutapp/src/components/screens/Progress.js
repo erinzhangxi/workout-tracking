@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import {View, ScrollView, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
-import workoutService from '../../services/WorkoutService'
 import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-
-class Home extends Component {
+class Progress extends Component {
     static navigationOptions = {
-        title: 'Home',
+        title: 'Progress',
         tabBarIcon: ({ focused, tintColor }) => {
-            return <Icon size={24} color="#611dce" name='home-variant' />;
+            return <Icon size={24} color="#611dce" name='chart-line' />;
         },
         tabBarOptions: {
             activeTintColor: 'tomato',
@@ -21,47 +19,34 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workouts: []
+
         }
-        this.workoutService = workoutService.instance;
     }
 
     componentDidMount() {
-        this.workoutService
-            .findAllWorkouts()
-            .then((workouts) => {this.setWorkouts(workouts)});
     }
 
-    handleSubmit() {
-        alert("register");
-    }
-    setWorkouts = (workouts) => {
-        this.setState({
-            workouts: workouts
-        });
-    }
 
     render() {
         return (
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.header]}>
-                    <Text h4 style={{color: 'white'}}>Workouts history </Text>
+                    <Text h4 style={{color: 'white'}}>Progress </Text>
                 </View>
                 <View style={[styles.boxContainer, styles.statsContainer ]}>
 
-                    <Text h4 style={styles.statsFont}>Completed</Text>
-                    <Text h4 style={styles.statsFont}>Total Duration</Text>
-                    <Text h4 style={styles.statsFont}>Calories burned</Text>
+                    <Text h4 style={styles.statsFont}>Last Weight</Text>
+                    <Text h4 style={styles.statsFont}>Current Weight</Text>
+                    <Text h4 style={styles.statsFont}>Weight Changed</Text>
 
                 </View>
-                <View style={[styles.boxContainer, styles.workoutsContent]}>
+                <View style={[styles.boxContainer, styles.MealContainerStyleTwo]}>
 
-                    {this.state.workouts.map((workout, index) => (
-                        <ListItem
-                            title={workout.title}
-                            subtitle={workout.duration}
-                            key={index}/>
-                    ))}
+                    <Text h4 style={{color:'white'}}>Progress Chart </Text>
+                </View>
+                <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
+
+                    <Text h4 style={{color:'#565656'}}>From Goal </Text>
                 </View>
 
 
@@ -83,27 +68,33 @@ export const styles = StyleSheet.create({
         // alignItems: 'center',
         // justifyContent: 'center'
     },
+    statsContainer: {
+        flex: 2,
+        backgroundColor: '#FFEEE4',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
     header: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#CE6D39'
     },
-    statsContainer: {
-        flex: 2,
-        backgroundColor: '#F17F42',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
+    MealContainerStyleTwo: {
+        flex: 5,
+        backgroundColor: '#F17F42'
     },
-    workoutsContent: {
-        flex: 7,
+    MealContainerStyleOne: {
+        flex: 2,
         backgroundColor: '#FFEEE4'
     },
     statsFont: {
-        color: 'white',
+        color: '#565656',
         fontSize: 17
     }
 })
 
-export default Home
+
+
+export default Progress

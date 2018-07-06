@@ -5,12 +5,18 @@ import workoutService from '../../services/WorkoutService'
 import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+// const Meal = ({props}) => {
+//     return (
+//         <Text h4 style={{color:'white'}}>Breakfast </Text>
+//
+//     )
+// }
 
-class Home extends Component {
+class FoodLog extends Component {
     static navigationOptions = {
-        title: 'Home',
+        title: 'Food Logs',
         tabBarIcon: ({ focused, tintColor }) => {
-            return <Icon size={24} color="#611dce" name='home-variant' />;
+            return <Icon size={24} color="#611dce" name='food-apple' />;
         },
         tabBarOptions: {
             activeTintColor: 'tomato',
@@ -21,47 +27,36 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workouts: []
         }
-        this.workoutService = workoutService.instance;
     }
 
     componentDidMount() {
-        this.workoutService
-            .findAllWorkouts()
-            .then((workouts) => {this.setWorkouts(workouts)});
+
     }
 
     handleSubmit() {
         alert("register");
     }
-    setWorkouts = (workouts) => {
-        this.setState({
-            workouts: workouts
-        });
-    }
+
 
     render() {
         return (
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.header]}>
-                    <Text h4 style={{color: 'white'}}>Workouts history </Text>
+                    <Text h4 style={{color: 'white'}}>Today </Text>
                 </View>
-                <View style={[styles.boxContainer, styles.statsContainer ]}>
-
-                    <Text h4 style={styles.statsFont}>Completed</Text>
-                    <Text h4 style={styles.statsFont}>Total Duration</Text>
-                    <Text h4 style={styles.statsFont}>Calories burned</Text>
+                <View style={[styles.boxContainer, styles.MealContainerStyleOne ]}>
+                    {/*<Meal/>*/}
+                    <Text h4 style={{color:'#565656'}}>Breakfast </Text>
 
                 </View>
-                <View style={[styles.boxContainer, styles.workoutsContent]}>
+                <View style={[styles.boxContainer, styles.MealContainerStyleTwo]}>
 
-                    {this.state.workouts.map((workout, index) => (
-                        <ListItem
-                            title={workout.title}
-                            subtitle={workout.duration}
-                            key={index}/>
-                    ))}
+                    <Text h4 style={{color:'white'}}>Lunch </Text>
+                </View>
+                <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
+
+                    <Text h4 style={{color:'#565656'}}>Dinner </Text>
                 </View>
 
 
@@ -89,21 +84,16 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#CE6D39'
     },
-    statsContainer: {
+    MealContainerStyleOne: {
         flex: 2,
-        backgroundColor: '#F17F42',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-    workoutsContent: {
-        flex: 7,
         backgroundColor: '#FFEEE4'
+
     },
-    statsFont: {
-        color: 'white',
-        fontSize: 17
+    MealContainerStyleTwo: {
+        flex: 2,
+        backgroundColor: '#F17F42'
     }
 })
 
-export default Home
+
+export default FoodLog

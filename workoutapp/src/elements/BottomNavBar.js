@@ -47,7 +47,7 @@ class BottomNavBar extends Component {
     renderTab = ({ tab, isActive }) => (
         <IconTab
             isActive={isActive}
-            showBadge={tab.key === 'movies-tv'}
+            showBadge={tab.key === 'progress'}
             renderBadge={() => <Badge>2</Badge>}
             key={tab.key}
             label={tab.label}

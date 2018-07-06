@@ -12,25 +12,25 @@ class BottomNavBar extends Component {
     tabs = [
         {
             key: 'workouts',
-            icon: 'gamepad-variant',
+            icon: 'home-variant',
             label: 'workouts',
             barColor:'#c9ebff'
         },
         {
             key: 'food',
-            icon: 'movie',
+            icon: 'food-apple',
             label: 'food',
             barColor:'#c9ebff'
         },
         {
             key: 'progress',
-            icon: 'gamepad-variant',
+            icon: 'chart-line',
             label: 'progress',
             barColor:'#c9ebff'
         },
         {
             key: 'profile',
-            icon: 'gamepad-variant',
+            icon: 'account',
             label: 'profile',
             barColor:'#c9ebff'
         }
@@ -57,17 +57,17 @@ class BottomNavBar extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1,  backgroundColor: 'white'  }}>
+            <View style={{ flex: 1}}>
                 <View style={{ flex: 1}}>
-                    {/* Your screen contents depending on current tab. */}
-                    <Text>Bottom Nav</Text>
-                    <BottomNavigation
-                        onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-                        renderTab={this.renderTab}
-                        tabs={this.tabs}
-                        activeTab={this.state.activeTab}
-                    />
                 </View>
+                {/* Your screen contents depending on current tab. */}
+                <BottomNavigation
+                    onTabPress={newTab => this.setState({ activeTab: newTab.key })}
+                    renderTab={this.renderTab}
+                    tabs={this.tabs}
+                    activeTab={this.state.activeTab}
+                />
+
 
             </View>
         )

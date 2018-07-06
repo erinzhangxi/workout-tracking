@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import BottomNavBar from '../../elements/BottomNavBar'
@@ -34,23 +34,31 @@ class Home extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <Text h4>Workouts history </Text>
-                <View style={{padding: 15}}>
+            <View style={styles.homeContainer}>
+                <ScrollView>
+                    <Text h4>Workouts history </Text>
+
                     {this.state.workouts.map((workout, index) => (
                         <ListItem
                             title={workout.title}
                             subtitle={workout.duration}
                             key={index}/>
                     ))}
-                </View>
 
-                <View style={{flex: 1, justifyContent: 'flex-end'}}>
-                    <BottomNavBar/>
-                </View>
-            </ScrollView>
+
+                </ScrollView>
+                <BottomNavBar/>
+            </View>
         )
     }
 }
+
+export const styles = StyleSheet.create({
+    homeContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    }
+})
 
 export default Home

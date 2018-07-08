@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
-import workoutService from '../../services/WorkoutService'
-import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-// const Meal = ({props}) => {
-//     return (
-//         <Text h4 style={{color:'white'}}>Breakfast </Text>
-//
-//     )
-// }
+const HEADER_COLOR = '#CE6D39';
 
 class FoodLog extends Component {
     static navigationOptions = {
@@ -34,8 +27,9 @@ class FoodLog extends Component {
 
     }
 
-    handleSubmit() {
-        alert("register");
+    handleAddMeal = () => {
+        alert("add meal");
+        this.props.navigation.navigate('Food Log Editor');
     }
 
 
@@ -44,6 +38,9 @@ class FoodLog extends Component {
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.header]}>
                     <Text h4 style={{color: 'white'}}>Today </Text>
+                    <Button title='+'
+                            backgroundColor={HEADER_COLOR}
+                            onPress={this.handleAddMeal}></Button>
                 </View>
                 <View style={[styles.boxContainer, styles.MealContainerStyleOne ]}>
                     {/*<Meal/>*/}
@@ -82,7 +79,8 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#CE6D39'
+        backgroundColor: HEADER_COLOR,
+        flexDirection: 'row'
     },
     MealContainerStyleOne: {
         flex: 2,

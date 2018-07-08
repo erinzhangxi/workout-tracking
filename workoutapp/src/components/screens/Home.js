@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import {View, ScrollView, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
-import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+const HEADER_COLOR = '#CE6D39';
 
 class Home extends Component {
+
     static navigationOptions = {
         title: 'Home',
         tabBarIcon: ({ focused, tintColor }) => {
@@ -32,13 +33,16 @@ class Home extends Component {
             .then((workouts) => {this.setWorkouts(workouts)});
     }
 
-    handleSubmit() {
-        alert("register");
+    handleAddWorkout = () => {
+        alert("add workout");
     }
     setWorkouts = (workouts) => {
         this.setState({
             workouts: workouts
         });
+    }
+    logout = () => {
+        this.props.navigation.navigate("Login");
     }
 
     render() {
@@ -46,6 +50,9 @@ class Home extends Component {
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.header]}>
                     <Text h4 style={{color: 'white'}}>Workouts history </Text>
+                    <Button title='+'
+                            backgroundColor={HEADER_COLOR}
+                            onPress={this.handleAddWorkout}></Button>
                 </View>
                 <View style={[styles.boxContainer, styles.statsContainer ]}>
 
@@ -63,6 +70,18 @@ class Home extends Component {
                             key={index}/>
                     ))}
                 </View>
+                <Button
+                    onPress={this.logout}
+                    icon={
+                        <Icon
+                            name='arrow-right'
+                            size={15}
+                            color='white'
+                        />
+                    }
+                    title='Log out'
+                />
+
 
 
                 {/*<BottomNavBar/>*/}
@@ -87,7 +106,8 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#CE6D39'
+        backgroundColor: HEADER_COLOR,
+        flexDirection: 'row'
     },
     statsContainer: {
         flex: 2,

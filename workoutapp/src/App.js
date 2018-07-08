@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-import { Login, Register, Home, FoodLog, Progress, Profile } from './components/screens'
-import { createStackNavigator } from 'react-navigation'
-import { createBottomTabNavigator } from 'react-navigation';
-//
-//
-// const App = createStackNavigator({
-//     Login: Login,
-//     Register: Register,
-//     Home: Home,
-//     FoodLog: FoodLog
-//
-// });
+import { Login, Register, Home, FoodLog, Progress, Profile, FoodLogEditor } from './components/screens'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+
+const HomeStacks = createStackNavigator({
+    Home: Home,
+    Login: Login,
+    Register: Register,
+    FoodLogEditor: FoodLogEditor
+
+});
 
 const App = createBottomTabNavigator({
-    Home: { screen: Home },
+    Home: { screen:  HomeStacks},
     FoodLog: { screen: FoodLog },
     Progress: { screen: Progress },
     Profile: { screen: Profile }

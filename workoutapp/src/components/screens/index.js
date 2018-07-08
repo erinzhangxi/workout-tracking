@@ -4,6 +4,7 @@ import Home from './Home.js'
 import FoodLog from './FoodLog.js'
 import Progress from './Progress.js'
 import Profile from './Profile.js'
+import FoodLogEditor from './FoodLogEditor.js'
 
 
 export {
@@ -12,5 +13,6 @@ export {
     Home,
     FoodLog,
     Progress,
-    Profile
+    Profile,
+    FoodLogEditor
 }

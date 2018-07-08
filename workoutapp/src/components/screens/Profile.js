@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
-import workoutService from '../../services/WorkoutService'
-import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
 
 class Profile extends Component {
     static navigationOptions = {
@@ -33,8 +32,16 @@ class Profile extends Component {
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.headerContainer]}>
                     <Text h4 style={{color: 'white'}}>Profile</Text>
+                    <Icon
+                        name='settings-outline'
+                        size={20}
+                        color={'white'}/>}
                 </View>
                 <View style={[styles.boxContainer, styles.userContainer]}>
+                    <Image source={PROFILE_PICTURE}
+                           style={{
+                               width: 40,
+                               height: 40}}/>
                     <Text h4 style={styles.userFont}>username</Text>
                     <Text h4 style={styles.userFont}>Age</Text>
                     <Text h4 style={styles.userFont}>Current Weight</Text>
@@ -61,11 +68,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#CE6D39',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'row'
     },
     userContainer: {
         flex: 2,
         backgroundColor: '#F17F42',
+        alignItems: 'flex-end'
 
     },
     boxThree: {
@@ -75,7 +84,7 @@ export const styles = StyleSheet.create({
     userFont: {
         color: '#565656',
         fontSize: 17
-}
+    }
 })
 
 export default Profile

@@ -28,8 +28,7 @@ class FoodLog extends Component {
     }
 
     handleAddMeal = () => {
-        alert("add meal");
-        this.props.navigation.navigate('Food Log Editor');
+        this.props.navigation.navigate('FoodLogEditor');
     }
 
 

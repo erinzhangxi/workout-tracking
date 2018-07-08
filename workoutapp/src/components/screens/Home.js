@@ -34,7 +34,7 @@ class Home extends Component {
     }
 
     handleAddWorkout = () => {
-        alert("add workout");
+      this.props.navigation.navigate("WorkoutEditor");
     }
     setWorkouts = (workouts) => {
         this.setState({

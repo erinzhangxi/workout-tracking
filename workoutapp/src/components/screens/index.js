@@ -5,6 +5,7 @@ import FoodLog from './FoodLog.js'
 import Progress from './Progress.js'
 import Profile from './Profile.js'
 import FoodLogEditor from './FoodLogEditor.js'
+import WorkoutEditor from './WorkoutEditor.js'
 
 
 export {
@@ -14,5 +15,6 @@ export {
     FoodLog,
     Progress,
     Profile,
-    FoodLogEditor
+    FoodLogEditor,
+    WorkoutEditor
 }

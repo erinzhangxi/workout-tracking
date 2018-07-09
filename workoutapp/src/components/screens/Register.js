@@ -1,43 +1,86 @@
 import React, { Component } from 'react'
-import { ScrollView } from 'react-native';
+import {ScrollView, StyleSheet, TextInput} from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import UserService from '../../services/UserService.js'
+import cookie from 'react-cookies'
 
 class Register extends Component {
     static navigationOptions = {
         title: 'Register'
     }
+
     constructor(props) {
         super(props)
+        this.state = {
+            email: '',
+            username: '',
+            password: ''
+        }
+        this.userService = UserService.instance;
     }
 
+
     handleSubmit() {
-        alert("register");
+        let user = {
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password
+        }
+
+        this.userService
+            .createUser(user)
+            .then((res) => {
+                if (res.status === 500) {
+                    alert('Sorry, that username is already taken')
+                } else {
+                    cookie.save('user', JSON.stringify(res))
+                    console.log(res);
+                    this.props.navigation.navigate("Home");
+                }
+            })
     }
+
+    // validate = (text) => {
+    //     this.setState({
+    //             username: text
+    //         }
+    //     );
+    // }
+
+    updateForm = (newState) => {
+        this.setState(newState)
+    }
+
 
     render() {
         return (
             <ScrollView>
                 <FormLabel>Email</FormLabel>
-                <FormInput ref={(input) => {this.email = input}}
-                           placeholder='email'/>
+                <FormInput
+                    onChangeText={text => this.updateForm({email: text})}
+                    value={this.state.email}
+                    placeholder='email'/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
                 <FormLabel>Username</FormLabel>
                 <FormInput
-                    ref={input => this.username = input}
+                    onChangeText={text => this.updateForm({username: text})}
+                    value={this.state.username}
                     placeholder='username'/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
 
                 <FormLabel>Password</FormLabel>
                 <FormInput
-                    ref={input => this.password = input}
+                    onChangeText={text => this.updateForm({password: text})}
+                    value={this.state.password}
                     placeholder='password'/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
                 <FormLabel>Confirm Password</FormLabel>
                 <FormInput
-                    ref={input => this.password2 = input}
+                    onChangeText={text => this.updateForm({password2: text})}
+                    value={this.state.password2}
                     placeholder='please type in the same password'/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
@@ -50,5 +93,10 @@ class Register extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+
+})
+
 
 export default Register

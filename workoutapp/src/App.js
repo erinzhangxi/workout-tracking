@@ -5,9 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 const HomeStacks = createStackNavigator({
     Home: Home,
     Login: Login,
-    WorkoutEditor: WorkoutEditor
-    // Register: Register,
-    // FoodLogEditor: FoodLogEditor
+    WorkoutEditor: WorkoutEditor,
+    Register: Register
 
 });
 

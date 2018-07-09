@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import cookie from "react-cookies";
+import UserService from "../../services/UserService";
 
 class Login extends Component {
     static navigationOptions = {
@@ -9,35 +11,55 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
+        this.state =
+            {
+                username: '',
+                password: ''
+            }
+        this.userService = UserService.instance;
 
     }
+
     handleSubmit() {
-        this.props.navigation.navigate('Home');
+        let user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+
+        this.userService
+            .login(user)
+            .then(res => {
+
+                cookie.save('user', JSON.stringify(res));
+                this.props.navigation.navigate('Home');
+
+            })
     }
 
+    updateForm = (newState) => {
+        this.setState(newState)
+    }
     render() {
         return (
             <ScrollView>
                 {/*<FixedHeader/>*/}
                 <View style={styles.homeContainer}>
                     <FormLabel>Username</FormLabel>
-                    <FormInput ref={(input) => {this.username = input}}
-                               placeholder='username'
-                               containerStyle={styles.inputContainer}
-                               inputStyle={styles.inputBox}/>
+                    <FormInput  onChangeText={text => this.updateForm({username: text})}
+                                value={this.state.username}
+                                placeholder='username'/>
                     <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
                     <FormLabel>Password</FormLabel>
                     <FormInput
-                        ref={input => this.password = input}
-                        placeholder='password'
-                        containerStyle={styles.inputContainer}
-                        inputStyle={styles.inputBox}/>
+                        onChangeText={text => this.updateForm({password: text})}
+                        value={this.state.password}
+                        placeholder='password'/>
                     <FormValidationMessage>{'This field is required'}</FormValidationMessage>
                     <Button
                         title='Login'
                         onPress={this.handleSubmit.bind(this)}/>
-                    <Text>Don't have an account?
+                    <Text h5>Don't have an account?
                     </Text>
 
                     <Button title="Sign up here"
@@ -53,25 +75,12 @@ class Login extends Component {
 }
 
 export const styles = StyleSheet.create({
-    inputBox: {
-        height: 60,
-        backgroundColor: "#fff",
-        borderColor: "#6495ED",
-        borderWidth: 2,
-        borderRadius: 15
-    },
-    inputContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 6,
-        marginBottom: 10,
-        height: 56
-    },
-    homeContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+    // homeContainer: {
+    //     flex: 1,
+    //     flexDirection: 'column',
+    //     justifyContent: 'center',
+    //     alignItems: 'center'
+    // }
 })
 
 export default Login

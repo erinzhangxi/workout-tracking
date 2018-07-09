@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-    const USER_API_URL =
+const USER_API_URL =
     'http://localhost:4000/api/user';
 
 class UserService {
@@ -28,6 +28,23 @@ class UserService {
         }).then(function (response) {
             return response.json();
         })}
+
+    login(user) {
+        return fetch('http://localhost:4000/api/login', {
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        })
+            .then(response => {
+                if (response.status === 404) {
+                    alert('Login credentials incorrect')
+                } else {
+                    return response.json()
+                }
+            })
+    }
 }
 
 export default UserService;

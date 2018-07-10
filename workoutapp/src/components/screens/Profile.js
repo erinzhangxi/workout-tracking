@@ -3,6 +3,7 @@ import {View, Image, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
+import cookie from "react-cookies";
 
 class Profile extends Component {
     static navigationOptions = {
@@ -19,13 +20,26 @@ class Profile extends Component {
         super(props);
 
         this.state = {
-
+            username: '',
+            age: '',
+            weight: ''
         }
     }
 
     componentDidMount() {
+        var user = cookie.load('user');
+        if(user) {
+            this.setProfile(user.username, user.age, user.currentWeight);
+        }
     }
 
+    setProfile = (username, age, currentWeight) => {
+        this.setState({
+            username: username,
+            age: age,
+            currentWeight: currentWeight
+        })
+    }
 
     render() {
         return (
@@ -42,9 +56,9 @@ class Profile extends Component {
                            style={{
                                width: 40,
                                height: 40}}/>
-                    <Text h4 style={styles.userFont}>username</Text>
-                    <Text h4 style={styles.userFont}>Age</Text>
-                    <Text h4 style={styles.userFont}>Current Weight</Text>
+                    <Text h4 style={styles.userFont}>{this.state.username}</Text>
+                    <Text h4 style={styles.userFont}>Age {this.state.age}</Text>
+                    <Text h4 style={styles.userFont}>Current Weight {this.state.currentWeight}</Text>
                 </View>
                 <View style={[styles.boxContainer, styles.boxThree]}>
                     <Text h3>Box Three</Text>

@@ -14,7 +14,9 @@ class Register extends Component {
         this.state = {
             email: '',
             username: '',
-            password: ''
+            password: '',
+            age: '',
+            currentWeight: ''
         }
         this.userService = UserService.instance;
     }
@@ -24,7 +26,9 @@ class Register extends Component {
         let user = {
             email: this.state.email,
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            age: this.state.age,
+            currentWeight: this.state.currentWeight
         }
 
         this.userService
@@ -83,6 +87,21 @@ class Register extends Component {
                     value={this.state.password2}
                     placeholder='please type in the same password'/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
+
+
+                <FormLabel>Age</FormLabel>
+                <FormInput
+                    onChangeText={text => this.updateForm({age: text})}
+                    value={this.state.age}
+                    placeholder='Age'/>
+
+
+                <FormLabel>Current Weight</FormLabel>
+                <FormInput
+                    onChangeText={text => this.updateForm({currentWeight: text})}
+                    value={this.state.currentWeight}
+                    placeholder='Current Weight'/>
+
 
                 <Button
                     title='Register'

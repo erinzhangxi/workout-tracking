@@ -30,6 +30,13 @@ function updateUser(userId, newUser) {
     return userModel.update({_id: userId}, {$set:newUser});
 }
 
+function addWorkoutToUser(userId, workoutId) {
+    return userModel.update(
+        {_id: userId},
+        { $push: {workouts: workoutId}}
+    );
+}
+
 var api = {
     createUser: createUser,
     findAllUsers: findAllUsers,
@@ -37,7 +44,8 @@ var api = {
     findUserByCredentials: findUserByCredentials,
     findUserByUsername: findUserByUsername,
     deleteUser: deleteUser,
-    updateUser: updateUser
+    updateUser: updateUser,
+    addWorkoutToUser: addWorkoutToUser
 };
 
 module.exports = api;

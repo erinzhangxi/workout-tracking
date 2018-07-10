@@ -59,6 +59,7 @@ class Home extends Component {
                 <View style={[styles.boxContainer, styles.header]}>
                     <Text h4 style={styles.titleFont}>Workouts history </Text>
                     <Button title='+'
+                           buttonStyle={{backgroundColor: colors.lightcharcoal}}
                             onPress={this.handleAddWorkout}></Button>
                 </View>
                 <View style={[styles.boxContainer, styles.statsContainer ]}>
@@ -133,10 +134,12 @@ export const styles = StyleSheet.create({
     },
     statsFont: {
         color: 'white',
+        fontSize: 18
 
     },
     titleFont: {
-        color: colors.white
+        color: colors.white,
+        fontSize: 16
     },
     button: {
         backgroundColor: colors.green

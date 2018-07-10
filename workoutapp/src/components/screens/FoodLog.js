@@ -43,7 +43,7 @@ class FoodLog extends Component {
                 <View style={[styles.boxContainer, styles.header]}>
                     <Text h4 style={{color: 'white'}}>Today </Text>
                     <Button title='+'
-                            backgroundColor= {colors.gray}
+                            backgroundColor= {colors.lightcharcoal}
                             onPress={this.handleAddMeal}></Button>
                 </View>
                 <View style={[styles.boxContainer, styles.MealContainerStyleOne ]}>

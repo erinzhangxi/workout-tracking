@@ -18,6 +18,7 @@ const colors = {
     ypsDark: '#47546E',
     yps: '#637599',
     ypsLight: '#7B92BF',
-    cosmic: '#963D32'
+    cosmic: '#963D32',
+    backgroundLight: '#EFEFF4'
 };
 export default colors;

@@ -18,12 +18,16 @@
     "react-navigation": "^2.6.0",
     "react-navigation-material-bottom-tabs": "^0.3.0"
   },
+  "rnpm": {
+    "assets": ["./src/assets/fonts"]
+  },
   "devDependencies": {
     "babel-jest": "23.2.0",
     "babel-preset-react-native": "4.0.0",
     "jest": "23.2.0",
     "react-test-renderer": "16.3.1"
   },
+
   "jest": {
     "preset": "react-native"
   }

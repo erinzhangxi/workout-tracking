@@ -3,10 +3,17 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import colors from 'Colors';
 
 class Progress extends Component {
     static navigationOptions = {
         title: 'Progress',
+        headerTitleStyle: {
+            color: colors.white
+        },
+        headerStyle: {
+            backgroundColor: colors.charcoal
+        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='chart-line' />;
         },
@@ -30,9 +37,6 @@ class Progress extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.header]}>
-                    <Text h4 style={{color: 'white'}}>Progress </Text>
-                </View>
                 <View style={[styles.boxContainer, styles.statsContainer ]}>
 
                     <Text h4 style={styles.statsFont}>Last Weight</Text>
@@ -59,7 +63,8 @@ class Progress extends Component {
 export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: colors.charcoal
         // justifyContent: 'space-between',
         // padding: 20
     },
@@ -70,24 +75,24 @@ export const styles = StyleSheet.create({
     },
     statsContainer: {
         flex: 2,
-        backgroundColor: '#FFEEE4',
+        backgroundColor: colors.yps,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center'
     },
-    header: {
+    /*header: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#CE6D39'
-    },
+        backgroundColor: colors.lightcharcoal
+    },*/
     MealContainerStyleTwo: {
         flex: 5,
-        backgroundColor: '#F17F42'
+        backgroundColor: colors.ypsLight
     },
     MealContainerStyleOne: {
         flex: 2,
-        backgroundColor: '#FFEEE4'
+        backgroundColor: colors.ypsDark
     },
     statsFont: {
         color: '#565656',

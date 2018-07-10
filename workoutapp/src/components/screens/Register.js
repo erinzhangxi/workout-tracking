@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, TextInput} from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import UserService from '../../services/UserService.js'
 import cookie from 'react-cookies'
+import colors from 'Colors';
 
 class Register extends Component {
     static navigationOptions = {

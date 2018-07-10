@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Picker, View, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import colors from 'Colors';
 
 class FoodLogEditor extends Component {
     static navigationOptions = {

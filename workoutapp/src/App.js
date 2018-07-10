@@ -16,12 +16,19 @@ const FoodLogsStacks = createStackNavigator({
     FoodLogEditor: FoodLogEditor
 });
 
+const ProgressStacks = createStackNavigator({
+    Progress: Progress
+});
+
+const ProfileStacks = createStackNavigator({
+    Profile: Profile
+});
 
 const App = createBottomTabNavigator({
     Home: { screen:  HomeStacks},
     FoodLog: { screen: FoodLogsStacks },
-    Progress: { screen: Progress },
-    Profile: { screen: Profile }
+    Progress: { screen: ProgressStacks },
+    Profile: { screen: ProfileStacks }
 });
 
 export default App;

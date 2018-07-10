@@ -4,10 +4,17 @@ import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
 import cookie from "react-cookies";
+import colors from 'Colors';
 
 class Profile extends Component {
     static navigationOptions = {
         title: 'Profile',
+        headerTitleStyle: {
+            color: colors.white
+        },
+        headerStyle: {
+            backgroundColor: colors.black
+        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='account' />;
         },
@@ -44,14 +51,11 @@ class Profile extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.headerContainer]}>
-                    <Text h4 style={{color: 'white'}}>Profile</Text>
-                    <Icon
-                        name='settings-outline'
-                        size={20}
-                        color={'white'}/>}
-                </View>
                 <View style={[styles.boxContainer, styles.userContainer]}>
+                    <Icon
+                    name='settings-outline'
+                    size={20}
+                    color={'white'}/>}
                     <Image source={PROFILE_PICTURE}
                            style={{
                                width: 40,
@@ -71,29 +75,30 @@ class Profile extends Component {
 export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: colors.black
     },
     boxContainer: {
         flex: 1
         // alignItems: 'center',
         // justifyContent: 'center'
     },
-    headerContainer: {
-        flex: 1,
-        backgroundColor: '#CE6D39',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row'
-    },
+    // headerContainer: {
+    //     flex: 1,
+    //     backgroundColor: '#CE6D39',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     flexDirection: 'row'
+    // },
     userContainer: {
         flex: 2,
-        backgroundColor: '#F17F42',
+        backgroundColor: colors.ypsLight,
         alignItems: 'flex-end'
 
     },
     boxThree: {
         flex: 7,
-        backgroundColor: '#FFEEE4'
+        backgroundColor: colors.yps
     },
     userFont: {
         color: '#565656',

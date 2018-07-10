@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import colors from 'Colors';
+// import fonts from 'Fonts';
 
-const HEADER_COLOR = '#CE6D39';
 
 class Home extends Component {
 
     static navigationOptions = {
         title: 'Home',
+        headerTitleStyle: {
+            color: colors.white
+            // fontFamily: fonts.montserrat
+        },
+        headerStyle: {
+            backgroundColor: colors.charcoal,
+        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='home-variant' />;
         },
@@ -34,7 +42,7 @@ class Home extends Component {
     }
 
     handleAddWorkout = () => {
-      this.props.navigation.navigate("WorkoutEditor");
+        this.props.navigation.navigate("WorkoutEditor");
     }
     setWorkouts = (workouts) => {
         this.setState({
@@ -49,9 +57,8 @@ class Home extends Component {
         return (
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer, styles.header]}>
-                    <Text h4 style={{color: 'white'}}>Workouts history </Text>
+                    <Text h4 style={styles.titleFont}>Workouts history </Text>
                     <Button title='+'
-                            backgroundColor={HEADER_COLOR}
                             onPress={this.handleAddWorkout}></Button>
                 </View>
                 <View style={[styles.boxContainer, styles.statsContainer ]}>
@@ -79,6 +86,7 @@ class Home extends Component {
                             color='white'
                         />
                     }
+                    buttonStyle={styles.button}
                     title='Log out'
                 />
 
@@ -93,7 +101,8 @@ class Home extends Component {
 export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: colors.charcoal,
         // justifyContent: 'space-between',
         // padding: 20
     },
@@ -106,23 +115,32 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: HEADER_COLOR,
+        backgroundColor: colors.lightcharcoal,
         flexDirection: 'row'
     },
     statsContainer: {
         flex: 2,
-        backgroundColor: '#F17F42',
+        backgroundColor: colors.yps,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderColor:'red'
     },
     workoutsContent: {
         flex: 7,
-        backgroundColor: '#FFEEE4'
+        backgroundColor: colors.white,
+        borderColor:'red'
     },
     statsFont: {
         color: 'white',
-        fontSize: 17
+
+    },
+    titleFont: {
+        color: colors.white
+    },
+    button: {
+        backgroundColor: colors.green
+
     }
 })
 

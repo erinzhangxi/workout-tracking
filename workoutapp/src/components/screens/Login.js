@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
+import colors from 'Colors';
 
 class Login extends Component {
     static navigationOptions = {

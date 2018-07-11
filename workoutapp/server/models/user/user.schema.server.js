@@ -20,7 +20,8 @@ var userSchema = mongoose.Schema({
         }
     ],
     age: Number,
-    currentWeight: Number
+    currentWeight: Number,
+    profileURL: String
 }, {collection: 'user'});
 
 module.exports = userSchema;

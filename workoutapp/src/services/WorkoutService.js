@@ -16,6 +16,18 @@ export default class WorkoutService {
             })
     }
 
+    createWorkout(workout, userId) {
+        return fetch(WORKOUT_API_URL + '/' + userId, {
+            body: JSON.stringify(workout),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
 
     static get instance() {
         if(!this[_singleton])

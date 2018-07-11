@@ -11,7 +11,7 @@ class FoodLog extends Component {
             color: colors.white
         },
         headerStyle: {
-            backgroundColor: colors.black
+            backgroundColor: colors.charcoal,
         },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='food-apple' />;
@@ -40,22 +40,22 @@ class FoodLog extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.header]}>
-                    <Text h4 style={{color: 'white'}}>Today </Text>
+                <View style={styles.header}>
+                    <Text h4 style={styles.titleFont}>Today </Text>
                     <Button title='+'
                             backgroundColor= {colors.lightcharcoal}
                             onPress={this.handleAddMeal}></Button>
                 </View>
-                <View style={[styles.boxContainer, styles.MealContainerStyleOne ]}>
+                <View style={styles.MealContainerStyleOne}>
                     {/*<Meal/>*/}
                     <Text h4 style={{color:'#565656'}}>Breakfast </Text>
 
                 </View>
-                <View style={[styles.boxContainer, styles.MealContainerStyleTwo]}>
+                <View style={styles.MealContainerStyleTwo}>
 
                     <Text h4 style={{color:'white'}}>Lunch </Text>
                 </View>
-                <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
+                <View style={styles.MealContainerStyleOne}>
 
                     <Text h4 style={{color:'#565656'}}>Dinner </Text>
                 </View>
@@ -74,13 +74,8 @@ export const styles = StyleSheet.create({
         // justifyContent: 'space-between',
         // padding: 20
     },
-    boxContainer: {
-        flex: 1
-        // alignItems: 'center',
-        // justifyContent: 'center'
-    },
     header: {
-        flex: 1,
+        height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.lightcharcoal,
@@ -94,7 +89,11 @@ export const styles = StyleSheet.create({
     MealContainerStyleTwo: {
         flex: 2,
         backgroundColor: colors.ypsDark
-    }
+    },
+    titleFont: {
+        color: colors.white,
+        fontSize: 16
+    },
 })
 
 

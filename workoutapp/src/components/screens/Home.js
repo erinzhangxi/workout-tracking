@@ -30,12 +30,22 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workouts: []
+            workouts: [],
+            userId: null
         }
         this.workoutService = workoutService.instance;
     }
 
     componentDidMount() {
+      this.renderWorkouts(this.props);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.renderWorkouts(newProps);
+    }
+
+    renderWorkouts = (props) => {
+        var userId = props.userId;
         this.workoutService
             .findAllWorkouts()
             .then((workouts) => {this.setWorkouts(workouts)});
@@ -56,20 +66,20 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.header]}>
+                <View style={styles.header}>
                     <Text h4 style={styles.titleFont}>Workouts history </Text>
                     <Button title='+'
                            buttonStyle={{backgroundColor: colors.lightcharcoal}}
                             onPress={this.handleAddWorkout}></Button>
                 </View>
-                <View style={[styles.boxContainer, styles.statsContainer ]}>
+                <View style={styles.statsContainer}>
 
                     <Text h4 style={styles.statsFont}>Completed</Text>
                     <Text h4 style={styles.statsFont}>Total Duration</Text>
                     <Text h4 style={styles.statsFont}>Calories burned</Text>
 
                 </View>
-                <View style={[styles.boxContainer, styles.workoutsContent]}>
+                <ScrollView style={styles.workoutsContent}>
 
                     {this.state.workouts.map((workout, index) => (
                         <ListItem
@@ -77,7 +87,7 @@ class Home extends Component {
                             subtitle={workout.duration}
                             key={index}/>
                     ))}
-                </View>
+                </ScrollView>
                 <Button
                     onPress={this.logout}
                     icon={
@@ -107,20 +117,15 @@ export const styles = StyleSheet.create({
         // justifyContent: 'space-between',
         // padding: 20
     },
-    boxContainer: {
-        flex: 1
-        // alignItems: 'center',
-        // justifyContent: 'center'
-    },
     header: {
-        flex: 1,
+        height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.lightcharcoal,
         flexDirection: 'row'
     },
     statsContainer: {
-        flex: 2,
+        height: 100,
         backgroundColor: colors.yps,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -128,7 +133,6 @@ export const styles = StyleSheet.create({
         borderColor:'red'
     },
     workoutsContent: {
-        flex: 7,
         backgroundColor: colors.white,
         borderColor:'red'
     },

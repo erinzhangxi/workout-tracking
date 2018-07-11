@@ -13,7 +13,7 @@ class Profile extends Component {
             color: colors.white
         },
         headerStyle: {
-            backgroundColor: colors.black
+            backgroundColor: colors.charcoal
         },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='account' />;
@@ -33,11 +33,15 @@ class Profile extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         var user = cookie.load('user');
         if(user) {
             this.setProfile(user.username, user.age, user.currentWeight);
         }
+    }
+
+    componentDidMount() {
+
     }
 
     setProfile = (username, age, currentWeight) => {
@@ -51,18 +55,23 @@ class Profile extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.userContainer]}>
+                <View style={[styles.boxContainer]}>
+                    <View style={styles.avatarContainer}>
+                        <Image source={PROFILE_PICTURE}
+                               style={{
+                                   width: 40,
+                                   height: 40}}/>
+                    </View>
+                    <View style={styles.userContainer}>
                     <Icon
-                    name='settings-outline'
-                    size={20}
-                    color={'white'}/>}
-                    <Image source={PROFILE_PICTURE}
-                           style={{
-                               width: 40,
-                               height: 40}}/>
-                    <Text h4 style={styles.userFont}>{this.state.username}</Text>
+                        name='settings-outline'
+                        size={20}
+                        color={'white'}/>}
+
+                    <Text h4 style={styles.userFont}>username {this.state.username}</Text>
                     <Text h4 style={styles.userFont}>Age {this.state.age}</Text>
                     <Text h4 style={styles.userFont}>Current Weight {this.state.currentWeight}</Text>
+                    </View>
                 </View>
                 <View style={[styles.boxContainer, styles.boxThree]}>
                     <Text h3>Box Three</Text>
@@ -79,21 +88,27 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.black
     },
     boxContainer: {
-        flex: 1
+        flex: 3,
+        backgroundColor: colors.ypsLight,
+        flexDirection: 'row'
         // alignItems: 'center',
         // justifyContent: 'center'
     },
-    // headerContainer: {
-    //     flex: 1,
-    //     backgroundColor: '#CE6D39',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     flexDirection: 'row'
-    // },
     userContainer: {
         flex: 2,
-        backgroundColor: colors.ypsLight,
-        alignItems: 'flex-end'
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        marginRight: 30
+
+
+    },
+    avatarContainer: {
+        flex: 1,
+        // alignItems: 'flex-start',
+        justifyContent:'center',
+        marginLeft: 30
+
 
     },
     boxThree: {

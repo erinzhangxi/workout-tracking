@@ -8,7 +8,7 @@ import cookie from "react-cookies";
 
 class WorkoutEditor extends Component {
     static navigationOptions = {
-        title: 'Add a work',
+        title: 'WorkoutEditor',
         headerTitleStyle: {
             color: colors.white
             // fontFamily: fonts.montserrat
@@ -22,45 +22,50 @@ class WorkoutEditor extends Component {
         super(props);
 
         this.state = {
-            title: '',
-            description: '',
-            duration: '',
-            location: '',
-            caloriesBurned: 0
+            // title: null,
+            // description: null,
+            // duration: null,
+            // location: null,
+            // caloriesBurned: 0,
+            // userId: null
         }
         this.workoutService = WorkoutService.instance;
     }
 
-    handleSubmit = () => {
-        alert("submit");
-        let workout = {
-            time: new Date().toLocaleString(),
-            duration: this.state.duration,
-            title: this.state.title,
-            description: this.state.description,
-            location: this.state.location,
-            caloriesBurned: this.state.caloriesBurned
+    componentDidMount() {
+        var userCookie = cookie.load('user');
+        if(userCookie) {
+            // this.setProfile(user.username, user.age, user.currentWeight);
+            this.setState({
+                userId: userCookie._id
+            });
         }
+    }
+    handleSubmit = () => {
+        if (this.state) {
 
-       //TODO create workout service
+            let workout = {
+                time: new Date().toLocaleString(),
+                duration: this.state.duration,
+                title: this.state.title,
+                description: this.state.description,
+                location: this.state.location,
+                caloriesBurned: this.state.caloriesBurned
+            }
+
+            this.workoutService
+                .createWorkout(workout, this.state.userId)
+                .then(res => {
+                    alert('workout submitted');
+                    this.props.navigation.navigate('Home', {userId: this.state.userId});
+                })
+        }
     }
 
-    // handleSubmit() {
 
-    //     this.userService
-    //         .login(user)
-    //         .then(res => {
-    //             // TODO need to stop invalidated user from going back to Home tab
-    //             cookie.save('user', JSON.stringify(res));
-    //             this.props.navigation.navigate('Home');
-    //
-    //         })
-    // }
 
     updateForm = (newState) => {
-        this.setState({
-            newState
-        })
+        this.setState(newState)
     }
 
     render() {

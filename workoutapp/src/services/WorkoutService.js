@@ -28,6 +28,13 @@ export default class WorkoutService {
         })
     }
 
+    findWorkoutsForUser(userId) {
+        return fetch(WORKOUT_API_URL + '/' + userId)
+            .then(function (response) {
+                return response.json();
+            })
+    }
+
 
     static get instance() {
         if(!this[_singleton])

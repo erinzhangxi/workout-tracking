@@ -4,11 +4,10 @@ import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
+import cookie from "react-cookies";
 // import fonts from 'Fonts';
 
-
 class Home extends Component {
-
     static navigationOptions = {
         title: 'Home',
         headerTitleStyle: {
@@ -31,24 +30,51 @@ class Home extends Component {
 
         this.state = {
             workouts: [],
-            userId: null
+            totalDuration: 0,
+            caloriesBurned: 0
         }
         this.workoutService = workoutService.instance;
     }
 
+    componentWillMount() {
+        var user = cookie.load('user');
+        if (user) {
+            this.setState({
+                username: user.username,
+                userId: user._id
+            })
+        }
+    }
+
     componentDidMount() {
-      this.renderWorkouts(this.props);
+        if (this.state.username) {
+            alert('Did Mount');
+            // this.renderWorkouts(user._id);
+        }
     }
 
     componentWillReceiveProps(newProps) {
-        this.renderWorkouts(newProps);
+        // var user = cookie.load('user');
+        // alert('before check ' + user);
+        if (this.state.username) {
+            alert('Will Receive newprops');
+            // this.renderWorkouts(user._id);
+        }
+        if (this.state.userId) {
+            this.renderWorkouts(this.state.userId);
+        }
     }
 
-    renderWorkouts = (props) => {
-        var userId = props.userId;
-        this.workoutService
-            .findAllWorkouts()
-            .then((workouts) => {this.setWorkouts(workouts)});
+    renderWorkouts = (userId) => {
+        if (userId) {
+            alert(userId);
+
+            this.workoutService
+                .findWorkoutsForUser(userId)
+                .then((workouts) => {
+                    this.setWorkouts(workouts)
+                });
+        }
     }
 
     handleAddWorkout = () => {
@@ -68,16 +94,23 @@ class Home extends Component {
             <View style={styles.homeContainer}>
                 <View style={styles.header}>
                     <Text h4 style={styles.titleFont}>Workouts history </Text>
+                    <Text h4 style={styles.titleFont}>{this.state.username}</Text>
                     <Button title='+'
-                           buttonStyle={{backgroundColor: colors.lightcharcoal}}
+                            buttonStyle={{backgroundColor: colors.lightcharcoal}}
                             onPress={this.handleAddWorkout}></Button>
                 </View>
                 <View style={styles.statsContainer}>
+                    <View>
+                        <Text h4 style={styles.statsFont}>Completed</Text>
+                        <Text h4 style={styles.statsFont}>Total Duration</Text>
+                        <Text h4 style={styles.statsFont}>Calories burned</Text>
+                    </View>
+                    <View >
+                        <Text h4 style={styles.statsFont}>{this.state.workouts.length}</Text>
+                        <Text h4 style={styles.statsFont}>0</Text>
+                        <Text h4 style={styles.statsFont}>0</Text>
 
-                    <Text h4 style={styles.statsFont}>Completed</Text>
-                    <Text h4 style={styles.statsFont}>Total Duration</Text>
-                    <Text h4 style={styles.statsFont}>Calories burned</Text>
-
+                    </View>
                 </View>
                 <ScrollView style={styles.workoutsContent}>
 
@@ -130,15 +163,13 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        borderColor:'red'
     },
     workoutsContent: {
         backgroundColor: colors.white,
-        borderColor:'red'
     },
     statsFont: {
         color: 'white',
-        fontSize: 18
+        fontSize: 16
 
     },
     titleFont: {

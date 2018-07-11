@@ -4,10 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 const HomeStacks = createStackNavigator({
     Home: Home,
-    Login: Login,
-    WorkoutEditor: WorkoutEditor,
-    Register: Register
-
+    WorkoutEditor: WorkoutEditor
 });
 
 
@@ -24,11 +21,19 @@ const ProfileStacks = createStackNavigator({
     Profile: Profile
 });
 
-const App = createBottomTabNavigator({
+const MainApp = createBottomTabNavigator({
     Home: { screen:  HomeStacks},
     FoodLog: { screen: FoodLogsStacks },
     Progress: { screen: ProgressStacks },
     Profile: { screen: ProfileStacks }
 });
+
+const App =  createStackNavigator({
+    Login: Login,
+    Register: Register,
+    Home: MainApp
+})
+
+
 
 export default App;

@@ -22,6 +22,8 @@ function updateWorkout(workoutId, newWorkout) {
     return workoutModel.update({_id: workoutId}, {$set:newWorkout});
 }
 
+
+
 var api = {
     findAllWorkouts: findAllWorkouts,
     createWorkout: createWorkout,

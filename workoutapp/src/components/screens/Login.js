@@ -32,7 +32,7 @@ class Login extends Component {
             .then(res => {
         // TODO need to stop invalidated user from going back to Home tab
                 cookie.save('user', JSON.stringify(res));
-                this.props.navigation.navigate('Home');
+                this.props.navigation.navigate('Home', );
 
             })
     }

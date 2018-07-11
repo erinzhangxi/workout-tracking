@@ -1,6 +1,7 @@
 module.exports = function (app) {
     app.get('/api/workout', findAllWorkouts);
     app.post('/api/workout/:userId', createWorkout);
+    app.get('/api/workout/:userId', findWorkoutsForUser)
 
     var workoutModel = require('../models/workout/workout.model.server');
     var userModel = require('../models/user/user.model.server');
@@ -29,5 +30,14 @@ module.exports = function (app) {
                     })
             })
 
+    }
+
+    function findWorkoutsForUser(req, res) {
+        var id = req.params['userId'];
+        userModel
+            .findUserById(id)
+            .then(function (user) {
+                res.send(user.workouts);
+            })
     }
 }

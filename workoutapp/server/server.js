@@ -33,6 +33,7 @@ app.get('/', function (req, res) {
 
 var userService = require('./services/user.service.server')(app);
 var workoutService = require('./services/workout.service.server')(app);
+var MealService = require('./services/meal.service.server')(app);
 
 
 app.listen(4000);

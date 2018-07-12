@@ -1,7 +1,8 @@
 module.exports = function (app) {
     app.get('/api/workout', findAllWorkouts);
     app.post('/api/workout/:userId', createWorkout);
-    app.get('/api/workout/:userId', findWorkoutsForUser)
+    app.get('/api/:userId/workout', findWorkoutsForUser);
+    app.get('/api/workout/:workoutId', findWorkoutById);
 
     var workoutModel = require('../models/workout/workout.model.server');
     var userModel = require('../models/user/user.model.server');
@@ -31,13 +32,23 @@ module.exports = function (app) {
             })
 
     }
+    function findWorkoutById(req, res) {
+        var id = req.params['workoutId'];
+        workoutModel
+            .findWorkoutById(id)
+            .then(function (workout) {
+                res.send(workout);
+            })
+    }
 
     function findWorkoutsForUser(req, res) {
         var id = req.params['userId'];
         userModel
             .findUserById(id)
             .then(function (user) {
+                console.log("user " + id + " workouts: " + user.workouts);
                 res.send(user.workouts);
             })
     }
+
 }

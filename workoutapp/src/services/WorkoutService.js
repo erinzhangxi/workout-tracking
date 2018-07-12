@@ -1,6 +1,9 @@
 const WORKOUT_API_URL =
     'http://localhost:4000/api/workout';
 
+const FINDFORUSER_API_URL =
+    'http://localhost:4000/api/UID/workout';
+
 let _singleton = Symbol();
 export default class WorkoutService {
     constructor(singletonToken) {
@@ -29,12 +32,18 @@ export default class WorkoutService {
     }
 
     findWorkoutsForUser(userId) {
-        return fetch(WORKOUT_API_URL + '/' + userId)
+        return fetch(FINDFORUSER_API_URL.replace('UID', userId))
             .then(function (response) {
                 return response.json();
             })
     }
 
+    findWorkoutById(workoutId) {
+        return fetch(WORKOUT_API_URL + '/' + workoutId)
+            .then(function (response) {
+                return response.json();
+            })
+    }
 
     static get instance() {
         if(!this[_singleton])

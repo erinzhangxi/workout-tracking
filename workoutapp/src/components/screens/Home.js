@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
+import WorkoutItem from './../../elements/WorkoutItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
@@ -47,9 +48,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        if (this.state.username) {
-            alert('Did Mount');
-            // this.renderWorkouts(user._id);
+        if (this.state.userId) {
+            this.renderWorkouts(this.state.userId);
         }
     }
 
@@ -67,8 +67,6 @@ class Home extends Component {
 
     renderWorkouts = (userId) => {
         if (userId) {
-            alert(userId);
-
             this.workoutService
                 .findWorkoutsForUser(userId)
                 .then((workouts) => {
@@ -81,46 +79,58 @@ class Home extends Component {
         this.props.navigation.navigate("WorkoutEditor");
     }
     setWorkouts = (workouts) => {
-        this.setState({
-            workouts: workouts
-        });
+        if (workouts) {
+            this.setState({
+                workouts: workouts
+            });
+        }
     }
     logout = () => {
         this.props.navigation.navigate("Login");
+    }
+
+    renderWorkoutStats = () => {
+        return (
+            <View style={styles.statsContainer}>
+                <View>
+                    <Text h4 style={styles.statsFont}>Completed</Text>
+                    <Text h4 style={styles.statsFont}>Total Duration</Text>
+                    <Text h4 style={styles.statsFont}>Calories burned</Text>
+                </View>
+                <View >
+                    <Text h4 style={styles.statsFont}>{this.state.workouts.length}</Text>
+                    <Text h4 style={styles.statsFont}>0</Text>
+                    <Text h4 style={styles.statsFont}>0</Text>
+
+                </View>
+            </View>
+        )
+    }
+
+    renderWorkoutsForUser = () => {
+        return (
+            this.state.workouts.map((workout, index) => {
+                return <WorkoutItem id={workout}></WorkoutItem>
+            })
+        )
     }
 
     render() {
         return (
             <View style={styles.homeContainer}>
                 <View style={styles.header}>
-                    <Text h4 style={styles.titleFont}>Workouts history </Text>
-                    <Text h4 style={styles.titleFont}>{this.state.username}</Text>
+                    <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
                     <Button title='+'
                             buttonStyle={{backgroundColor: colors.lightcharcoal}}
                             onPress={this.handleAddWorkout}></Button>
                 </View>
-                <View style={styles.statsContainer}>
-                    <View>
-                        <Text h4 style={styles.statsFont}>Completed</Text>
-                        <Text h4 style={styles.statsFont}>Total Duration</Text>
-                        <Text h4 style={styles.statsFont}>Calories burned</Text>
-                    </View>
-                    <View >
-                        <Text h4 style={styles.statsFont}>{this.state.workouts.length}</Text>
-                        <Text h4 style={styles.statsFont}>0</Text>
-                        <Text h4 style={styles.statsFont}>0</Text>
 
-                    </View>
-                </View>
+                {this.renderWorkoutStats()}
+
                 <ScrollView style={styles.workoutsContent}>
-
-                    {this.state.workouts.map((workout, index) => (
-                        <ListItem
-                            title={workout.title}
-                            subtitle={workout.duration}
-                            key={index}/>
-                    ))}
+                    {this.renderWorkoutsForUser()}
                 </ScrollView>
+
                 <Button
                     onPress={this.logout}
                     icon={

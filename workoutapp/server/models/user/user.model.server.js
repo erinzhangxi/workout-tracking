@@ -37,6 +37,13 @@ function addWorkoutToUser(userId, workoutId) {
     );
 }
 
+function addMealToUser(userId, mealId) {
+    return userModel.update(
+        {_id: userId},
+        { $push: {meals: mealId}}
+    );
+}
+
 var api = {
     createUser: createUser,
     findAllUsers: findAllUsers,
@@ -45,7 +52,8 @@ var api = {
     findUserByUsername: findUserByUsername,
     deleteUser: deleteUser,
     updateUser: updateUser,
-    addWorkoutToUser: addWorkoutToUser
+    addWorkoutToUser: addWorkoutToUser,
+    addMealToUser: addMealToUser
 };
 
 module.exports = api;

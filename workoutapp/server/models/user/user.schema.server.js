@@ -7,12 +7,7 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     workouts: [],
-    meals: [
-        {
-            food: String,
-            calories: Number
-        }
-    ],
+    meals: [],
     weights: [
         {
             date: Date,

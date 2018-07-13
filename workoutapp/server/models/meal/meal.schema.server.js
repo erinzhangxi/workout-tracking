@@ -1,8 +1,12 @@
 var mongoose = require('mongoose');
 
 var mealSchema = mongoose.Schema({
-    food: [String],
-    totalCalories: Number,
+    foods: [
+        {
+            name: String,
+            calories: Number
+        }
+    ],
     type: String,
     date: Date
 }, {collection: 'meal'});

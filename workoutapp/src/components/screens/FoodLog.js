@@ -3,26 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
-import { connect } from "react-redux";
-
-const stateToPropsMapper = state => ({
-    meals: state.meals
-})
-
-const dispatchToPropsMapper = dispatch => ({
-    // headingSizeChanged: (widgetId, newSize) =>
-    //     actions.headingSizeChanged(dispatch, widgetId, newSize),
-    // textChanged: (widgetId, newText) =>
-    //     actions.textChanged(dispatch, widgetId, newText),
-    // listTypeChanged: (widgetId, newType) =>
-    //     actions.listTypeChanged(dispatch, widgetId, newType),
-    // imageChanged: (widgetId, newImage) =>
-    //     actions.imageChanged(dispatch, widgetId, newImage),
-    // widthChanged: (widgetId, newWidth) =>
-    //     actions.widthChanged(dispatch, widgetId, newWidth),
-    // linkChanged: (widgetId, newLink) =>
-    //     actions.linkChanged(dispatch, widgetId, newLink)
-})
+import FoodLogEditor from "./FoodLogEditor";
 
 class FoodLog extends Component {
     static navigationOptions = {
@@ -47,15 +28,6 @@ class FoodLog extends Component {
         this.state = {
             meals: []  // meals for the day
         }
-    }
-
-    /* */
-    componentWillMount = () => {
-
-    }
-
-    componentDidMount = () => {
-
     }
 
     handleAddMeal = () => {
@@ -112,10 +84,7 @@ class FoodLog extends Component {
     }
 }
 
-// export default FoodLog
-const FoodLogContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(FoodLog);
-
-export default FoodLogContainer;
+export default FoodLog
 
 export const styles = StyleSheet.create({
     homeContainer: {

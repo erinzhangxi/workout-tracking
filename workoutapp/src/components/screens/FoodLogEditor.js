@@ -1,21 +1,31 @@
 import React, { Component } from 'react'
-import { ScrollView, Picker, View, StyleSheet } from 'react-native'
+import { ScrollView, Picker, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, ListItem } from 'react-native-elements'
 import colors from 'Colors';
+import {connect} from "react-redux";
+import * as actions from "../../actions"
+
+
+const stateToPropsMapper = state => ({
+    foods: state.foods,
+    mealType: state.mealType
+})
+
+const dispatchToPropsMapper = dispatch => ({
+    // findAllFoods: (mealId) => actions.findAllFoods(dispatch, mealId)
+    addFoodItem: () =>
+        actions.addFoodItem(dispatch, this.name, this.calories)
+
+    // widthChanged: (widgetId, newWidth) =>
+    //     actions.widthChanged(dispatch, widgetId, newWidth),
+    // linkChanged: (widgetId, newLink) =>
+    //     actions.linkChanged(dispatch, widgetId, newLink)
+})
+
 
 class FoodLogEditor extends Component {
     static navigationOptions = {
         title: 'Food Logs Editor'
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            mealType: 'lunch', // by default
-            foodList: []
-
-        }
     }
 
     updateMealType = (meal) => {
@@ -27,38 +37,45 @@ class FoodLogEditor extends Component {
         alert("submit");
     }
 
-    addFoodItem = () => {
-        let foodItem = {
-            name: this.name,
-            calories: this.calories
-        }
-        this.setState({
-            foodList: [...this.state.foodList, foodItem]}
-            // () => {
-            // this.renderFoodList();}
-        );
-        this.name.clear();
-        this.calories.clear();
-
-
-    }
+    // addFoodItem = () => {
+    //     let foodItem = {
+    //         name: this.name,
+    //         calories: this.calories
+    //     }
+    //     this.setState({
+    //         foodList: [...this.state.foodList, foodItem]}
+    //         // () => {
+    //         // this.renderFoodList();}
+    //     );
+    //     this.name.clear();
+    //     this.calories.clear();
+    //
+    //
+    // }
 
     renderFoodList = () => {
         alert('render food list');
-        return this.state.foodList.map(
+        return this.props.foods.map(
             (food, index) => (
                 <ListItem
                     key={index}
                     title={food.name}
+                    subtitle={food.calories}
                     leftIcon={{name: "close", color: "red"}}
                 />))
+        this.name.clear();
+        this.calories.clear();
     }
 
     render() {
         return (
             <ScrollView>
+
+                <Text style={styles.text}>
+                    Total Number of Food Items ({this.props.foods.length})
+                </Text>
+
                 {this.renderFoodList()}
-                <Text>{this.state.foodList.length}</Text>
 
                 <FormLabel>Name</FormLabel>
                 <FormInput ref={(input) => {this.name = input}}
@@ -70,18 +87,18 @@ class FoodLogEditor extends Component {
                     placeholder='How much calories does it have?'/>
 
                 <Button
-                    onPress={this.addFoodItem}
+                    onPress={this.props.addFoodItem}
                     title='add another food item'
                     buttonStyle={styles.button}></Button>
 
-                <Picker selectedValue = {this.state.mealType} onValueChange = {this.updateMealType}>
+                <Picker selectedValue = {this.props.mealType} onValueChange = {this.updateMealType}>
                     <Picker.Item label = "breakfast" value = "breakfast" />
                     <Picker.Item label = "lunch" value = "lunch" />
                     <Picker.Item label = "dinner" value = "dinner" />
                     <Picker.Item label = "snacks" value = "snacks" />
                 </Picker>
 
-                <Text style = {styles.text}>{this.state.mealType}</Text>
+                <Text style = {styles.text}>{this.props.mealType}</Text>
 
                 <Button
                     onPress={this.handleSubmit}
@@ -112,15 +129,19 @@ class FoodLogEditor extends Component {
         )
     }
 }
+
+// export default FoodLog
+const FoodLogContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(FoodLogEditor);
+
+export default FoodLogContainer;
+
 const styles = StyleSheet.create({
     text: {
-        fontSize: 30,
+        fontSize: 18,
         alignSelf: 'center',
-        color: 'red'
+        color: colors.turqoise
     },
     button: {
         backgroundColor: colors.green
     }
 })
-
-export default FoodLogEditor

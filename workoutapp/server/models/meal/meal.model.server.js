@@ -23,7 +23,6 @@ function updateMeal(mealId, newMeal) {
 }
 
 
-
 var api = {
     findAllMeals: findAllMeals,
     createMeal: createMeal,

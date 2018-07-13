@@ -6,7 +6,6 @@ import WorkoutItem from './../../elements/WorkoutItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
-// import fonts from 'Fonts';
 
 class Home extends Component {
     static navigationOptions = {
@@ -117,37 +116,37 @@ class Home extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
-                <View style={styles.header}>
-                    <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
-                    <Button title='+'
-                            buttonStyle={{backgroundColor: colors.lightcharcoal}}
-                            onPress={this.handleAddWorkout}></Button>
+                <View style={styles.homeContainer}>
+                    <View style={styles.header}>
+                        <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
+                        <Button title='+'
+                                buttonStyle={{backgroundColor: colors.lightcharcoal}}
+                                onPress={this.handleAddWorkout}></Button>
+                    </View>
+
+                    {this.renderWorkoutStats()}
+
+                    <ScrollView style={styles.workoutsContent}>
+                        {this.renderWorkoutsForUser()}
+                    </ScrollView>
+
+                    <Button
+                        onPress={this.logout}
+                        icon={
+                            <Icon
+                                name='arrow-right'
+                                size={15}
+                                color='white'
+                            />
+                        }
+                        buttonStyle={styles.button}
+                        title='Log out'
+                    />
+
+
+
+                    {/*<BottomNavBar/>*/}
                 </View>
-
-                {this.renderWorkoutStats()}
-
-                <ScrollView style={styles.workoutsContent}>
-                    {this.renderWorkoutsForUser()}
-                </ScrollView>
-
-                <Button
-                    onPress={this.logout}
-                    icon={
-                        <Icon
-                            name='arrow-right'
-                            size={15}
-                            color='white'
-                        />
-                    }
-                    buttonStyle={styles.button}
-                    title='Log out'
-                />
-
-
-
-                {/*<BottomNavBar/>*/}
-            </View>
         )
     }
 }

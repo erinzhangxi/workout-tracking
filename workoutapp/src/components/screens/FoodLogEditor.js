@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Picker, View, StyleSheet } from 'react-native'
-import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Text, Button, FormLabel, FormInput, ListItem } from 'react-native-elements'
 import colors from 'Colors';
 
 class FoodLogEditor extends Component {
@@ -12,9 +12,12 @@ class FoodLogEditor extends Component {
         super(props);
 
         this.state = {
-            mealType: 'lunch' // by default
+            mealType: 'lunch', // by default
+            foodList: []
+
         }
     }
+
     updateMealType = (meal) => {
         this.setState({
             mealType: meal
@@ -24,10 +27,38 @@ class FoodLogEditor extends Component {
         alert("submit");
     }
 
+    addFoodItem = () => {
+        let foodItem = {
+            name: this.name,
+            calories: this.calories
+        }
+        this.setState({
+            foodList: [...this.state.foodList, foodItem]}
+            // () => {
+            // this.renderFoodList();}
+        );
+        this.name.clear();
+        this.calories.clear();
+
+
+    }
+
+    renderFoodList = () => {
+        alert('render food list');
+        return this.state.foodList.map(
+            (food, index) => (
+                <ListItem
+                    key={index}
+                    title={food.name}
+                    leftIcon={{name: "close", color: "red"}}
+                />))
+    }
+
     render() {
         return (
             <ScrollView>
-                <Text h3>Meal Entry</Text>
+                {this.renderFoodList()}
+                <Text>{this.state.foodList.length}</Text>
 
                 <FormLabel>Name</FormLabel>
                 <FormInput ref={(input) => {this.name = input}}
@@ -37,6 +68,11 @@ class FoodLogEditor extends Component {
                 <FormInput
                     ref={input => this.calories = input}
                     placeholder='How much calories does it have?'/>
+
+                <Button
+                    onPress={this.addFoodItem}
+                    title='add another food item'
+                    buttonStyle={styles.button}></Button>
 
                 <Picker selectedValue = {this.state.mealType} onValueChange = {this.updateMealType}>
                     <Picker.Item label = "breakfast" value = "breakfast" />
@@ -50,25 +86,26 @@ class FoodLogEditor extends Component {
                 <Button
                     onPress={this.handleSubmit}
                     title='Submit'
+                    buttonStyle={styles.button}
                 />
 
                 {/*dropdown to choose from three meals*/}
 
                 {/*<FormLabel>Password</FormLabel>*/}
                 {/*<FormInput*/}
-                    {/*ref={input => this.password = input}*/}
-                    {/*placeholder='password'/>*/}
+                {/*ref={input => this.password = input}*/}
+                {/*placeholder='password'/>*/}
                 {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
                 {/*<FormLabel>Confirm Password</FormLabel>*/}
                 {/*<FormInput*/}
-                    {/*ref={input => this.password2 = input}*/}
-                    {/*placeholder='please type in the same password'/>*/}
+                {/*ref={input => this.password2 = input}*/}
+                {/*placeholder='please type in the same password'/>*/}
                 {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
                 {/*<Button*/}
-                    {/*title='Register'*/}
-                    {/*onPress={this.handleSubmit.bind(this)}/>*/}
+                {/*title='Register'*/}
+                {/*onPress={this.handleSubmit.bind(this)}/>*/}
 
 
             </ScrollView>
@@ -80,6 +117,9 @@ const styles = StyleSheet.create({
         fontSize: 30,
         alignSelf: 'center',
         color: 'red'
+    },
+    button: {
+        backgroundColor: colors.green
     }
 })
 

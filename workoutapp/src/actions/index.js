@@ -11,11 +11,7 @@ import * as constants from "../constants/index"
 export const addFoodItem = (dispatch, foodName, calories) => (
     dispatch({type: constants.ADD_FOOD_ITEM, name: foodName, calories: calories})
 )
-//
-// export const setFoodName = (dispatch, foodName) => (
-//     dispatch({type: constants.SET_FOOD_NAME, name: foodName})
-// )
-//
-// export const setFoodCalories = (dispatch, calories) => (
-//     dispatch({type: constants.SET_FOOD_CALORIES, calories: calories})
-// )
+
+export const submitMeal = (dispatch, foods, mealType, userId) => (
+    dispatch({type: constants.SUBMIT_MEAL, foods: foods, mealType: mealType, userId: userId})
+)

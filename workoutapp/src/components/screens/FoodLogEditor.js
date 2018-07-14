@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput, ListItem } from 'react-native-eleme
 import colors from 'Colors';
 import {connect} from "react-redux";
 import * as actions from "../../actions"
+import cookie from "react-cookies";
 
 
 const stateToPropsMapper = state => ({
@@ -14,11 +15,9 @@ const stateToPropsMapper = state => ({
 const dispatchToPropsMapper = dispatch => ({
     // findAllFoods: (mealId) => actions.findAllFoods(dispatch, mealId)
     addFoodItem: (name, calories) =>
-        actions.addFoodItem(dispatch, name, calories)
-    // setFoodName: (foodName) =>
-    //     actions.setFoodName(dispatch, foodName),
-    // setFoodCalories: (calories) =>
-    //     actions.setFoodCalories(dispatch, calories)
+        actions.addFoodItem(dispatch, name, calories),
+    submitMeal: (foods, mealType, userId) =>
+        actions.submitMeal(dispatch, foods, mealType, userId)
 })
 
 
@@ -29,7 +28,17 @@ class FoodLogEditor extends Component {
 
     state = {
         currentFoodName: '',
-        currentFoodCalories: ''
+        currentFoodCalories: '',
+        userId: null
+    }
+
+    componentWillMount() {
+        var user = cookie.load('user');
+        if (user) {
+            this.setState({
+                userId: user._id
+            })
+        }
     }
 
     updateMealType = (meal) => {
@@ -38,7 +47,8 @@ class FoodLogEditor extends Component {
         })
     }
     handleSubmit = () => {
-        alert("submit");
+        this.props.submitMeal(this.props.foods, this.props.mealType, this.state.userId);
+        this.props.navigation.navigate("Food Logs");
     }
 
     updateForm = (newState) => {
@@ -85,14 +95,11 @@ class FoodLogEditor extends Component {
                     onChangeText={text => this.updateForm({currentFoodCalories: text})}
                     placeholder='How much calories does it have?'/>
 
-                <Text>{this.state.currentFoodName}</Text>
-                <Text>{this.state.currentFoodCalories}</Text>
                 <Button
                     onPress={()=>
                         this.props.addFoodItem(this.state.currentFoodName, this.state.currentFoodCalories)}
                     title='add another food item'
                     buttonStyle={styles.button}></Button>
-
 
 
                 <Picker selectedValue = {this.props.mealType} onValueChange = {this.updateMealType}>

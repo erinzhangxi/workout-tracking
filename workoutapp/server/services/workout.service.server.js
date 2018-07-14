@@ -46,7 +46,6 @@ module.exports = function (app) {
         userModel
             .findUserById(id)
             .then(function (user) {
-                console.log("user " + id + " workouts: " + user.workouts);
                 res.send(user.workouts);
             })
     }

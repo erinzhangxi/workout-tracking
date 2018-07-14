@@ -8,14 +8,11 @@ let initialState = {
         }]
 }
 
-export const foodLogReducer = (state = {foods: [], mealType: 'lunch'}, action) => {
+export const foodLogReducer = (state = {foods: [], mealType: ''}, action) => {
 
     switch (action.type) {
 
         case constants.ADD_FOOD_ITEM:
-            console.log(action.name);
-            console.log(action.calories);
-
             return {
                 foods: [...state.foods,
                     {
@@ -28,23 +25,21 @@ export const foodLogReducer = (state = {foods: [], mealType: 'lunch'}, action) =
                 currentFoodCalories: ''
             }
 
-        // case constants.SET_FOOD_NAME:
-        //     console.log(action.name);
-        //     return {
-        //         foods: state.foods,
-        //         mealType: state.mealType,
-        //         currentFoodName: action.name,
-        //         currentFoodCalories: state.calories
-        //     }
-        //
-        // case constants.SET_FOOD_CALORIES:
-        //     console.log(action.calories);
-        //     return {
-        //         foods: state.foods,
-        //         mealType: state.mealType,
-        //         currentFoodName: state.name,
-        //         currentFoodCalories: action.calories
-        //     }
+        case constants.SUBMIT_MEAL:
+            let meal = {
+                foods: action.foods,
+                type: action.mealType,
+                date: new Date()
+            }
+            fetch(('http://localhost:4000/api/meal/UID').replace('UID', action.userId), {
+                method: 'post',
+                body: JSON.stringify(meal),
+                headers: {
+                    'content-type': 'application/json'}
+            })
+
+            return state
+
 
         default:
             return state

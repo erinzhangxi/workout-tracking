@@ -18,6 +18,8 @@ module.exports = function (app) {
         var meal = req.body;
         var id = req.params['userId'];
 
+        console.log('meal service - userId ' + id);
+
         var mealId;
         mealModel
             .createMeal(meal, id)
@@ -25,6 +27,7 @@ module.exports = function (app) {
                 res.send(meal);
                 mealId = meal._id;
 
+                console.log('meal ID ' + mealId);
                 userModel.addMealToUser(id, mealId)
                     .then(function (user) {
                         res.send(user);

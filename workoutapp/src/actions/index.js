@@ -8,6 +8,14 @@ import * as constants from "../constants/index"
 //             foods: meal.foods }))
 // }
 
-export const addFoodItem = (dispatch, name, calories) => (
-    dispatch({type: constants.ADD_FOOD_ITEM, name: name, calories: calories})
+export const addFoodItem = (dispatch, foodName, calories) => (
+    dispatch({type: constants.ADD_FOOD_ITEM, name: foodName, calories: calories})
 )
+//
+// export const setFoodName = (dispatch, foodName) => (
+//     dispatch({type: constants.SET_FOOD_NAME, name: foodName})
+// )
+//
+// export const setFoodCalories = (dispatch, calories) => (
+//     dispatch({type: constants.SET_FOOD_CALORIES, calories: calories})
+// )

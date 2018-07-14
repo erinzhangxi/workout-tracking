@@ -13,19 +13,23 @@ const stateToPropsMapper = state => ({
 
 const dispatchToPropsMapper = dispatch => ({
     // findAllFoods: (mealId) => actions.findAllFoods(dispatch, mealId)
-    addFoodItem: () =>
-        actions.addFoodItem(dispatch, this.name, this.calories)
-
-    // widthChanged: (widgetId, newWidth) =>
-    //     actions.widthChanged(dispatch, widgetId, newWidth),
-    // linkChanged: (widgetId, newLink) =>
-    //     actions.linkChanged(dispatch, widgetId, newLink)
+    addFoodItem: (name, calories) =>
+        actions.addFoodItem(dispatch, name, calories)
+    // setFoodName: (foodName) =>
+    //     actions.setFoodName(dispatch, foodName),
+    // setFoodCalories: (calories) =>
+    //     actions.setFoodCalories(dispatch, calories)
 })
 
 
 class FoodLogEditor extends Component {
     static navigationOptions = {
         title: 'Food Logs Editor'
+    }
+
+    state = {
+        currentFoodName: '',
+        currentFoodCalories: ''
     }
 
     updateMealType = (meal) => {
@@ -37,34 +41,19 @@ class FoodLogEditor extends Component {
         alert("submit");
     }
 
-    // addFoodItem = () => {
-    //     let foodItem = {
-    //         name: this.name,
-    //         calories: this.calories
-    //     }
-    //     this.setState({
-    //         foodList: [...this.state.foodList, foodItem]}
-    //         // () => {
-    //         // this.renderFoodList();}
-    //     );
-    //     this.name.clear();
-    //     this.calories.clear();
-    //
-    //
-    // }
+    updateForm = (newState) => {
+        this.setState(newState)
+    }
 
     renderFoodList = () => {
-        alert('render food list');
-        return this.props.foods.map(
-            (food, index) => (
-                <ListItem
-                    key={index}
-                    title={food.name}
-                    subtitle={food.calories}
-                    leftIcon={{name: "close", color: "red"}}
-                />))
-        this.name.clear();
-        this.calories.clear();
+        if (this.props.foods.length > 0) {
+            return this.props.foods.map(
+                (food, index) => (
+                    <ListItem key={index}
+                              title={food.name}
+                            subtitle={food.calories}/>
+                ))
+        }
     }
 
     render() {
@@ -78,18 +67,33 @@ class FoodLogEditor extends Component {
                 {this.renderFoodList()}
 
                 <FormLabel>Name</FormLabel>
-                <FormInput ref={(input) => {this.name = input}}
-                           placeholder='What did you eat?'/>
+                {/*<FormInput*/}
+                    {/*onChangeText={text => this.setFoodName(text)}*/}
+                    {/*placeholder='What did you eat?'/>*/}
+
+                <FormInput
+                    ref={input => this.foodName = input}
+                    onChangeText={text => this.updateForm({currentFoodName: text})}
+                    placeholder='What did you eat?'/>
 
                 <FormLabel>Number of Calories</FormLabel>
+                {/*<FormInput*/}
+                    {/*onChangeText={text => this.props.setFoodCalories(text)}*/}
+                    {/*placeholder='How much calories does it have?'/>*/}
                 <FormInput
-                    ref={input => this.calories = input}
+                    ref={input => this.foodCalories = input}
+                    onChangeText={text => this.updateForm({currentFoodCalories: text})}
                     placeholder='How much calories does it have?'/>
 
+                <Text>{this.state.currentFoodName}</Text>
+                <Text>{this.state.currentFoodCalories}</Text>
                 <Button
-                    onPress={this.props.addFoodItem}
+                    onPress={()=>
+                        this.props.addFoodItem(this.state.currentFoodName, this.state.currentFoodCalories)}
                     title='add another food item'
                     buttonStyle={styles.button}></Button>
+
+
 
                 <Picker selectedValue = {this.props.mealType} onValueChange = {this.updateMealType}>
                     <Picker.Item label = "breakfast" value = "breakfast" />

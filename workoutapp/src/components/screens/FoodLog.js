@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import {View, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import FoodLogEditor from "./FoodLogEditor";
+import FoodService from "../../services/FoodService";
+import cookie from "react-cookies";
+import MealItem from '../../elements/MealItem'
 
 class FoodLog extends Component {
     static navigationOptions = {
@@ -26,7 +29,42 @@ class FoodLog extends Component {
         super(props);
 
         this.state = {
-            meals: []  // meals for the day
+            meals: [],  // meals for the day
+            userId: null
+        }
+        this.foodService = FoodService.instance;
+    }
+
+    componentWillMount = () => {
+        var userCookie = cookie.load('user');
+        if(userCookie) {
+            // this.setProfile(user.username, user.age, user.currentWeight);
+            this.setState({
+                userId: userCookie._id
+            });
+        }
+    }
+    componentDidMount = () => {
+        if (this.state.userId) {
+            this.fetchMealsForUser(this.state.userId);
+        }
+    }
+
+    fetchMealsForUser = (userId) => {
+        if (userId) {
+            this.foodService
+                .findMealsForUser(userId)
+                .then((meals) => {
+                    this.setMeals(meals)
+                });
+        }
+    }
+
+    setMeals = (meals) => {
+        if (meals) {
+            this.setState({
+                meals: meals
+            });
         }
     }
 
@@ -35,24 +73,25 @@ class FoodLog extends Component {
     }
 
     // renderBreakfasts = () => {
-    //     return  <Text h4 style={{color:'#565656'}}>Breakfast </Text>
-    // }
-    //
-    // renderLunches = () => {
-    //     return <Text h4 style={{color:'white'}}>Lunch </Text>
-    // }
-    //
-    // renderDinners = () => {
-    //     return  <Text h4 style={{color:'#565656'}}>Dinner </Text>
-    // }
+    //     //     return  <Text h4 style={{color:'#565656'}}>Breakfast </Text>
+    //     // }
+    //     //
+    //     // renderLunches = () => {
+    //     //     return <Text h4 style={{color:'white'}}>Lunch </Text>
+    //     // }
+    //     //
+    //     // renderDinners = () => {
+    //     //     return  <Text h4 style={{color:'#565656'}}>Dinner </Text>
+    //     // }
 
-    renderMealForTheDay = () => {
+    renderMealsForUser = () => {
         return (
             this.state.meals.map((meal, index) => {
-                return <ListItem title='index'></ListItem>
-        })
+                return <MealItem id={meal}/>
+            })
         )
     }
+
 
     render() {
         return (
@@ -64,20 +103,20 @@ class FoodLog extends Component {
                             onPress={this.handleAddMeal}></Button>
                 </View>
                 {/*<View style={styles.MealContainerStyleOne}>*/}
-                    {/*{this.renderBreakfasts()}*/}
+                {/*{this.renderBreakfasts()}*/}
                 {/*</View>*/}
                 {/*<View style={styles.MealContainerStyleTwo}>*/}
 
-                    {/*{this.renderLunches()}*/}
+                {/*{this.renderLunches()}*/}
                 {/*</View>*/}
                 {/*<View style={styles.MealContainerStyleOne}>*/}
 
-                    {/*{this.renderDinners()}*/}
+                {/*{this.renderDinners()}*/}
                 {/*</View>*/}
+                <ScrollView>
+                    {this.renderMealsForUser()}
 
-                {this.renderMealForTheDay()}
-
-
+                </ScrollView>
                 {/*<BottomNavBar/>*/}
             </View>
         )

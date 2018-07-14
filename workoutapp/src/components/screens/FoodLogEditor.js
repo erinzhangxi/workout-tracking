@@ -8,8 +8,7 @@ import cookie from "react-cookies";
 
 
 const stateToPropsMapper = state => ({
-    foods: state.foods,
-    mealType: state.mealType
+    foods: state.foods
 })
 
 const dispatchToPropsMapper = dispatch => ({
@@ -29,7 +28,8 @@ class FoodLogEditor extends Component {
     state = {
         currentFoodName: '',
         currentFoodCalories: '',
-        userId: null
+        userId: null,
+        mealType: ''
     }
 
     componentWillMount() {
@@ -47,8 +47,9 @@ class FoodLogEditor extends Component {
         })
     }
     handleSubmit = () => {
-        this.props.submitMeal(this.props.foods, this.props.mealType, this.state.userId);
-        this.props.navigation.navigate("Food Logs");
+        this.props.submitMeal(this.props.foods, this.state.mealType, this.state.userId);
+        alert('Meal added!');
+        this.props.navigation.navigate("FoodLog");
     }
 
     updateForm = (newState) => {
@@ -102,14 +103,14 @@ class FoodLogEditor extends Component {
                     buttonStyle={styles.button}></Button>
 
 
-                <Picker selectedValue = {this.props.mealType} onValueChange = {this.updateMealType}>
+                <Picker selectedValue = {this.state.mealType} onValueChange = {this.updateMealType}>
                     <Picker.Item label = "breakfast" value = "breakfast" />
                     <Picker.Item label = "lunch" value = "lunch" />
                     <Picker.Item label = "dinner" value = "dinner" />
                     <Picker.Item label = "snacks" value = "snacks" />
                 </Picker>
 
-                <Text style = {styles.text}>{this.props.mealType}</Text>
+                <Text style = {styles.text}>{this.state.mealType}</Text>
 
                 <Button
                     onPress={this.handleSubmit}

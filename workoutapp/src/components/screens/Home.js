@@ -48,23 +48,21 @@ class Home extends Component {
 
     componentDidMount() {
         if (this.state.userId) {
-            this.renderWorkouts(this.state.userId);
+            this.fetchWorkoutsForUser(this.state.userId);
         }
     }
 
     componentWillReceiveProps(newProps) {
-        // var user = cookie.load('user');
-        // alert('before check ' + user);
         if (this.state.username) {
             alert('Will Receive newprops');
             // this.renderWorkouts(user._id);
         }
         if (this.state.userId) {
-            this.renderWorkouts(this.state.userId);
+            this.fetchWorkoutsForUser(this.state.userId);
         }
     }
 
-    renderWorkouts = (userId) => {
+    fetchWorkoutsForUser = (userId) => {
         if (userId) {
             this.workoutService
                 .findWorkoutsForUser(userId)

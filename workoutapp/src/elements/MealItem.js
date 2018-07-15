@@ -38,8 +38,3 @@ class MealItem extends Component {
 }
 
 export default MealItem;
-
-// {/*<ListItem*/}
-//                 {/*title={workout.title}*/}
-//                 {/*subtitle={workout.duration}*/}
-//                 {/*key={index}/>*/}

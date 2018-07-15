@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Login, Register, Home, FoodLog, Progress, Profile, FoodLogEditor, WorkoutEditor } from './components/screens'
+import { Login, Register, Home, FoodLog, Progress, Profile, FoodLogEditor, WorkoutEditor, EditProfile }
+        from './components/screens'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import { Provider } from 'react-redux';
 import {createStore} from "redux";
@@ -22,7 +23,8 @@ const ProgressStacks = createStackNavigator({
 });
 
 const ProfileStacks = createStackNavigator({
-    Profile: Profile
+    Profile: Profile,
+    EditProfile: EditProfile
 });
 
 const MainApp = createBottomTabNavigator({
@@ -33,7 +35,6 @@ const MainApp = createBottomTabNavigator({
 });
 
 export const Stack =  createStackNavigator({
-
     Login: { screen: Login },
     Home: { screen: MainApp },
     Register: { screen: Register }

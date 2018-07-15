@@ -103,15 +103,18 @@ module.exports = function (app) {
 
     function updateUser(req, res) {
         var user = req.body;
+        var userId = req.params['userId'];
+        console.log('userID server: ' + userId);
+        console.log(user);
         userModel
-            .updateUser(user._id, user)
+            .updateUser(userId, user)
             .then(function(response) {
                 if (response === null) {
                     res.sendStatus(404);
                 }
                 else {
                     userModel
-                        .findUserById(user._id)
+                        .findUserById(userId)
                         .then(function(updatedUser) {
                             res.send(updatedUser);
                             // req.session['currentUser'] = user;

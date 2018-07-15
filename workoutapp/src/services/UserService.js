@@ -45,6 +45,25 @@ class UserService {
                 }
             })
     }
+    updateUser(userId, user) {
+        return fetch('http://localhost:4000/api/user/UID'.replace('UID', userId), {
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    findUserById(userId) {
+        return fetch(USER_API_URL + '/' + userId)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
 }
 
 export default UserService;

@@ -87,7 +87,8 @@ class FoodLog extends Component {
     renderMealsForUser = () => {
         return (
             this.state.meals.map((meal, index) => {
-                return <MealItem id={meal}/>
+                return <MealItem key={index}
+                                 id={meal}/>
             })
         )
     }
@@ -113,7 +114,7 @@ class FoodLog extends Component {
 
                 {/*{this.renderDinners()}*/}
                 {/*</View>*/}
-                <ScrollView>
+                <ScrollView style={styles.mealListContent}>
                     {this.renderMealsForUser()}
 
                 </ScrollView>
@@ -151,5 +152,8 @@ export const styles = StyleSheet.create({
     titleFont: {
         color: colors.white,
         fontSize: 16
+    },
+    mealListContent: {
+        backgroundColor: colors.white,
     },
 })

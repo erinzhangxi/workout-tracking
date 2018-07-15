@@ -107,7 +107,8 @@ class Home extends Component {
     renderWorkoutsForUser = () => {
         return (
             this.state.workouts.map((workout, index) => {
-                return <WorkoutItem id={workout}></WorkoutItem>
+                return <WorkoutItem key={index}
+                                    id={workout}></WorkoutItem>
             })
         )
     }

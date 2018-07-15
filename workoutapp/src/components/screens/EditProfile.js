@@ -1,0 +1,107 @@
+import React, { Component } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Text, Button, FormLabel, FormInput } from 'react-native-elements'
+import cookie from "react-cookies";
+import UserService from "../../services/UserService";
+import colors from 'Colors';
+
+class EditProfile extends Component {
+    static navigationOptions = {
+        title: 'Edit Profile',
+        headerTitleStyle: {
+            color: colors.white
+        },
+        headerStyle: {
+            backgroundColor: colors.charcoal,
+        }
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            age: '',
+            currentWeight: '',
+            height: ''
+        }
+        this.userService = UserService.instance;
+
+    }
+
+    componentWillMount() {
+        var user = cookie.load('user');
+        if(user) {
+            this.setProfile(user.username, user.age, user.currentWeight, user.email, user.height, user._id);
+        }
+    }
+
+    updateForm = (newState) => {
+        this.setState(newState)
+    }
+
+    setProfile = (username, age, currentWeight, email, height, id) => {
+        this.setState({
+            username: username,
+            age: age,
+            currentWeight: currentWeight,
+            email: email,
+            height: height,
+            userId: id
+        })
+    }
+
+    updateProfile = () => {
+        let updatedUser = {
+            username: this.state.username,
+            email: this.state.email,
+            age: this.state.age,
+            currentWeight: this.state.currentWeight,
+            height: this.state.height,
+        }
+
+        this.userService
+            .updateUser(this.state.userId, updatedUser)
+            .then(res => alert('button pressed'));
+    }
+
+
+    render() {
+        return (
+            <View>
+                <FormLabel>Name</FormLabel>
+                <FormInput  onChangeText={text => this.updateForm({username: text})}
+                            value={this.state.username}
+                            placeholder='username'/>
+
+                <FormLabel>Email</FormLabel>
+                <FormInput  onChangeText={text => this.updateForm({email: text})}
+                            value={this.state.email}
+                            placeholder='email'/>
+
+                <FormLabel>Age</FormLabel>
+                <FormInput  onChangeText={text => this.updateForm({age: text})}
+                            value={this.state.age}
+                            placeholder='age'/>
+
+                <FormLabel>Current Weight</FormLabel>
+                <FormInput  onChangeText={text => this.updateForm({currentWeight: text})}
+                            value={this.state.currentWeight}
+                            placeholder='current weight'/>
+
+                <FormLabel>Height</FormLabel>
+                <FormInput  onChangeText={text => this.updateForm({height: text})}
+                            value={this.state.height}
+                            placeholder='current weight'/>
+
+                <Button
+                    onPress={this.updateProfile}
+                    title='Save'
+                />
+
+            </View>
+        )
+    }
+}
+
+export default EditProfile;

@@ -59,11 +59,13 @@ class Login extends Component {
                     <FormValidationMessage>{'This field is required'}</FormValidationMessage>
                     <Button
                         title='Login'
+                        buttonStyle={styles.button}
                         onPress={this.handleSubmit.bind(this)}/>
                     <Text h5>Don't have an account?
                     </Text>
 
                     <Button title="Sign up here"
+                            buttonStyle={styles.button}
                             onPress={() => this.props.navigation
                                 .navigate('Register') } />
 
@@ -76,12 +78,10 @@ class Login extends Component {
 }
 
 export const styles = StyleSheet.create({
-    // homeContainer: {
-    //     flex: 1,
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     alignItems: 'center'
-    // }
+    button: {
+        backgroundColor: colors.green
+
+    }
 })
 
 export default Login

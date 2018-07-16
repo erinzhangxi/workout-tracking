@@ -23,18 +23,28 @@ class EditProfile extends Component {
             email: '',
             age: '',
             currentWeight: '',
-            height: ''
+            height: '',
+            userId: ''
         }
         this.userService = UserService.instance;
 
     }
-
+    // TODO age, weight, height value in input don't get updated
     componentWillMount() {
         var user = cookie.load('user');
         if(user) {
             this.setProfile(user.username, user.age, user.currentWeight, user.email, user.height, user._id);
         }
     }
+
+    // componentWillReceiveProps(newProps) {
+    //     this.userService
+    //         .findUserById(this.state.userId)
+    //         .then(res => {
+    //             this.setProfile(res.username, res.age, res.currentWeight, res.email,
+    //                 res.height, res.userId)
+    //         })
+    // }
 
     updateForm = (newState) => {
         this.setState(newState)
@@ -92,7 +102,7 @@ class EditProfile extends Component {
                 <FormLabel>Height</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({height: text})}
                             value={this.state.height}
-                            placeholder='current weight'/>
+                            placeholder='current height'/>
 
                 <Button
                     onPress={this.updateProfile}

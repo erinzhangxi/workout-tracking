@@ -60,19 +60,11 @@ class Profile extends Component {
         this.userService
             .findUserById(this.state.userId)
             .then(res => {
-                this.setProfile(res.username, res.age, res.currentWeight, this.state.userId)
+                this.setProfile(res.username, res.age, res.currentWeight, this.state.userId);
+                cookie.save('user', res);
             })
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props != newProps) {
-            this.userService
-                .findUserById(this.state.userId)
-                .then(res => {
-                    this.setProfile(res.username, res.age, res.currentWeight, this.state.userId)
-                })
-        }
-    }
 
     setProfile = (username, age, currentWeight, userId) => {
         this.setState({

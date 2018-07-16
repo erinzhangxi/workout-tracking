@@ -7,6 +7,7 @@ import Profile from './Profile.js'
 import FoodLogEditor from './FoodLogEditor.js'
 import WorkoutEditor from './WorkoutEditor.js'
 import EditProfile from './EditProfile.js'
+import WeightList from './WeightList'
 
 
 export {
@@ -18,5 +19,6 @@ export {
     Profile,
     FoodLogEditor,
     WorkoutEditor,
-    EditProfile
+    EditProfile,
+    WeightList
 }

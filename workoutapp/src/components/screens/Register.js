@@ -106,7 +106,8 @@ class Register extends Component {
 
                 <Button
                     title='Register'
-                    onPress={this.handleSubmit.bind(this)}/>
+                    onPress={this.handleSubmit.bind(this)}
+                    buttonStyle={styles.button}/>
 
 
             </ScrollView>
@@ -115,7 +116,10 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: colors.green
 
+    }
 })
 
 

@@ -4,6 +4,7 @@ import { Text, Button, ListItem } from 'react-native-elements'
 import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
+import cookie from "react-cookies";
 
 class Progress extends Component {
     static navigationOptions = {
@@ -30,30 +31,66 @@ class Progress extends Component {
         }
     }
 
+    componentWillMount() {
+        var user = cookie.load('user');
+        if(user) {
+            this.setProfile(user.username, user.weights, user.currentWeight);
+        }
+    }
+
+    setProfile = (username, weights, currentWeight) => {
+        this.setState({
+            username: username,
+            weights: weights,
+            currentWeight: currentWeight
+        })
+    }
+
     componentDidMount() {
     }
 
 
-    render() {
-        return (
-            <View style={styles.homeContainer}>
-                <View style={[styles.boxContainer, styles.statsContainer ]}>
+    renderWeightStats = () => {
 
+        return (
+            <View style={styles.statsContainer}>
+                <View>
                     <Text h4 style={styles.statsFont}>Last Weight</Text>
                     <Text h4 style={styles.statsFont}>Current Weight</Text>
                     <Text h4 style={styles.statsFont}>Weight Changed</Text>
+                </View>
+                <View >
+                    <Text h4 style={styles.statsFont}>0</Text>
+                    <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
+                    <Text h4 style={styles.statsFont}>0</Text>
 
                 </View>
+            </View>
+        )
+
+
+    }
+
+    render() {
+        return (
+            <View style={styles.homeContainer}>
+                {this.renderWeightStats()}
+
                 <View style={[styles.boxContainer, styles.MealContainerStyleTwo]}>
 
                     <Text h4 style={{color:'white'}}>Progress Chart </Text>
+                    <Text h4> Number of Weights Recorded: ({this.state.weights.length})</Text>
                 </View>
                 <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
 
                     <Text h4 style={{color:'#565656'}}>From Goal </Text>
                 </View>
 
-
+                <Button
+                    onPress={()=> this.props.navigation.navigate('WeightList')}
+                    title='View Weight History'
+                    buttonStyle={styles.button}
+                />
                 {/*<BottomNavBar/>*/}
             </View>
         )
@@ -95,8 +132,12 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.ypsDark
     },
     statsFont: {
-        color: '#565656',
+        color: colors.white,
         fontSize: 17
+    },
+    button: {
+        backgroundColor: colors.green
+
     }
 })
 

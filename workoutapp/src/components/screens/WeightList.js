@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, ScrollView, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
-import workoutService from '../../services/WorkoutService'
-import WorkoutItem from './../../elements/WorkoutItem'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
+import UserService from "../../services/UserService";
 
 class WeightList extends Component {
     static navigationOptions = {
@@ -22,11 +20,71 @@ class WeightList extends Component {
             inactiveTintColor: 'gray',
         }
     }
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        }
+        this.userService = UserService.instance;
+    }
+
+    handleAddWeight = () => {
+        this.userService
+            .addWeightToUser(this.state.userId, this.state.newWeight)
+            .then(res => {
+                this.setState({weights: res.weights});
+            })
+
+    }
+
+    renderWeightList = () => {
+        return (
+            this.state.weights.map((weight, index) => {
+                return <ListItem title={weight.weight} subtitle={weight.date}/>
+            })
+        )
+    }
+    componentWillMount = () => {
+        var userCookie = cookie.load('user');
+        if(userCookie) {
+            // this.setProfile(user.username, user.age, user.currentWeight);
+            this.setState({
+                userId: userCookie._id,
+                weights: userCookie.weights
+            });
+        }
+    }
+
+    componentDidMount() {
+        this.userService
+            .findUserById(this.state.userId)
+            .then(res => {
+                this.setState({weights: res.weights});
+            })
+    }
+
 
     render() {
         return (
-            <View>
-                <Text>Weight History Page</Text>
+            <View style={styles.homeContainer}>
+                <View style={styles.header}>
+                    <Text h4 style={styles.titleFont}>Weight History </Text>
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={(text) => this.setState({newWeight: text})}
+                        value={this.state.newWeight}
+                        placeholder='Enter your new weight here'></TextInput>
+                    <Button title='Add weight entry'
+                            backgroundColor= {colors.green}
+                            onPress={this.handleAddWeight}></Button>
+                </View>
+                <ScrollView style={styles.mealListContent}>
+                    {this.renderWeightList()}
+
+                </ScrollView>
             </View>
         )
 
@@ -35,3 +93,31 @@ class WeightList extends Component {
 }
 
 export default WeightList;
+
+export const styles = StyleSheet.create({
+    homeContainer: {
+        flex: 1,
+        flexDirection: 'column'
+        // justifyContent: 'space-between',
+        // padding: 20
+    },
+    header: {
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.lightcharcoal,
+        flexDirection: 'row'
+    },
+    inputContainer: {
+        padding: 10
+    },
+    titleFont: {
+        color: colors.white,
+        fontSize: 16
+    },
+    textInput: {
+        height: 40,
+        fontSize: 15
+    }
+})
+

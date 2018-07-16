@@ -8,6 +8,7 @@ module.exports = function (app) {
     app.post('/api/register', register);
     app.delete('/api/user/:userId', deleteUser);
     app.put('/api/user/:userId', updateUser);
+    app.post('/api/user/:userId/weight', addWeightToUser);
 
 
     var userModel = require('../models/user/user.model.server');
@@ -104,8 +105,6 @@ module.exports = function (app) {
     function updateUser(req, res) {
         var user = req.body;
         var userId = req.params['userId'];
-        console.log('userID server: ' + userId);
-        console.log(user);
         userModel
             .updateUser(userId, user)
             .then(function(response) {
@@ -123,7 +122,26 @@ module.exports = function (app) {
             })
     }
 
-
+    function addWeightToUser(req, res) {
+        var weight = req.body;
+        var userId = req.params['userId'];
+        console.log('weight' + weight);
+        console.log("user Id " + userId);
+        userModel
+            .addWeightToUser(userId, weight)
+            .then(function(response) {
+                if (response === null) {
+                    res.sendStatus(404);
+                }
+                else {
+                    userModel
+                        .findUserById(userId)
+                        .then(function(updatedUser) {
+                            res.send(updatedUser);
+                        })
+                }
+            })
+    }
 
 
 }

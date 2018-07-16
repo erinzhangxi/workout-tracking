@@ -64,6 +64,20 @@ class UserService {
             });
     }
 
+    addWeightToUser(userId, weight) {
+        return fetch('http://localhost:4000/api/user/UID/weight'.replace('UID', userId), {
+            body: JSON.stringify({
+                date: new Date(),
+                weight: weight
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
 }
 
 export default UserService;

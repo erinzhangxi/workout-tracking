@@ -18,8 +18,6 @@ module.exports = function (app) {
         var meal = req.body;
         var id = req.params['userId'];
 
-        console.log('meal service - userId ' + id);
-
         var mealId;
         mealModel
             .createMeal(meal, id)

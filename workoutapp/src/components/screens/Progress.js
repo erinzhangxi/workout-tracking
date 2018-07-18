@@ -55,23 +55,17 @@ class Progress extends Component {
         return (
             <View style={styles.statsContainer}>
                 <View>
-                    <Text h4 style={styles.statsFont}>Last Weight</Text>
                     <Text h4 style={styles.statsFont}>Current Weight</Text>
-                    <Text h4 style={styles.statsFont}>Weight Changed</Text>
                 </View>
                 <View >
-                    <Text h4 style={styles.statsFont}>0</Text>
                     <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
-                    <Text h4 style={styles.statsFont}>0</Text>
-
                 </View>
             </View>
         )
-
-
     }
 
     render() {
+
         return (
             <View style={styles.homeContainer}>
                 {this.renderWeightStats()}
@@ -80,10 +74,11 @@ class Progress extends Component {
 
                     <Text h4 style={{color:'white'}}>Progress Chart </Text>
                     <Text h4> Number of Weights Recorded: ({this.state.weights.length})</Text>
+
                 </View>
                 <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
 
-                    <Text h4 style={{color:'#565656'}}>From Goal </Text>
+                    <Text h4 style={{color:colors.white}}>From Goal </Text>
                 </View>
 
                 <Button
@@ -91,7 +86,6 @@ class Progress extends Component {
                     title='View Weight History'
                     buttonStyle={styles.button}
                 />
-                {/*<BottomNavBar/>*/}
             </View>
         )
     }
@@ -107,8 +101,6 @@ export const styles = StyleSheet.create({
     },
     boxContainer: {
         flex: 1
-        // alignItems: 'center',
-        // justifyContent: 'center'
     },
     statsContainer: {
         flex: 2,
@@ -117,12 +109,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center'
     },
-    /*header: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.lightcharcoal
-    },*/
     MealContainerStyleTwo: {
         flex: 5,
         backgroundColor: colors.ypsLight

@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import colors from 'Colors';
+import MainApp from '../../App'
 
 class Login extends Component {
     static navigationOptions = {

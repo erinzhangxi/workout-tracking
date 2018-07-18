@@ -8,6 +8,7 @@ import FoodLogEditor from './FoodLogEditor.js'
 import WorkoutEditor from './WorkoutEditor.js'
 import EditProfile from './EditProfile.js'
 import WeightList from './WeightList'
+import AuthLoadingScreen from './AuthLoadingScreen'
 
 
 export {
@@ -20,5 +21,6 @@ export {
     FoodLogEditor,
     WorkoutEditor,
     EditProfile,
-    WeightList
+    WeightList,
+    AuthLoadingScreen
 }

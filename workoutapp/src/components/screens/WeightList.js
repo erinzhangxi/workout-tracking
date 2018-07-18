@@ -67,10 +67,6 @@ class WeightList extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                <View style={styles.header}>
-                    <Text h4 style={styles.titleFont}>Weight History </Text>
-                </View>
-
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.textInput}
@@ -100,13 +96,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'column'
         // justifyContent: 'space-between',
         // padding: 20
-    },
-    header: {
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.lightcharcoal,
-        flexDirection: 'row'
     },
     inputContainer: {
         padding: 10

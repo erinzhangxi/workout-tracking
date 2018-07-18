@@ -8,8 +8,10 @@ import { Login,
     FoodLogEditor,
     WorkoutEditor,
     EditProfile,
-    WeightList } from './components/screens'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+    WeightList,
+    AuthLoadingScreen
+} from './components/screens'
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import { Provider } from 'react-redux';
 import {createStore} from "redux";
 import {foodLogReducer} from "./reducers/foodLogReducer";
@@ -35,18 +37,32 @@ const ProfileStacks = createStackNavigator({
     EditProfile: EditProfile
 });
 
-const MainApp = createBottomTabNavigator({
+export const MainApp = createBottomTabNavigator({
     Home: { screen:  HomeStacks},
     FoodLog: { screen: FoodLogsStacks },
     Progress: { screen: ProgressStacks },
     Profile: { screen: ProfileStacks }
 });
 
-export const Stack =  createStackNavigator({
+// export const Stack =  createStackNavigator({
+//     Login: { screen: Login },
+//     Home: { screen: MainApp },
+//     Register: { screen: Register }
+// });
+
+export const AuthStack = createStackNavigator({
     Login: { screen: Login },
-    Home: { screen: MainApp },
     Register: { screen: Register }
 });
+
+export const Stack = createSwitchNavigator({
+    AuthLoading: AuthLoadingScreen,
+    Auth: AuthStack,
+    App: MainApp
+},
+    {
+        initialRouteName: 'AuthLoading'
+    });
 
 let store = createStore(foodLogReducer);
 
@@ -55,9 +71,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-
                     <Stack />
-
             </Provider>
         );
     }

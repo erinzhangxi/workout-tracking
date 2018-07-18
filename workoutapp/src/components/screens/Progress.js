@@ -80,12 +80,13 @@ class Progress extends Component {
 
                     <Text h4 style={{color:colors.white}}>From Goal </Text>
                 </View>
-
-                <Button
-                    onPress={()=> this.props.navigation.navigate('WeightList')}
-                    title='View Weight History'
-                    buttonStyle={styles.button}
-                />
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={()=> this.props.navigation.navigate('WeightList')}
+                        title='View Weight History'
+                        buttonStyle={styles.button}
+                    />
+                </View>
             </View>
         )
     }
@@ -123,7 +124,9 @@ export const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: colors.green
-
+    },
+    buttonContainer: {
+        backgroundColor: 'white'
     }
 })
 

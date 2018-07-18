@@ -32,9 +32,21 @@ class WorkoutItem extends Component {
                 })
             })
     }
+
+    handleDelete = () => {
+        this.props.handleDelete();
+    }
+
     render() {
+        // const { params } = this.props.navigation.state;
         return (
-            <ListItem title={this.state.title} subtitle={this.state.description}/>
+            <ListItem
+                onPress={() => this.props.navigation
+                    .navigate("WorkoutDetail", {
+                        workoutId: this.props.id,
+                        handleDelete: this.handleDelete})}
+                title={this.state.title}
+                subtitle={this.state.description}/>
         )
     }
 }

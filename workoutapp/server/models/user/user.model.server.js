@@ -37,6 +37,13 @@ function addWorkoutToUser(userId, workoutId) {
     );
 }
 
+function removeWorkoutFromUser(userId, workoutId) {
+    return userModel.update(
+        {_id: userId},
+        { pull: {workouts: workoutId}}
+    );
+}
+
 function addMealToUser(userId, mealId) {
     return userModel.update(
         {_id: userId},
@@ -61,7 +68,8 @@ var api = {
     updateUser: updateUser,
     addWorkoutToUser: addWorkoutToUser,
     addMealToUser: addMealToUser,
-    addWeightToUser: addWeightToUser
+    addWeightToUser: addWeightToUser,
+    removeWorkoutFromUser: removeWorkoutFromUser
 };
 
 module.exports = api;

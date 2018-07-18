@@ -9,7 +9,8 @@ import { Login,
     WorkoutEditor,
     EditProfile,
     WeightList,
-    AuthLoadingScreen
+    AuthLoadingScreen,
+    WorkoutDetail
 } from './components/screens'
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import { Provider } from 'react-redux';
@@ -18,7 +19,8 @@ import {foodLogReducer} from "./reducers/foodLogReducer";
 
 const HomeStacks = createStackNavigator({
     Home: Home,
-    WorkoutEditor: WorkoutEditor
+    WorkoutEditor: WorkoutEditor,
+    WorkoutDetail: WorkoutDetail
 });
 
 
@@ -43,12 +45,6 @@ export const MainApp = createBottomTabNavigator({
     Progress: { screen: ProgressStacks },
     Profile: { screen: ProfileStacks }
 });
-
-// export const Stack =  createStackNavigator({
-//     Login: { screen: Login },
-//     Home: { screen: MainApp },
-//     Register: { screen: Register }
-// });
 
 export const AuthStack = createStackNavigator({
     Login: { screen: Login },

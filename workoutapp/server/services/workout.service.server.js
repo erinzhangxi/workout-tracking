@@ -3,6 +3,7 @@ module.exports = function (app) {
     app.post('/api/workout/:userId', createWorkout);
     app.get('/api/:userId/workout', findWorkoutsForUser);
     app.get('/api/workout/:workoutId', findWorkoutById);
+    app.delete('api/:userId/workout/:workoutId', deleteWorkout);
 
     var workoutModel = require('../models/workout/workout.model.server');
     var userModel = require('../models/user/user.model.server');
@@ -32,6 +33,21 @@ module.exports = function (app) {
             })
 
     }
+
+    function deleteWorkout(req, res) {
+        var workout = req.params['workoutId'];
+        var id = req.params['userId'];
+        workoutModel.deleteWorkout(workout)
+            .then(function (workout) {
+                res.send(workout);
+
+                userModel.removeWorkoutFromUser(id, workout)
+                    .then(function (user) {
+                        res.send(user);
+                    })
+            })
+    }
+
     function findWorkoutById(req, res) {
         var id = req.params['workoutId'];
         workoutModel

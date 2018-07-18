@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, ScrollView, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import WorkoutItem from './../../elements/WorkoutItem'
@@ -89,6 +89,7 @@ class Home extends Component {
     renderWorkoutStats = () => {
         return (
             <View style={styles.statsContainer}>
+                <StatusBar barStyle="light-content"/>
                 <View>
                     <Text h4 style={styles.statsFont}>Completed</Text>
                     <Text h4 style={styles.statsFont}>Total Duration</Text>
@@ -104,31 +105,43 @@ class Home extends Component {
         )
     }
 
+    deleteWorkout = () => {
+        alert('delete workout');
+        this.workoutService
+            .deleteWorkout(this.state.userId, this.state.workoutId)
+            .then(res => {
+                this.props.navigation.navigate('Home');
+                this.renderWorkoutsForUser();
+            });
+    }
+
     renderWorkoutsForUser = () => {
         return (
             this.state.workouts.map((workout, index) => {
                 return <WorkoutItem key={index}
-                                    id={workout}></WorkoutItem>
+                                    id={workout}
+                                    navigation={this.props.navigation}
+                                    handleDelete={this.deleteWorkout}></WorkoutItem>
             })
         )
     }
 
     render() {
         return (
-                <View style={styles.homeContainer}>
-                    <View style={styles.header}>
-                        <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
-                        <Button title='+'
-                                buttonStyle={{backgroundColor: colors.lightcharcoal}}
-                                onPress={this.handleAddWorkout}></Button>
-                    </View>
+            <View style={styles.homeContainer}>
+                <View style={styles.header}>
+                    <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
+                    <Button title='+'
+                            buttonStyle={{backgroundColor: colors.lightcharcoal}}
+                            onPress={this.handleAddWorkout}></Button>
+                </View>
 
-                    {this.renderWorkoutStats()}
+                {this.renderWorkoutStats()}
 
-                    <ScrollView style={styles.workoutsContent}>
-                        {this.renderWorkoutsForUser()}
-                    </ScrollView>
-
+                <ScrollView style={styles.workoutsContent}>
+                    {this.renderWorkoutsForUser()}
+                </ScrollView>
+                <View style={styles.buttonContainer}>
                     <Button
                         onPress={this.logout}
                         icon={
@@ -141,11 +154,12 @@ class Home extends Component {
                         buttonStyle={styles.button}
                         title='Log out'
                     />
-
-
-
-                    {/*<BottomNavBar/>*/}
                 </View>
+
+
+
+                {/*<BottomNavBar/>*/}
+            </View>
         )
     }
 }
@@ -187,6 +201,9 @@ export const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.green
 
+    },
+    buttonContainer: {
+        backgroundColor: colors.white
     }
 })
 

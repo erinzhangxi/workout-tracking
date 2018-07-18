@@ -4,6 +4,9 @@ const WORKOUT_API_URL =
 const FINDFORUSER_API_URL =
     'http://localhost:4000/api/UID/workout';
 
+const REMOVE_WORKOUT_FROM_USER =
+    'http://localhost:4000/api/UID/workout/WID';
+
 let _singleton = Symbol();
 export default class WorkoutService {
     constructor(singletonToken) {
@@ -31,6 +34,16 @@ export default class WorkoutService {
         })
     }
 
+    deleteWorkout(userId, workout) {
+        return fetch(REMOVE_WORKOUT_FROM_USER
+            .replace('UID', userId)
+            .replace('WID', workout), {
+            method: 'DELETE'
+        }).then(function(response) {
+            return response.json();
+        })
+    }
+
     findWorkoutsForUser(userId) {
         return fetch(FINDFORUSER_API_URL.replace('UID', userId))
             .then(function (response) {
@@ -44,6 +57,7 @@ export default class WorkoutService {
                 return response.json();
             })
     }
+
 
     static get instance() {
         if(!this[_singleton])

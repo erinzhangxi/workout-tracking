@@ -102,13 +102,13 @@ class Home extends Component {
     }
 
     deleteWorkout = (workoutId) => {
-        alert('delete workout' + 'workoutID ' + workoutId);
+        let newWorkouts;
         this.workoutService
             .deleteWorkout(this.state.userId, workoutId)
-            .then(res => {
-                this.renderWorkoutsForUser();
+            .then(() => {
+                newWorkouts = this.renderWorkoutsForUser()
             });
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('Home', {workouts: newWorkouts});
     }
 
     renderWorkoutsForUser = () => {

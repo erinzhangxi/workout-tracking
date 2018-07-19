@@ -39,12 +39,11 @@ module.exports = function (app) {
 
         userModel.removeWorkoutFromUser(id, workout)
             .then(function(user) {
-                res.json(user);
-               // return workoutModel.deleteWorkout(workout)
-               //      .then(function (workout) {
-               //          res.send(workout);
-               //
-               //      })
+                return workoutModel.deleteWorkout(workout)
+                    .then(function (workout) {
+                        res.send(workout);
+
+                    })
             })
     }
 

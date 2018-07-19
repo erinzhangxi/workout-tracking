@@ -56,12 +56,10 @@ class WorkoutEditor extends Component {
             this.workoutService
                 .createWorkout(workout, this.state.userId)
                 .then(res => {
-                    alert('workout submitted');
                     this.props.navigation.navigate('Home', {userId: this.state.userId});
                 })
         }
     }
-
 
 
     updateForm = (newState) => {

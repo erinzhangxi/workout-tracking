@@ -40,7 +40,7 @@ function addWorkoutToUser(userId, workoutId) {
 function removeWorkoutFromUser(userId, workoutId) {
     return userModel.update(
         {_id: userId},
-        { pull: {workouts: workoutId}}
+        { $pull: {workouts: workoutId}}
     );
 }
 

@@ -53,10 +53,6 @@ class Home extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.state.username) {
-            alert('Will Receive newprops');
-            // this.renderWorkouts(user._id);
-        }
         if (this.state.userId) {
             this.fetchWorkoutsForUser(this.state.userId);
         }
@@ -105,14 +101,14 @@ class Home extends Component {
         )
     }
 
-    deleteWorkout = () => {
-        alert('delete workout');
+    deleteWorkout = (workoutId) => {
+        alert('delete workout' + 'workoutID ' + workoutId);
         this.workoutService
-            .deleteWorkout(this.state.userId, this.state.workoutId)
+            .deleteWorkout(this.state.userId, workoutId)
             .then(res => {
-                this.props.navigation.navigate('Home');
                 this.renderWorkoutsForUser();
             });
+        this.props.navigation.navigate('Home');
     }
 
     renderWorkoutsForUser = () => {
@@ -121,7 +117,7 @@ class Home extends Component {
                 return <WorkoutItem key={index}
                                     id={workout}
                                     navigation={this.props.navigation}
-                                    handleDelete={this.deleteWorkout}></WorkoutItem>
+                                    handleDelete={()=>this.deleteWorkout(workout)}></WorkoutItem>
             })
         )
     }

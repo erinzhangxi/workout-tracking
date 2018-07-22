@@ -51,12 +51,12 @@ class Home extends Component {
             this.fetchWorkoutsForUser(this.state.userId);
         }
     }
-
     componentWillReceiveProps(newProps) {
         if (this.state.userId) {
             this.fetchWorkoutsForUser(this.state.userId);
         }
     }
+
 
     fetchWorkoutsForUser = (userId) => {
         if (userId) {

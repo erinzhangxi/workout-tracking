@@ -7,6 +7,7 @@ import FoodLogEditor from "./FoodLogEditor";
 import FoodService from "../../services/FoodService";
 import cookie from "react-cookies";
 import MealItem from '../../elements/MealItem'
+import ModalDropdown from 'react-native-modal-dropdown';
 
 class FoodLog extends Component {
     static navigationOptions = {
@@ -50,6 +51,12 @@ class FoodLog extends Component {
         }
     }
 
+    componentWillReceiveProps(newProps) {
+        if (this.state.userId) {
+            this.fetchMealsForUser(this.state.userId);
+        }
+    }
+
     fetchMealsForUser = (userId) => {
         if (userId) {
             this.foodService
@@ -72,6 +79,16 @@ class FoodLog extends Component {
         this.props.navigation.navigate('FoodLogEditor');
     }
 
+    deleteMeal = (mealId) => {
+        let newMeals;
+        this.foodService
+            .deleteMeal(this.state.userId, mealId)
+            .then(() => {
+                newMeals = this.renderMealsForUser()
+            });
+        this.props.navigation.navigate('FoodLog', {meals: newMeals});
+    }
+
     // renderBreakfasts = () => {
     //     //     return  <Text h4 style={{color:'#565656'}}>Breakfast </Text>
     //     // }
@@ -88,7 +105,10 @@ class FoodLog extends Component {
         return (
             this.state.meals.map((meal, index) => {
                 return <MealItem key={index}
-                                 id={meal}/>
+                                 id={meal}
+                                 navigation={this.props.navigation}
+                                 handleDelete={()=>this.deleteMeal(meal)}
+                                />
             })
         )
     }
@@ -97,8 +117,13 @@ class FoodLog extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
+
                 <View style={styles.header}>
-                    <Text h4 style={styles.titleFont}>Today </Text>
+                    <ModalDropdown
+                        dropdownTextStyle={styles.dropdownText}
+                        options={['Today', 'This week', "This month", "Earlier"]}>
+                        <Text h4 style={styles.titleFont}>Today </Text>
+                    </ModalDropdown>
                     <Button title='+'
                             backgroundColor= {colors.lightcharcoal}
                             onPress={this.handleAddMeal}></Button>
@@ -115,6 +140,11 @@ class FoodLog extends Component {
                 {/*{this.renderDinners()}*/}
                 {/*</View>*/}
                 <ScrollView style={styles.mealListContent}>
+
+                    <View>
+                        <Text style={styles.paragraph}>Number of meals: {this.state.meals.length}</Text>
+                    </View>
+
                     {this.renderMealsForUser()}
 
                 </ScrollView>
@@ -156,4 +186,12 @@ export const styles = StyleSheet.create({
     mealListContent: {
         backgroundColor: colors.white,
     },
+    dropdownText: {
+        color: 'black',
+        fontSize: 16
+    },
+    paragraph: {
+        color: colors.green,
+        fontSize: 15
+    }
 })

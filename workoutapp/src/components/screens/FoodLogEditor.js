@@ -12,7 +12,7 @@ const stateToPropsMapper = state => ({
 })
 
 const dispatchToPropsMapper = dispatch => ({
-    // findAllFoods: (mealId) => actions.findAllFoods(dispatch, mealId)
+    findAllFoodsForMeal: (mealId) => actions.findAllFoodsForMeal(dispatch, mealId),
     addFoodItem: (name, calories) =>
         actions.addFoodItem(dispatch, name, calories),
     submitMeal: (foods, mealType, userId) =>
@@ -49,7 +49,7 @@ class FoodLogEditor extends Component {
     handleSubmit = () => {
         this.props.submitMeal(this.props.foods, this.state.mealType, this.state.userId);
         alert('Meal added!');
-        this.props.navigation.navigate("FoodLog");
+        this.props.navigation.navigate('FoodLog', {meals: this.props.findAllFoodsForMeal(mealId)});
     }
 
     updateForm = (newState) => {

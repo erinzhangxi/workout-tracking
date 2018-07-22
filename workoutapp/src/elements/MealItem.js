@@ -32,7 +32,11 @@ class MealItem extends Component {
         //     return <MealItem id={meal}/>
         // })
         return (
-            <ListItem title={this.state.date} subtitle={this.state.type}/>
+            <ListItem title={this.state.date}
+                      subtitle={this.state.type}
+                      onPress={() => this.props.navigation.navigate("MealDetails", {
+                              mealId: this.props.id,
+                              handleDelete: this.props.handleDelete})}/>
         )
     }
 }

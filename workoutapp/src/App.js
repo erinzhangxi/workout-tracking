@@ -10,7 +10,8 @@ import { Login,
     EditProfile,
     WeightList,
     AuthLoadingScreen,
-    WorkoutDetail
+    WorkoutDetail,
+    MealDetails
 } from './components/screens'
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import { Provider } from 'react-redux';
@@ -26,7 +27,9 @@ const HomeStacks = createStackNavigator({
 
 const FoodLogsStacks = createStackNavigator({
     FoodLog: FoodLog,
-    FoodLogEditor: FoodLogEditor
+    FoodLogEditor: FoodLogEditor,
+    MealDetails:  MealDetails
+
 });
 
 const ProgressStacks = createStackNavigator({

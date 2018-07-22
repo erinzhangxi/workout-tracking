@@ -3,6 +3,8 @@ module.exports = function (app) {
     app.post('/api/meal/:userId', createMeal);
     app.get('/api/:userId/meal', findMealsForUser);
     app.get('/api/meal/:mealId', findMealById);
+    app.delete('/api/:userId/meal/:mealId', deleteMeal);
+    app.get('/api/meal/:mealId/food', findAllFoodsForMeal);
 
     var mealModel = require('../models/meal/meal.model.server');
     var userModel = require('../models/user/user.model.server');
@@ -11,6 +13,14 @@ module.exports = function (app) {
         mealModel.findAllMeals()
             .then(function (meals) {
                 res.send(meals);
+            })
+    }
+
+    function findAllFoodsForMeal(req, res) {
+        var mealId = req.params['mealId'];
+        mealModel.findAllFoodsForMeal(mealId)
+            .then(function (foods) {
+                res.send(foods);
             })
     }
 
@@ -49,6 +59,20 @@ module.exports = function (app) {
             .then(function (user) {
                 console.log("user " + id + " meals: " + user.meals);
                 res.send(user.meals);
+            })
+    }
+
+    function deleteMeal(req, res) {
+        var meal = req.params['mealId'];
+        var id = req.params['userId'];
+
+        userModel.removeMealFromUser(id, meal)
+            .then(function(user) {
+                return mealModel.deleteMeal(meal)
+                    .then(function (meal) {
+                        res.send(meal);
+
+                    })
             })
     }
 

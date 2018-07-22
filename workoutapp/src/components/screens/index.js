@@ -10,6 +10,7 @@ import EditProfile from './EditProfile.js'
 import WeightList from './WeightList.js'
 import AuthLoadingScreen from './AuthLoadingScreen.js'
 import WorkoutDetail from './WorkoutDetail.js'
+import MealDetails from './MealDetails.js'
 
 
 export {
@@ -24,5 +25,6 @@ export {
     EditProfile,
     WeightList,
     AuthLoadingScreen,
-    WorkoutDetail
+    WorkoutDetail,
+    MealDetails
 }

@@ -4,6 +4,9 @@ const MEAL_API_URL =
 const FIND_USER_MEAL =
     'http://localhost:4000/api/UID/meal';
 
+const REMOVE_MEAL_FROM_USER =
+    'http://localhost:4000/api/UID/meal/MID';
+
 let _singleton = Symbol();
 export default class WorkoutService {
     constructor(singletonToken) {
@@ -31,6 +34,16 @@ export default class WorkoutService {
             .then(function (response) {
                 return response.json();
             })
+    }
+
+    deleteMeal(userId, mealId) {
+        return fetch(REMOVE_MEAL_FROM_USER
+            .replace('UID', userId)
+            .replace('MID', mealId), {
+            method: 'DELETE'
+        }).then(function(response) {
+            return response.json();
+        })
     }
 
     static get instance() {

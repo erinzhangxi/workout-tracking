@@ -22,13 +22,19 @@ function updateMeal(mealId, newMeal) {
     return mealModel.update({_id: mealId}, {$set:newMeal});
 }
 
+function findAllFoodsForMeal(mealId) {
+    return mealModel.find({_id: mealId}, {foods: true});
+}
+
 
 var api = {
     findAllMeals: findAllMeals,
     createMeal: createMeal,
     findMealById: findMealById,
     deleteMeal: deleteMeal,
-    updateMeal: updateMeal
+    updateMeal: updateMeal,
+    findAllFoodsForMeal: findAllFoodsForMeal
+
 };
 
 module.exports = api;

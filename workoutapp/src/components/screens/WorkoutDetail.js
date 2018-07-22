@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
-import { Text, Card, ListItem, Button, Icon } from 'react-native-elements'
+import { View } from 'react-native'
+import { Text, Card, Button, Icon } from 'react-native-elements'
 import colors from 'Colors';
 import cookie from "react-cookies";
 import WorkoutService from "../../services/WorkoutService";

@@ -49,7 +49,11 @@ class FoodLogEditor extends Component {
     handleSubmit = () => {
         this.props.submitMeal(this.props.foods, this.state.mealType, this.state.userId);
         alert('Meal added!');
-        this.props.navigation.navigate('FoodLog', {meals: this.props.findAllFoodsForMeal(mealId)});
+
+        // TODO how to use call back in react native (redux-thunk)
+        // get the newly created meal ID and use as a param in the method below
+        // this.props.navigation.navigate('FoodLog', {meals: this.props.findAllFoodsForMeal(mealId)});
+        this.props.navigation.navigate('FoodLog');
     }
 
     updateForm = (newState) => {

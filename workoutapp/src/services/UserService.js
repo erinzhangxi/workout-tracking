@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 let _singleton = Symbol();
 const USER_API_URL =
     'http://localhost:4000/api/user';
@@ -65,9 +67,10 @@ class UserService {
     }
 
     addWeightToUser(userId, weight) {
+        var now = moment().format("MMM Do YY");
         return fetch('http://localhost:4000/api/user/UID/weight'.replace('UID', userId), {
             body: JSON.stringify({
-                date: new Date(),
+                date: now,
                 weight: weight
             }),
             headers: {

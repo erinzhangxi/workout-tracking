@@ -8,7 +8,7 @@ var mealSchema = mongoose.Schema({
         }
     ],
     type: String,
-    date: Date
+    date: String
 }, {collection: 'meal'});
 
 module.exports = mealSchema;

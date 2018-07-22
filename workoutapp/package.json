@@ -9,6 +9,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "moment": "^2.22.2",
     "react": "16.3.1",
     "react-cookies": "^0.1.0",
     "react-native": "0.55.4",

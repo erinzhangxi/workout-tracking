@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     meals: [String],
     weights: [
         {
-            date: Date,
+            date: String,
             weight: Number
         }
     ],

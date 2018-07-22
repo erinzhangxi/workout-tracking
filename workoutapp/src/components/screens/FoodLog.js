@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {ScrollView, View, StyleSheet} from 'react-native';
-import { Text, Button, ListItem } from 'react-native-elements'
+import { Text, Button, ListItem, Divider } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import FoodLogEditor from "./FoodLogEditor";
@@ -31,6 +31,9 @@ class FoodLog extends Component {
 
         this.state = {
             meals: [],  // meals for the day
+            breakfasts: [],
+            lunches: [],
+            dinners: [],
             userId: null
         }
         this.foodService = FoodService.instance;
@@ -108,7 +111,7 @@ class FoodLog extends Component {
                                  id={meal}
                                  navigation={this.props.navigation}
                                  handleDelete={()=>this.deleteMeal(meal)}
-                                />
+                />
             })
         )
     }
@@ -144,6 +147,15 @@ class FoodLog extends Component {
                     <View>
                         <Text style={styles.paragraph}>Number of meals: {this.state.meals.length}</Text>
                     </View>
+
+                    <Divider style={styles.divider}/>
+
+                    <Text h3>Breakfast</Text>
+                    <Divider style={styles.divider}/>
+
+                    <Text h3>Meal 2</Text>
+                    <Divider style={styles.divider}/>
+                    <Text h3>Meal 3</Text>
 
                     {this.renderMealsForUser()}
 
@@ -193,5 +205,9 @@ export const styles = StyleSheet.create({
     paragraph: {
         color: colors.green,
         fontSize: 15
+    },
+    divider: {
+        backgroundColor: colors.lightgray,
+        height: 2
     }
 })

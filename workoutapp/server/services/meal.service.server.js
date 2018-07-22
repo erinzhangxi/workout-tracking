@@ -32,7 +32,6 @@ module.exports = function (app) {
         mealModel
             .createMeal(meal, id)
             .then(function (meal) {
-                res.send(meal);
                 mealId = meal._id;
 
                 console.log('meal ID ' + mealId);
@@ -57,7 +56,6 @@ module.exports = function (app) {
         userModel
             .findUserById(id)
             .then(function (user) {
-                console.log("user " + id + " meals: " + user.meals);
                 res.send(user.meals);
             })
     }

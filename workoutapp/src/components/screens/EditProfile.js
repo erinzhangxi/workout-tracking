@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import colors from 'Colors';
+import {styles} from "./Login";
 
 class EditProfile extends Component {
     static navigationOptions = {
@@ -107,6 +108,7 @@ class EditProfile extends Component {
                 <Button
                     onPress={this.updateProfile}
                     title='Save'
+                    buttonStyle={styles.button}
                 />
 
             </View>

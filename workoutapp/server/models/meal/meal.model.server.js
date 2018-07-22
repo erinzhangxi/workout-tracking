@@ -11,6 +11,9 @@ function findMealById(mealId) {
 }
 
 function createMeal(meal, userId) {
+    console.log('create Meal');
+    console.log(meal.date);
+    console.log(meal.type);
     return mealModel.create(meal);
 }
 

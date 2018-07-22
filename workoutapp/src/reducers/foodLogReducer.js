@@ -1,4 +1,5 @@
 import * as constants from '../constants/index.js'
+import moment from 'moment';
 
 let initialState = {
     foods:
@@ -26,10 +27,11 @@ export const foodLogReducer = (state = {foods: [], mealType: ''}, action) => {
             }
 
         case constants.SUBMIT_MEAL:
+            var now = moment(new Date()).format('YYYY MM DD');
             let meal = {
                 foods: action.foods,
                 type: action.mealType,
-                date: new Date()
+                date: now
             }
             fetch(('http://localhost:4000/api/meal/UID').replace('UID', action.userId), {
                 method: 'post',

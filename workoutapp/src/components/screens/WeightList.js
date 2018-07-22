@@ -38,8 +38,11 @@ class WeightList extends Component {
 
     }
 
-    deleteNote = (selectedItem) => {
-        alert('delete row' + selectedItem.weight + ' date:  '+selectedItem.date);
+    deleteNote = (selectedItem, weightId) => {
+        alert('delete row' + selectedItem.weight);
+        this.userService
+            .removeWeightFromUser(this.state.userId, weightId)
+            .then(res => this.setState({weights: res.weights}));
     }
 
     renderWeightList = () => {
@@ -47,7 +50,8 @@ class WeightList extends Component {
             this.state.weights.map((weight, index) => {
                 return (
                     <SwipeoutWrapper item={weight}
-                                     deleteNote={this.deleteNote}/>
+                                     deleteNote={this.deleteNote}
+                                     id={weight._id}/>
                 )
             })
         )
@@ -69,6 +73,17 @@ class WeightList extends Component {
             .then(res => {
                 this.setState({weights: res.weights});
             })
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (this.props != newProps) {
+            this.userService
+                .findUserById(newProps.userId)
+                .then(res => {
+                    this.setState({weights: res.weights});
+                    this.renderWeightList();
+                })
+        }
     }
 
 

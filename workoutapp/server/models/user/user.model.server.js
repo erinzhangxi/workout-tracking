@@ -65,6 +65,13 @@ function addWeightToUser(userId, weight) {
     );
 }
 
+function removeWeightFromUser(userId, weightId) {
+    return userModel.update(
+        {_id: userId},
+        { $pull:  {'weights': {_id: weightId }}}
+    );
+}
+
 var api = {
     createUser: createUser,
     findAllUsers: findAllUsers,
@@ -76,6 +83,7 @@ var api = {
     addWorkoutToUser: addWorkoutToUser,
     addMealToUser: addMealToUser,
     addWeightToUser: addWeightToUser,
+    removeWeightFromUser: removeWeightFromUser,
     removeWorkoutFromUser: removeWorkoutFromUser,
     removeMealFromUser: removeMealFromUser
 };

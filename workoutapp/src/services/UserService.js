@@ -78,6 +78,16 @@ class UserService {
             return response.json();
         })
     }
+
+    removeWeightFromUser(userId, weightId) {
+        return fetch('http://localhost:4000/api/user/UID/weight/WID'
+            .replace('UID', userId)
+            .replace('WID', weightId), {
+            method: 'DELETE'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
 }
 
 export default UserService;

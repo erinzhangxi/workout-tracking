@@ -13,7 +13,7 @@ class SwipeoutWrapper extends Component {
             text: 'Delete',
             backgroundColor: 'red',
             underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-            onPress: () => {this.props.deleteNote(this.props.item)}
+            onPress: () => {this.props.deleteNote(this.props.item, this.props.id)}
         }];
 
 

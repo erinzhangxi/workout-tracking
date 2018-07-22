@@ -4,6 +4,7 @@ import { Text, Button, ListItem } from 'react-native-elements'
 import colors from 'Colors';
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
+import SwipeoutWrapper from '../../elements/SwipeoutWrapper';
 
 class WeightList extends Component {
     static navigationOptions = {
@@ -37,10 +38,17 @@ class WeightList extends Component {
 
     }
 
+    deleteNote = (selectedItem) => {
+        alert('delete row' + selectedItem.weight + ' date:  '+selectedItem.date);
+    }
+
     renderWeightList = () => {
         return (
             this.state.weights.map((weight, index) => {
-                return <ListItem title={weight.weight} subtitle={weight.date}/>
+                return (
+                    <SwipeoutWrapper item={weight}
+                                     deleteNote={this.deleteNote}/>
+                )
             })
         )
     }

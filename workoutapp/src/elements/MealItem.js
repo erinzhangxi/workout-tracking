@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {View, StyleSheet} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
-import MealService from "../services/FoodService";
+import FoodService from "../services/FoodService";
 
 // given a meal id, fetch meal from server and render the meal item
 class MealItem extends Component {
@@ -12,11 +12,11 @@ class MealItem extends Component {
             type: '',
             date: ''
         }
-        this.mealService = MealService.instance;
+        this.foodService = FoodService.instance;
     }
 
     componentWillMount() {
-        this.mealService
+        this.foodService
             .findMealById(this.props.id)
             .then(res => {
                 this.setState({

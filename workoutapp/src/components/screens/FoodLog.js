@@ -31,9 +31,10 @@ class FoodLog extends Component {
 
         this.state = {
             meals: [],  // meals for the day
-            breakfasts: [],
-            lunches: [],
-            dinners: [],
+            // breakfasts: [],
+            // lunches: [],
+            // dinners: [],
+            // snacks: [],
             userId: null
         }
         this.foodService = FoodService.instance;
@@ -69,12 +70,47 @@ class FoodLog extends Component {
                 });
         }
     }
+    checkMealType = (mealId) => {
+        this.foodService
+            .findMealById(mealId)
+            .then(res => {
+                return res.type;
+            })
+    }
 
+    // meals are a list of meal IDs
     setMeals = (meals) => {
+        // let mapIDsToMeals = (mealId) => {
+        //     return  this.foodService
+        //         .findMealById(mealId)
+        //         .then(res => {
+        //             console.log(res.type);
+        //             return res.type
+        //         });
+        // };
+        //
+        // let isBreakfast = (mealType) => {
+        //     console.log(mealType);
+        //     console.log(mealType === 'breakfast');
+        //     return mealType === 'breakfast';
+        // };
+        //
+        // let breakfastList = (breakfasts, meal) => {
+        //     return breakfasts.push(meal);
+        // };
+
         if (meals) {
+            // let filteredBreakfastList = meals
+            //     .map(mapIDsToMeals)
+            //     .filter(isBreakfast)
+            //     .reduce(breakfastList, []);
+
             this.setState({
                 meals: meals
-            });
+                // lunches: lunches,
+                // dinners: dinners,
+                // snacks: snacks
+            })
         }
     }
 
@@ -92,21 +128,9 @@ class FoodLog extends Component {
         this.props.navigation.navigate('FoodLog', {meals: newMeals});
     }
 
-    // renderBreakfasts = () => {
-    //     //     return  <Text h4 style={{color:'#565656'}}>Breakfast </Text>
-    //     // }
-    //     //
-    //     // renderLunches = () => {
-    //     //     return <Text h4 style={{color:'white'}}>Lunch </Text>
-    //     // }
-    //     //
-    //     // renderDinners = () => {
-    //     //     return  <Text h4 style={{color:'#565656'}}>Dinner </Text>
-    //     // }
-
-    renderMealsForUser = () => {
+    renderMealsForUser = (meals) => {
         return (
-            this.state.meals.map((meal, index) => {
+            meals.map((meal, index) => {
                 return <MealItem key={index}
                                  id={meal}
                                  navigation={this.props.navigation}
@@ -115,7 +139,6 @@ class FoodLog extends Component {
             })
         )
     }
-
 
     render() {
         return (
@@ -131,33 +154,30 @@ class FoodLog extends Component {
                             backgroundColor= {colors.lightcharcoal}
                             onPress={this.handleAddMeal}></Button>
                 </View>
-                {/*<View style={styles.MealContainerStyleOne}>*/}
-                {/*{this.renderBreakfasts()}*/}
-                {/*</View>*/}
-                {/*<View style={styles.MealContainerStyleTwo}>*/}
 
-                {/*{this.renderLunches()}*/}
-                {/*</View>*/}
-                {/*<View style={styles.MealContainerStyleOne}>*/}
-
-                {/*{this.renderDinners()}*/}
-                {/*</View>*/}
                 <ScrollView style={styles.mealListContent}>
 
-                    <View>
-                        <Text style={styles.paragraph}>Number of meals: {this.state.meals.length}</Text>
-                    </View>
+                    {this.renderMealsForUser(this.state.meals)}
 
-                    <Divider style={styles.divider}/>
+                    {/*<Divider style={styles.divider}/>*/}
+                    {/*<View>*/}
+                        {/*<Text style={styles.paragraph}>Breakfast: {this.state.breakfasts.length}</Text>*/}
+                    {/*</View>*/}
+                    {/*{this.renderMealsForUser(this.state.breakfasts)}*/}
 
-                    <Text h3>Breakfast</Text>
-                    <Divider style={styles.divider}/>
 
-                    <Text h3>Meal 2</Text>
-                    <Divider style={styles.divider}/>
-                    <Text h3>Meal 3</Text>
+                    {/*<Divider style={styles.divider}/>*/}
+                    {/*<View>*/}
+                        {/*<Text style={styles.paragraph}>Lunch: {this.state.lunches.length}</Text>*/}
+                    {/*</View>*/}
+                    {/*{this.renderMealsForUser(this.state.lunches)}*/}
 
-                    {this.renderMealsForUser()}
+                    {/*<Divider style={styles.divider}/>*/}
+                    {/*<View>*/}
+                        {/*<Text style={styles.paragraph}>Dinner: {this.state.dinners.length}</Text>*/}
+                    {/*</View>*/}
+                    {/*{this.renderMealsForUser(this.state.dinners)}*/}
+
 
                 </ScrollView>
                 {/*<BottomNavBar/>*/}
@@ -204,7 +224,7 @@ export const styles = StyleSheet.create({
     },
     paragraph: {
         color: colors.green,
-        fontSize: 15
+        fontSize: 18
     },
     divider: {
         backgroundColor: colors.lightgray,

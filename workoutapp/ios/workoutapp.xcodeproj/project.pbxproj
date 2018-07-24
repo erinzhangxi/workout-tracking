@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,7 +22,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1472F9C8EE574C27B0EC2B3F /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55B68A28675D4B7F898514F9 /* Feather.ttf */; };
-		16434AC80E5241FEA58BCB3E /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D63AC8CB0544E8B1FC073E /* libRNSVG-tvOS.a */; };
 		165924682E224EBE96D3688B /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EFF319E456D4BADB5DDFEE6 /* Montserrat-Bold.ttf */; };
 		1E6CE021AB144919BF7A437B /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EC4DC96B42457C9D5DED4B /* libRNVectorIcons.a */; };
 		2C9596BD66F749F2AA27C20D /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 749762B0A74F4C7F9D483009 /* Montserrat-BoldItalic.ttf */; };
@@ -443,7 +441,6 @@
 		57CEFDE1C70C4603ACE9C414 /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-BlackItalic.ttf"; path = "../src/assets/fonts/Raleway/Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		66AE7E1BADFE4DE7B48E7742 /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Raleway/Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		66D63AC8CB0544E8B1FC073E /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		68848C5E57DC493FBD8AAA91 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		6B2D2CBFEA9E4D1CA9F499D8 /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-LightItalic.ttf"; path = "../src/assets/fonts/Raleway/Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
 		6F3BB34C0D094A489F21E9DE /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-BoldItalic.ttf"; path = "../src/assets/fonts/Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -537,7 +534,6 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
-				16434AC80E5241FEA58BCB3E /* libRNSVG-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +687,6 @@
 			children = (
 				44EC4DC96B42457C9D5DED4B /* libRNVectorIcons.a */,
 				DAEA1AAA9F9E45D8B4BAD254 /* libRNSVG.a */,
-				66D63AC8CB0544E8B1FC073E /* libRNSVG-tvOS.a */,
 				2295DE19618344B7902A2A3A /* libRNShare.a */,
 				2D51AEFBAC914A08A801ABFC /* libRNImagePicker.a */,
 			);

@@ -5,6 +5,7 @@ import BottomNavBar from '../../elements/BottomNavBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
+import { LineChart, Grid } from 'react-native-svg-charts'
 
 class Progress extends Component {
     static navigationOptions = {
@@ -27,7 +28,7 @@ class Progress extends Component {
         super(props);
 
         this.state = {
-
+            weightRawData: []
         }
     }
 
@@ -47,6 +48,13 @@ class Progress extends Component {
     }
 
     componentDidMount() {
+        let data = [];
+        this.state.weights.map((weight, index) => {
+            data.push(weight.weight);
+        })
+        this.setState({
+            weightRawData: data
+        }, ()=> console.log('raw weight data' + data))
     }
 
 
@@ -65,21 +73,26 @@ class Progress extends Component {
     }
 
     render() {
-
+        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
         return (
             <View style={styles.homeContainer}>
                 {this.renderWeightStats()}
 
-                <View style={[styles.boxContainer, styles.MealContainerStyleTwo]}>
+                <View style={[styles.boxContainer, styles.MealContainerStyle]}>
 
-                    <Text h4 style={{color:'white'}}>Progress Chart </Text>
-                    <Text h4> Number of Weights Recorded: ({this.state.weights.length})</Text>
+                    <Text h4 style={{color: colors.ypsLight}}>Progress </Text>
+
+                    <LineChart
+                        style={{ height: 200 }}
+                        data={ this.state.weightRawData }
+                        svg={{ stroke: 'rgb(134, 65, 244)' }}
+                        contentInset={{ top: 20, bottom: 20 }}
+                    >
+                        <Grid/>
+                    </LineChart>
 
                 </View>
-                <View style={[styles.boxContainer, styles.MealContainerStyleOne]}>
 
-                    <Text h4 style={{color:colors.white}}>From Goal </Text>
-                </View>
                 <View style={styles.buttonContainer}>
                     <Button
                         onPress={()=> this.props.navigation.navigate('WeightList')}
@@ -96,7 +109,7 @@ export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: colors.charcoal
+        backgroundColor: colors.white
         // justifyContent: 'space-between',
         // padding: 20
     },
@@ -110,13 +123,11 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center'
     },
-    MealContainerStyleTwo: {
+    MealContainerStyle: {
         flex: 5,
-        backgroundColor: colors.ypsLight
-    },
-    MealContainerStyleOne: {
-        flex: 2,
-        backgroundColor: colors.ypsDark
+        backgroundColor: colors.white,
+        marginLeft: 20,
+        marginRight: 20
     },
     statsFont: {
         color: colors.white,
@@ -126,7 +137,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.green
     },
     buttonContainer: {
-        backgroundColor: 'white'
+        backgroundColor: colors.white
     }
 })
 

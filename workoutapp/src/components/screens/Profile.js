@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, PixelRatio} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
 import cookie from "react-cookies";
 import colors from 'Colors';
 import UserService from "../../services/UserService";
+import ImagePicker from 'react-native-image-picker'
 
 const list = [
     {
@@ -19,6 +20,7 @@ const list = [
         subtitle: 'Chris congratulated on your last workout!'
     }
 ]
+
 
 // TODO fetch user data again
 class Profile extends Component {
@@ -44,7 +46,9 @@ class Profile extends Component {
         this.state = {
             username: '',
             age: '',
-            weight: ''
+            weight: '',
+            avatarSource: null,
+            videoSource: null
         }
         this.userService = UserService.instance;
     }
@@ -86,16 +90,55 @@ class Profile extends Component {
                 }
             ))
     }
+    selectPhotoTapped = () => {
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+                skipBackup: true
+            }
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled photo picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source
+                });
+            }
+        });
+    }
+
 
     render() {
         return (
             <View style={styles.homeContainer}>
                 <View style={[styles.boxContainer]}>
                     <View style={styles.avatarContainer}>
-                        <Image source={PROFILE_PICTURE}
-                               style={{
-                                   width: 40,
-                                   height: 40}}/>
+
+                        <TouchableOpacity onPress={this.selectPhotoTapped}>
+                            <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+                                { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+                                    <Image style={styles.avatar} source={this.state.avatarSource} />
+                                }
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.userContainer}>
 
@@ -142,14 +185,14 @@ export const styles = StyleSheet.create({
 
 
     },
-    avatarContainer: {
-        flex: 1,
-        // alignItems: 'flex-start',
-        justifyContent:'center',
-        marginLeft: 30
-
-
-    },
+    // avatarContainer: {
+    //     flex: 1,
+    //     // alignItems: 'flex-start',
+    //     justifyContent:'center',
+    //     marginLeft: 30
+    //
+    //
+    // },
     boxThree: {
         flex: 7,
         backgroundColor: colors.white
@@ -164,6 +207,17 @@ export const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         marginLeft: 20
 
+    },
+    avatarContainer: {
+        borderColor: '#9B9B9B',
+        borderWidth: 1 / PixelRatio.get(),
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    avatar: {
+        borderRadius: 75,
+        width: 150,
+        height: 150
     }
 })
 

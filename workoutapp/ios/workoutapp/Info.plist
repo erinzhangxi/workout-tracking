@@ -39,7 +39,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -64,24 +64,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Raleway-Black.ttf</string>
-		<string>Raleway-BlackItalic.ttf</string>
-		<string>Raleway-Bold.ttf</string>
-		<string>Raleway-BoldItalic.ttf</string>
-		<string>Raleway-ExtraBold.ttf</string>
-		<string>Raleway-ExtraBoldItalic.ttf</string>
-		<string>Raleway-ExtraLight.ttf</string>
-		<string>Raleway-ExtraLightItalic.ttf</string>
-		<string>Raleway-Italic.ttf</string>
-		<string>Raleway-Light.ttf</string>
-		<string>Raleway-LightItalic.ttf</string>
-		<string>Raleway-Medium.ttf</string>
-		<string>Raleway-MediumItalic.ttf</string>
-		<string>Raleway-Regular.ttf</string>
-		<string>Raleway-SemiBold.ttf</string>
-		<string>Raleway-SemiBoldItalic.ttf</string>
-		<string>Raleway-Thin.ttf</string>
-		<string>Raleway-ThinItalic.ttf</string>
 		<string>Montserrat-Black.ttf</string>
 		<string>Montserrat-BlackItalic.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
@@ -101,5 +83,13 @@
 		<string>Montserrat-Thin.ttf</string>
 		<string>Montserrat-ThinItalic.ttf</string>
 	</array>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like access to your photo gallery</string>
+  <key>NSCameraUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like to use your camera</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like to save photos to your photo gallery</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like to your microphone (for videos)</string>
 </dict>
 </plist>

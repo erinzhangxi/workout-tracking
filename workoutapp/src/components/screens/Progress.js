@@ -64,27 +64,29 @@ class Progress extends Component {
     renderWeightStats = () => {
 
         return (
-            <View>
-                <View style={styles.statsContainer}>
-                    <View>
+
+                <View>
+                    <View style={styles.animationContainer}>
+                        <Animation
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            style={styles.animation}
+                            loop={true}
+                            source={heart}
+                        />
+                    </View>
+
+                    <View style={styles.statsContainer}>
                         <Text h4 style={styles.statsFont}>Current Weight</Text>
                     </View>
                     <View >
                         <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
                     </View>
+
                 </View>
-                <Animation
-                    ref={animation => {
-                        this.animation = animation;
-                    }}
-                    style={{
-                        width: 300,
-                        height: 100
-                    }}
-                    loop={true}
-                    source={heart}
-                />
-            </View>
+
+
         )
     }
 
@@ -130,10 +132,8 @@ export const styles = StyleSheet.create({
         flex: 1
     },
     statsContainer: {
-        flex: 2,
-        backgroundColor: colors.yps,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
         alignItems: 'center'
     },
     MealContainerStyle: {
@@ -143,15 +143,25 @@ export const styles = StyleSheet.create({
         marginRight: 20
     },
     statsFont: {
-        color: colors.white,
-        fontSize: 17
+        color: colors.yps,
+        fontSize: 17,
+        fontFamily: 'Arial',
     },
     button: {
         backgroundColor: colors.green
     },
     buttonContainer: {
         backgroundColor: colors.white
-    }
+    },
+    animationContainer: {
+        width: 300,
+        height: 100,
+        flexDirection: 'column',
+    },
+    animation: {
+        width: 300,
+        height: 100
+    },
 })
 
 

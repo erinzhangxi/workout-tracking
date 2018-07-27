@@ -125,11 +125,13 @@ export const styles = StyleSheet.create({
     },
     titleFont: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'Arial',
     },
     textInput: {
         height: 40,
-        fontSize: 15
+        fontSize: 15,
+        fontFamily: 'Arial',
     }
 })
 

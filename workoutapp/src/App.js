@@ -11,7 +11,8 @@ import { Login,
     WeightList,
     AuthLoadingScreen,
     WorkoutDetail,
-    MealDetails
+    MealDetails,
+    TrophyScreen
 } from './components/screens'
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
 import { Provider } from 'react-redux';
@@ -21,7 +22,8 @@ import {foodLogReducer} from "./reducers/foodLogReducer";
 const HomeStacks = createStackNavigator({
     Home: Home,
     WorkoutEditor: WorkoutEditor,
-    WorkoutDetail: WorkoutDetail
+    WorkoutDetail: WorkoutDetail,
+    TrophyScreen: TrophyScreen
 });
 
 

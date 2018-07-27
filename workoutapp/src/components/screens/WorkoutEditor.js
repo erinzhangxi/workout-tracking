@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react
 import colors from 'Colors';
 import WorkoutService from "../../services/WorkoutService";
 import cookie from "react-cookies";
+import TrophyScreen from "./TrophyScreen";
 
 
 class WorkoutEditor extends Component {
@@ -56,9 +57,10 @@ class WorkoutEditor extends Component {
             this.workoutService
                 .createWorkout(workout, this.state.userId)
                 .then(res => {
-                    this.props.navigation.navigate('Home', {userId: this.state.userId});
+                    this.props.navigation.navigate('TrophyScreen', {userId: this.state.userId});
                 })
         }
+
     }
 
 
@@ -69,7 +71,7 @@ class WorkoutEditor extends Component {
     render() {
         return (
             <ScrollView style={styles.formContainer}>
-                <Text h3 style={styles.text}>Add a workout</Text>
+
 
                 <FormLabel>Title</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({title: text})}
@@ -131,11 +133,12 @@ class WorkoutEditor extends Component {
     }
 }
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 20,
-        alignSelf: 'center',
-        color: colors.night
-    },
+    // text: {
+    //     fontSize: 20,
+    //     alignSelf: 'center',
+    //     color: colors.night,
+    //     fontFamily: 'Arial',
+    // },
     formContainer: {
         backgroundColor: colors.backgroundLight
     },

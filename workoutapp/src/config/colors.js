@@ -7,6 +7,7 @@ const colors = {
     darkblue: '#140D4F',
     turqoise: '#4EA699',
     green: '#00d1b2',
+    darkGreen: '#00927c',
     lightgreen: '#6FEDB7',
     charcoal: '#191919',
     lightcharcoal: '#353535',

@@ -7,6 +7,9 @@ import cookie from "react-cookies";
 import colors from 'Colors';
 import UserService from "../../services/UserService";
 import ImagePicker from 'react-native-image-picker'
+import Animation from 'lottie-react-native';
+import setting from '../../assets/animations/49-Settings.json';
+
 
 const list = [
     {
@@ -61,6 +64,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
+        // this.animation.play();
         this.userService
             .findUserById(this.state.userId)
             .then(res => {
@@ -142,6 +146,16 @@ class Profile extends Component {
                     </View>
                     <View style={styles.userContainer}>
 
+                        {/*<View style={styles.animationContainer}>*/}
+                        {/*<Animation*/}
+                            {/*ref={animation => {*/}
+                                {/*this.animation = animation;*/}
+                            {/*}}*/}
+                            {/*style={styles.animation}*/}
+                            {/*loop={true}*/}
+                            {/*source={setting}*/}
+                        {/*/>*/}
+                        {/*</View>*/}
                         <Icon
                             name='settings-outline'
                             size={20}
@@ -218,6 +232,14 @@ export const styles = StyleSheet.create({
         borderRadius: 75,
         width: 150,
         height: 150
+    },
+    animationContainer: {
+        width: 200,
+        height: 200
+    },
+    animation: {
+        width: 200,
+        height: 200
     }
 })
 

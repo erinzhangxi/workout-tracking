@@ -11,6 +11,7 @@ import WeightList from './WeightList.js'
 import AuthLoadingScreen from './AuthLoadingScreen.js'
 import WorkoutDetail from './WorkoutDetail.js'
 import MealDetails from './MealDetails.js'
+import TrophyScreen from './TrophyScreen.js'
 
 
 export {
@@ -26,5 +27,6 @@ export {
     WeightList,
     AuthLoadingScreen,
     WorkoutDetail,
-    MealDetails
+    MealDetails,
+    TrophyScreen
 }

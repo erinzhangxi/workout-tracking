@@ -6,8 +6,6 @@ import WorkoutItem from './../../elements/WorkoutItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
-import Animation from 'lottie-react-native';
-import trophy from '../../assets/animations/trophy.json';
 
 class Home extends Component {
     static navigationOptions = {
@@ -49,7 +47,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.animation.play();
         if (this.state.userId) {
             this.fetchWorkoutsForUser(this.state.userId);
         }
@@ -141,17 +138,6 @@ class Home extends Component {
                     {this.renderWorkoutsForUser()}
                 </ScrollView>
                 <View style={styles.buttonContainer}>
-                    <Animation
-                        ref={animation => {
-                            this.animation = animation;
-                        }}
-                        style={{
-                            width: 300,
-                            height: 200
-                        }}
-                        loop={true}
-                        source={trophy}
-                    />
                     <Button
                         onPress={this.logout}
                         icon={
@@ -201,12 +187,13 @@ export const styles = StyleSheet.create({
     },
     statsFont: {
         color: 'white',
-        fontSize: 16
-
+        fontSize: 16,
+        fontFamily: 'Arial'
     },
     titleFont: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'Arial'
     },
     button: {
         backgroundColor: colors.green

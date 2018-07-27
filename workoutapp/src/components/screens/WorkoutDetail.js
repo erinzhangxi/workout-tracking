@@ -96,17 +96,16 @@ class WorkoutDetail extends Component {
                         {this.state.caloriesBurned}
                     </Text>
 
+                    <View style={styles.animationContainer}>
                     <Animation
                         ref={animation => {
                             this.animation = animation;
                         }}
-                        style={{
-                            width: 150,
-                            height: 80
-                        }}
+                        style={styles.animation}
                         loop={true}
                         source={stars}
                     />
+                    </View>
 
                     <Button
                         icon={<Icon name='code' color='#ffffff' />}
@@ -220,8 +219,18 @@ const styles = StyleSheet.create({
     shareText: {
         color: 'blue',
         fontSize: 16,
-        marginLeft: 20
+        marginLeft: 20,
+        fontFamily: 'Arial',
     },
+    animationContainer: {
+        width: 150,
+        height: 80
+    },
+    animation: {
+        width: 150,
+        height: 80
+    },
+
 });
 
 //  twitter icon

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Picker, StyleSheet } from 'react-native'
+import { View, ScrollView, Picker, StyleSheet } from 'react-native'
 import { Text, Button, Card, Icon, ListItem } from 'react-native-elements'
 import cookie from "react-cookies";
 import FoodService from "../../services/FoodService";
@@ -62,39 +62,37 @@ class MealDetails extends Component {
     render() {
         const { params } = this.props.navigation.state;
         return (
-            <View>
+            <ScrollView>
 
                 <Card
                     title={this.state.title}
                     image={require('../../assets/images/meal-placeholder.jpg')}>
-                    <Text style={{marginBottom: 10}}>
+                    <Text style={styles.fontStyle}>
                         Meal Details
                     </Text>
 
-                    <Text style={{marginBottom: 10}}>
+                    <Text style={styles.fontStyle}>
                         {this.state.date}
                     </Text>
-                    <Text style={{marginBottom: 10}}>
+                    <Text style={styles.fontStyle}>
                         {this.state.type}
                     </Text>
                     {/*<Text style={{marginBottom: 10}}>*/}
-                      {/*Length:  {this.state.foods.length}*/}
+                    {/*Length:  {this.state.foods.length}*/}
                     {/*</Text>*/}
 
                     /* Foods detail goes here */
                     {this.renderFoodList()}
-
-                    <Animation
-                        ref={animation => {
-                            this.animation = animation;
-                        }}
-                        style={{
-                            width: 150,
-                            height: 80
-                        }}
-                        loop={true}
-                        source={stars}
-                    />
+                    <View style={styles.animationContainer}>
+                        <Animation
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            style={styles.animation}
+                            loop={true}
+                            source={stars}
+                        />
+                    </View>
 
                     <Button
                         icon={<Icon name='code' color='#ffffff' />}
@@ -104,10 +102,26 @@ class MealDetails extends Component {
                         onPress={params.handleDelete}/>
                 </Card>
 
-            </View>
+            </ScrollView>
         )
     }
 }
+const styles = StyleSheet.create({
+    animationContainer: {
+        width: 150,
+        height: 80
+    },
+    animation: {
+        width: 150,
+        height: 80
+    },
+    fontStyle: {
+        fontFamily: 'Arial',
+        marginBottom: 10
+    }
+
+});
+
 
 export default MealDetails;
 

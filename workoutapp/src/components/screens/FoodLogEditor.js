@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         alignSelf: 'center',
-        color: colors.turqoise
+        color: colors.turqoise,
+        fontFamily: 'Arial'
     },
     button: {
         backgroundColor: colors.green

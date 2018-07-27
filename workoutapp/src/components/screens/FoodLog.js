@@ -213,18 +213,21 @@ export const styles = StyleSheet.create({
     },
     titleFont: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'Arial'
     },
     mealListContent: {
         backgroundColor: colors.white,
     },
     dropdownText: {
         color: 'black',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'Arial'
     },
     paragraph: {
         color: colors.green,
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: 'Arial'
     },
     divider: {
         backgroundColor: colors.lightgray,

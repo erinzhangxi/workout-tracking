@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
 import { LineChart, Grid } from 'react-native-svg-charts'
+import Animation from 'lottie-react-native';
+import heart from '../../assets/animations/heart_rate.json';
 
 class Progress extends Component {
     static navigationOptions = {
@@ -48,6 +50,7 @@ class Progress extends Component {
     }
 
     componentDidMount() {
+        this.animation.play();
         let data = [];
         this.state.weights.map((weight, index) => {
             data.push(weight.weight);
@@ -61,19 +64,31 @@ class Progress extends Component {
     renderWeightStats = () => {
 
         return (
-            <View style={styles.statsContainer}>
-                <View>
-                    <Text h4 style={styles.statsFont}>Current Weight</Text>
+            <View>
+                <View style={styles.statsContainer}>
+                    <View>
+                        <Text h4 style={styles.statsFont}>Current Weight</Text>
+                    </View>
+                    <View >
+                        <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
+                    </View>
                 </View>
-                <View >
-                    <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
-                </View>
+                <Animation
+                    ref={animation => {
+                        this.animation = animation;
+                    }}
+                    style={{
+                        width: 300,
+                        height: 100
+                    }}
+                    loop={true}
+                    source={heart}
+                />
             </View>
         )
     }
 
     render() {
-        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
         return (
             <View style={styles.homeContainer}>
                 {this.renderWeightStats()}
@@ -110,8 +125,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: colors.white
-        // justifyContent: 'space-between',
-        // padding: 20
     },
     boxContainer: {
         flex: 1

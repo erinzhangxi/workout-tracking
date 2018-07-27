@@ -9,6 +9,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "lottie-react-native": "^2.3.2",
     "moment": "^2.22.2",
     "react": "16.3.1",
     "react-cookies": "^0.1.0",
@@ -19,6 +20,7 @@
     "react-native-material-design": "^0.3.7",
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-share": "^1.0.27",
+    "react-native-splash-screen": "^3.1.0",
     "react-native-svg": "^6.4.1",
     "react-native-svg-charts": "^5.2.0",
     "react-native-swipeout": "^2.3.3",

@@ -4,6 +4,9 @@ import { Text, Button, Card, Icon, ListItem } from 'react-native-elements'
 import cookie from "react-cookies";
 import FoodService from "../../services/FoodService";
 
+import Animation from 'lottie-react-native';
+import stars from '../../assets/animations/5_stars.json';
+
 
 class MealDetails extends Component {
     static navigationOptions = {
@@ -28,6 +31,7 @@ class MealDetails extends Component {
     }
 
     componentDidMount() {
+        this.animation.play();
         const {navigation} = this.props;
         const mealId = navigation.getParam("mealId")
         // fetch from server
@@ -79,6 +83,18 @@ class MealDetails extends Component {
 
                     /* Foods detail goes here */
                     {this.renderFoodList()}
+
+                    <Animation
+                        ref={animation => {
+                            this.animation = animation;
+                        }}
+                        style={{
+                            width: 150,
+                            height: 80
+                        }}
+                        loop={true}
+                        source={stars}
+                    />
 
                     <Button
                         icon={<Icon name='code' color='#ffffff' />}

@@ -6,7 +6,7 @@ const colors = {
     night: '#1C0B19',
     darkblue: '#140D4F',
     turqoise: '#4EA699',
-    green: '#2DD881',
+    green: '#00d1b2',
     lightgreen: '#6FEDB7',
     charcoal: '#191919',
     lightcharcoal: '#353535',

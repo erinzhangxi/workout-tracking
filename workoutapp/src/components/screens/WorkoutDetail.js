@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Clipboard,
+import { View, ScrollView, StyleSheet, TouchableOpacity, Clipboard,
     ToastAndroid,
     AlertIOS,
     Platform } from 'react-native'
@@ -8,6 +8,10 @@ import Share, {ShareSheet} from 'react-native-share';
 import colors from 'Colors';
 import cookie from "react-cookies";
 import WorkoutService from "../../services/WorkoutService";
+
+import Animation from 'lottie-react-native';
+import stars from '../../assets/animations/5_stars.json';
+
 
 class WorkoutDetail extends Component {
     static navigationOptions = {
@@ -31,6 +35,7 @@ class WorkoutDetail extends Component {
     }
 
     componentDidMount() {
+        this.animation.play();
         const {navigation} = this.props;
         const workoutId = navigation.getParam("workoutId")
         // fetch from server
@@ -70,7 +75,7 @@ class WorkoutDetail extends Component {
         };
 
         return (
-            <View>
+            <ScrollView>
 
                 <Card
                     title={this.state.title}
@@ -90,6 +95,19 @@ class WorkoutDetail extends Component {
                     <Text style={{marginBottom: 10}}>
                         {this.state.caloriesBurned}
                     </Text>
+
+                    <Animation
+                        ref={animation => {
+                            this.animation = animation;
+                        }}
+                        style={{
+                            width: 150,
+                            height: 80
+                        }}
+                        loop={true}
+                        source={stars}
+                    />
+
                     <Button
                         icon={<Icon name='code' color='#ffffff' />}
                         backgroundColor='red'
@@ -182,7 +200,7 @@ class WorkoutDetail extends Component {
 
 
 
-            </View>
+            </ScrollView>
         )
     }
 

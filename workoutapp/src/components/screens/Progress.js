@@ -12,12 +12,6 @@ import heart from '../../assets/animations/heart_rate.json';
 class Progress extends Component {
     static navigationOptions = {
         title: 'Progress',
-        headerTitleStyle: {
-            color: colors.white
-        },
-        headerStyle: {
-            backgroundColor: colors.charcoal
-        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='chart-line' />;
         },
@@ -50,7 +44,7 @@ class Progress extends Component {
     }
 
     componentDidMount() {
-        this.animation.play();
+        // this.animation.play();
         let data = [];
         this.state.weights.map((weight, index) => {
             data.push(weight.weight);
@@ -66,16 +60,21 @@ class Progress extends Component {
         return (
 
                 <View>
-                    <View style={styles.animationContainer}>
-                        <Animation
-                            ref={animation => {
-                                this.animation = animation;
-                            }}
-                            style={styles.animation}
-                            loop={true}
-                            source={heart}
-                        />
+                    <View style={styles.header}>
+
+                        <Text h4 style={styles.titleFont}>Progress</Text>
                     </View>
+
+                    {/*<View style={styles.animationContainer}>*/}
+                        {/*<Animation*/}
+                            {/*ref={animation => {*/}
+                                {/*this.animation = animation;*/}
+                            {/*}}*/}
+                            {/*style={styles.animation}*/}
+                            {/*loop={true}*/}
+                            {/*source={heart}*/}
+                        {/*/>*/}
+                    {/*</View>*/}
 
                     <View style={styles.statsContainer}>
                         <Text h4 style={styles.statsFont}>Current Weight</Text>
@@ -92,12 +91,10 @@ class Progress extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
+            <ScrollView style={styles.homeContainer}>
                 {this.renderWeightStats()}
 
                 <View style={[styles.boxContainer, styles.MealContainerStyle]}>
-
-                    <Text h4 style={{color: colors.ypsLight}}>Progress </Text>
 
                     <LineChart
                         style={{ height: 200 }}
@@ -117,16 +114,28 @@ class Progress extends Component {
                         buttonStyle={styles.button}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
 
 export const styles = StyleSheet.create({
+    header: {
+        height: 80,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.darkGreen,
+        flexDirection: 'row'
+    },
     homeContainer: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: colors.white
+    },
+    titleFont: {
+        color: colors.white,
+        fontSize: 16,
+        fontFamily: 'Arial'
     },
     boxContainer: {
         flex: 1

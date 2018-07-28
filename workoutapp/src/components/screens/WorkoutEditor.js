@@ -1,22 +1,15 @@
 import React, { Component } from 'react'
-import { ScrollView, Picker, View, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import colors from 'Colors';
 import WorkoutService from "../../services/WorkoutService";
 import cookie from "react-cookies";
 import TrophyScreen from "./TrophyScreen";
-
+import BackButton from '../../elements/BackButton.js'
 
 class WorkoutEditor extends Component {
     static navigationOptions = {
-        title: 'WorkoutEditor',
-        headerTitleStyle: {
-            color: colors.white
-            // fontFamily: fonts.montserrat
-        },
-        headerStyle: {
-            backgroundColor: colors.charcoal,
-        },
+        title: 'WorkoutEditor'
     }
 
     constructor(props) {
@@ -71,36 +64,45 @@ class WorkoutEditor extends Component {
     render() {
         return (
             <ScrollView style={styles.formContainer}>
-
-
-                <FormLabel>Title</FormLabel>
+                <BackButton page='Home'/>
+                <FormLabel labelStyle={styles.formlabel}>Title</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({title: text})}
                             value={this.state.title}
-                           placeholder='What was your workout?'/>
+                            placeholder='What was your workout?'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Description</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Description</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({description: text})}
                     value={this.state.description}
-                    placeholder='Describe your workout'/>
+                    placeholder='Describe your workout'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Duration</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Duration</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({duration: text})}
                     value={this.state.duration}
-                    placeholder='How long was your workout?'/>
+                    placeholder='How long was your workout?'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Location</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Location</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({location: text})}
                     value={this.state.location}
-                    placeholder='Where was your workout?'/>
+                    placeholder='Where was your workout?'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Calories Burned</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Calories Burned</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({caloriesBurned: text})}
                     value={this.state.caloriesBurned}
-                    placeholder='How much calories did you burn?'/>
+                    placeholder='How much calories did you burn?'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}/>
 
 
 
@@ -140,10 +142,23 @@ const styles = StyleSheet.create({
     //     fontFamily: 'Arial',
     // },
     formContainer: {
-        backgroundColor: colors.backgroundLight
+        backgroundColor: colors.darkGreen
     },
     button: {
+        marginTop: 10,
         backgroundColor: colors.green
+    },
+    inputStyle: {
+        color: colors.charcoal,
+        fontFamily: 'Arial'
+    },
+    containerStyle: {
+        backgroundColor: colors.white,
+        color: colors.green
+    },
+    formlabel: {
+        color: colors.white,
+        fontFamily: 'Arial'
     }
 
 })

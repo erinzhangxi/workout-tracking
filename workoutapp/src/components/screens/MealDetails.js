@@ -3,10 +3,10 @@ import { View, ScrollView, Picker, StyleSheet } from 'react-native'
 import { Text, Button, Card, Icon, ListItem } from 'react-native-elements'
 import cookie from "react-cookies";
 import FoodService from "../../services/FoodService";
-
 import Animation from 'lottie-react-native';
 import stars from '../../assets/animations/5_stars.json';
-
+import BackButton from '../../elements/BackButton.js'
+import colors from 'Colors';
 
 class MealDetails extends Component {
     static navigationOptions = {
@@ -62,8 +62,9 @@ class MealDetails extends Component {
     render() {
         const { params } = this.props.navigation.state;
         return (
-            <ScrollView>
+            <ScrollView style={styles.container}>
 
+                <BackButton page='FoodLog'/>
                 <Card
                     title={this.state.title}
                     image={require('../../assets/images/meal-placeholder.jpg')}>
@@ -107,6 +108,9 @@ class MealDetails extends Component {
     }
 }
 const styles = StyleSheet.create({
+    container: {
+      backgroundColor: colors.darkGreen
+    },
     animationContainer: {
         width: 150,
         height: 80

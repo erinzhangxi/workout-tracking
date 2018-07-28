@@ -11,11 +11,18 @@ import WorkoutService from "../../services/WorkoutService";
 
 import Animation from 'lottie-react-native';
 import stars from '../../assets/animations/5_stars.json';
+import BackButton from '../../elements/BackButton.js'
 
 
 class WorkoutDetail extends Component {
     static navigationOptions = {
-        title: 'Workout Details'
+        title: 'Workout Details',
+        headerTitleStyle: {
+            color: colors.charcoal
+        },
+        headerStyle: {
+            backgroundColor: colors.white,
+        },
     }
 
     constructor(props) {
@@ -75,8 +82,8 @@ class WorkoutDetail extends Component {
         };
 
         return (
-            <ScrollView>
-
+            <ScrollView style={styles.container}>
+                <BackButton page='Home'/>
                 <Card
                     title={this.state.title}
                     image={require('../../assets/images/running.jpg')}>
@@ -97,14 +104,14 @@ class WorkoutDetail extends Component {
                     </Text>
 
                     <View style={styles.animationContainer}>
-                    <Animation
-                        ref={animation => {
-                            this.animation = animation;
-                        }}
-                        style={styles.animation}
-                        loop={true}
-                        source={stars}
-                    />
+                        <Animation
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            style={styles.animation}
+                            loop={true}
+                            source={stars}
+                        />
                     </View>
 
                     <Button
@@ -113,7 +120,6 @@ class WorkoutDetail extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                         title='Delete'
                         onPress={params.handleDelete}/>
-
 
 
                     <TouchableOpacity onPress={()=>{
@@ -207,10 +213,11 @@ class WorkoutDetail extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        // flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: '#F5FCFF',
+        backgroundColor: colors.darkGreen
     },
     instructions: {
         marginTop: 20,

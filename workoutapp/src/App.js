@@ -24,25 +24,24 @@ const HomeStacks = createStackNavigator({
     WorkoutEditor: WorkoutEditor,
     WorkoutDetail: WorkoutDetail,
     TrophyScreen: TrophyScreen
-});
+}, { headerMode: 'none' });
 
 
 const FoodLogsStacks = createStackNavigator({
     FoodLog: FoodLog,
     FoodLogEditor: FoodLogEditor,
     MealDetails:  MealDetails
-
-});
+}, { headerMode: 'none' });
 
 const ProgressStacks = createStackNavigator({
     Progress: Progress,
     WeightList: WeightList
-});
+}, { headerMode: 'none' });
 
 const ProfileStacks = createStackNavigator({
     Profile: Profile,
     EditProfile: EditProfile
-});
+},{ headerMode: 'none' });
 
 export const MainApp = createBottomTabNavigator({
     Home: { screen:  HomeStacks},

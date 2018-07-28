@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Picker, StyleSheet } from 'react-native'
+import { View, ScrollView, Picker, TouchableOpacity, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, ListItem } from 'react-native-elements'
 import colors from 'Colors';
 import {connect} from "react-redux";
 import * as actions from "../../actions"
 import cookie from "react-cookies";
+import BackButton from '../../elements/BackButton.js'
 
 
 const stateToPropsMapper = state => ({
@@ -22,7 +23,13 @@ const dispatchToPropsMapper = dispatch => ({
 
 class FoodLogEditor extends Component {
     static navigationOptions = {
-        title: 'Food Logs Editor'
+        title: 'Food Logs Editor',
+        headerTitleStyle: {
+            color: colors.charcoal
+        },
+        headerStyle: {
+            backgroundColor: colors.white,
+        },
     }
 
     state = {
@@ -31,6 +38,7 @@ class FoodLogEditor extends Component {
         userId: null,
         mealType: ''
     }
+
 
     componentWillMount() {
         var user = cookie.load('user');
@@ -56,6 +64,10 @@ class FoodLogEditor extends Component {
         this.props.navigation.navigate('FoodLog');
     }
 
+    // goBack = () => {
+    //     this.props.navigation.navigate('FoodLog');
+    // }
+
     updateForm = (newState) => {
         this.setState(newState)
     }
@@ -66,39 +78,43 @@ class FoodLogEditor extends Component {
                 (food, index) => (
                     <ListItem key={index}
                               title={food.name}
-                            subtitle={food.calories}/>
+                              subtitle={food.calories}/>
                 ))
         }
     }
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.mainContainer}>
 
-                <Text style={styles.text}>
-                    Total Number of Food Items ({this.props.foods.length})
-                </Text>
+
+                <BackButton page='FoodLog'/>
 
                 {this.renderFoodList()}
 
-                <FormLabel>Name</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
                 {/*<FormInput*/}
-                    {/*onChangeText={text => this.setFoodName(text)}*/}
-                    {/*placeholder='What did you eat?'/>*/}
+                {/*onChangeText={text => this.setFoodName(text)}*/}
+                {/*placeholder='What did you eat?'/>*/}
 
                 <FormInput
                     ref={input => this.foodName = input}
                     onChangeText={text => this.updateForm({currentFoodName: text})}
-                    placeholder='What did you eat?'/>
+                    placeholder='What did you eat?'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Number of Calories</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Number of Calories</FormLabel>
                 {/*<FormInput*/}
-                    {/*onChangeText={text => this.props.setFoodCalories(text)}*/}
-                    {/*placeholder='How much calories does it have?'/>*/}
+                {/*onChangeText={text => this.props.setFoodCalories(text)}*/}
+                {/*placeholder='How much calories does it have?'/>*/}
                 <FormInput
                     ref={input => this.foodCalories = input}
                     onChangeText={text => this.updateForm({currentFoodCalories: text})}
-                    placeholder='How much calories does it have?'/>
+                    placeholder='How much calories does it have?'
+                    inputStyle={styles.inputStyle}
+                    containerStyle={styles.containerStyle}
+                />
 
                 <Button
                     onPress={()=>
@@ -107,14 +123,14 @@ class FoodLogEditor extends Component {
                     buttonStyle={styles.button}></Button>
 
 
-                <Picker selectedValue = {this.state.mealType} onValueChange = {this.updateMealType}>
+                <Picker selectedValue = {this.state.mealType}
+                        onValueChange = {this.updateMealType}
+                        itemStyle={styles.pickerItem}>
                     <Picker.Item label = "breakfast" value = "breakfast" />
                     <Picker.Item label = "lunch" value = "lunch" />
                     <Picker.Item label = "dinner" value = "dinner" />
                     <Picker.Item label = "snacks" value = "snacks" />
                 </Picker>
-
-                <Text style = {styles.text}>{this.state.mealType}</Text>
 
                 <Button
                     onPress={this.handleSubmit}
@@ -152,13 +168,42 @@ const FoodLogContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Food
 export default FoodLogContainer;
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 18,
-        alignSelf: 'center',
-        color: colors.turqoise,
+    mainContainer: {
+        backgroundColor: colors.darkGreen
+    },
+    // text: {
+    //     fontSize: 18,
+    //     alignSelf: 'center',
+    //     color: colors.turqoise,
+    //     fontFamily: 'Arial'
+    // },
+    button: {
+        backgroundColor: colors.green,
+        marginTop: 10
+    },
+    animationContainer:{
+        width: 100,
+        height: 100
+    },
+    animation: {
+        width: 100,
+        height: 100
+    },
+    formlabel: {
+        color: colors.white,
         fontFamily: 'Arial'
     },
-    button: {
-        backgroundColor: colors.green
+    inputStyle: {
+        color: colors.charcoal,
+        fontFamily: 'Arial'
+    },
+    containerStyle: {
+        backgroundColor: colors.white,
+        color: colors.green
+    },
+    pickerItem:{
+        color: colors.white,
+        fontSize:15,
+        fontFamily: 'Arial'
     }
 })

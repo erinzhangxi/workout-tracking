@@ -7,7 +7,10 @@ import colors from 'Colors';
 
 class Register extends Component {
     static navigationOptions = {
-        title: 'Register'
+        title: 'Register',
+        headerStyle: {
+            backgroundColor: colors.white,
+        }
     }
 
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {ScrollView, View, StyleSheet} from 'react-native';
-import { Text, Button, ListItem, Divider } from 'react-native-elements'
+import { Text, Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import FoodLogEditor from "./FoodLogEditor";
@@ -8,16 +8,11 @@ import FoodService from "../../services/FoodService";
 import cookie from "react-cookies";
 import MealItem from '../../elements/MealItem'
 import ModalDropdown from 'react-native-modal-dropdown';
+import AddButton from '../../elements/AddButton'
 
 class FoodLog extends Component {
     static navigationOptions = {
         title: 'Food Logs',
-        headerTitleStyle: {
-            color: colors.white
-        },
-        headerStyle: {
-            backgroundColor: colors.charcoal,
-        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='food-apple' />;
         },
@@ -150,9 +145,6 @@ class FoodLog extends Component {
                         options={['Today', 'This week', "This month", "Earlier"]}>
                         <Text h4 style={styles.titleFont}>Today </Text>
                     </ModalDropdown>
-                    <Button title='+'
-                            backgroundColor= {colors.lightcharcoal}
-                            onPress={this.handleAddMeal}></Button>
                 </View>
 
                 <ScrollView style={styles.mealListContent}>
@@ -177,7 +169,7 @@ class FoodLog extends Component {
                         {/*<Text style={styles.paragraph}>Dinner: {this.state.dinners.length}</Text>*/}
                     {/*</View>*/}
                     {/*{this.renderMealsForUser(this.state.dinners)}*/}
-
+                    <AddButton addAction={this.handleAddMeal}/>
 
                 </ScrollView>
                 {/*<BottomNavBar/>*/}
@@ -196,10 +188,10 @@ export const styles = StyleSheet.create({
         // padding: 20
     },
     header: {
-        height: 50,
+        height: 80,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.lightcharcoal,
+        backgroundColor: colors.darkGreen,
         flexDirection: 'row'
     },
     MealContainerStyleOne: {
@@ -213,7 +205,7 @@ export const styles = StyleSheet.create({
     },
     titleFont: {
         color: colors.white,
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: 'Arial'
     },
     mealListContent: {

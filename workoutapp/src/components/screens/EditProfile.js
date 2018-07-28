@@ -5,16 +5,17 @@ import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import colors from 'Colors';
 import {styles} from "./Login";
+import BackButton from '../../elements/BackButton.js'
 
 class EditProfile extends Component {
     static navigationOptions = {
         title: 'Edit Profile',
         headerTitleStyle: {
-            color: colors.white
+            color: colors.charcoal
         },
         headerStyle: {
-            backgroundColor: colors.charcoal,
-        }
+            backgroundColor: colors.white,
+        },
     }
 
     constructor(props) {
@@ -80,6 +81,7 @@ class EditProfile extends Component {
     render() {
         return (
             <View>
+                <BackButton page='Profile'/>
                 <FormLabel>Name</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({username: text})}
                             value={this.state.username}

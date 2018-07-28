@@ -10,7 +10,10 @@ import gagaha from '../../assets/animations/gagaha.json';
 
 class Login extends Component {
     static navigationOptions = {
-        title: 'Login'
+        title: 'Login',
+        headerStyle: {
+            backgroundColor: colors.white,
+        }
     }
 
     constructor(props) {

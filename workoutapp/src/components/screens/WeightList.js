@@ -5,16 +5,17 @@ import colors from 'Colors';
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import SwipeoutWrapper from '../../elements/SwipeoutWrapper';
+import BackButton from '../../elements/BackButton.js'
+import AddButton from '../../elements/AddButton'
 
 class WeightList extends Component {
     static navigationOptions = {
         title: 'Weight History',
         headerTitleStyle: {
-            color: colors.white
-            // fontFamily: fonts.montserrat
+            color: colors.charcoal
         },
         headerStyle: {
-            backgroundColor: colors.charcoal,
+            backgroundColor: colors.white,
         },
         tabBarOptions: {
             activeTintColor: 'tomato',
@@ -39,7 +40,6 @@ class WeightList extends Component {
     }
 
     deleteNote = (selectedItem, weightId) => {
-        alert('delete row' + selectedItem.weight);
         this.userService
             .removeWeightFromUser(this.state.userId, weightId)
             .then(res => this.setState({weights: res.weights}));
@@ -51,6 +51,7 @@ class WeightList extends Component {
                 return (
                     <SwipeoutWrapper item={weight}
                                      deleteNote={this.deleteNote}
+                                     key={index}
                                      id={weight._id}/>
                 )
             })
@@ -90,15 +91,16 @@ class WeightList extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
+                <BackButton page='Progress'/>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.textInput}
                         onChangeText={(text) => this.setState({newWeight: text})}
                         value={this.state.newWeight}
                         placeholder='Enter your new weight here'></TextInput>
-                    <Button title='Add weight entry'
-                            backgroundColor= {colors.green}
-                            onPress={this.handleAddWeight}></Button>
+
+                    <AddButton addAction={this.handleAddWeight}/>
+
                 </View>
                 <ScrollView style={styles.mealListContent}>
                     {this.renderWeightList()}
@@ -116,7 +118,8 @@ export default WeightList;
 export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: colors.darkGreen
         // justifyContent: 'space-between',
         // padding: 20
     },
@@ -132,6 +135,7 @@ export const styles = StyleSheet.create({
         height: 40,
         fontSize: 15,
         fontFamily: 'Arial',
+        color: colors.white
     }
 })
 

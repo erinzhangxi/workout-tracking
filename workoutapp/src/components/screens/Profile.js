@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Image, StyleSheet, TouchableOpacity, PixelRatio} from 'react-native';
+import {View, ScrollView, Image, StyleSheet, TouchableOpacity, PixelRatio} from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
@@ -29,12 +29,6 @@ const list = [
 class Profile extends Component {
     static navigationOptions = {
         title: 'Profile',
-        headerTitleStyle: {
-            color: colors.white
-        },
-        headerStyle: {
-            backgroundColor: colors.charcoal
-        },
         tabBarIcon: ({ focused, tintColor }) => {
             return <Icon size={24} color="#611dce" name='account' />;
         },
@@ -132,7 +126,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
+            <ScrollView style={styles.homeContainer}>
                 <View style={[styles.boxContainer]}>
                     <View style={styles.avatarContainer}>
 
@@ -172,7 +166,7 @@ class Profile extends Component {
                     <Text style={styles.titleFont}>Messages from friends</Text>
                     {this.renderFeeds()}
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -181,11 +175,11 @@ export const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: colors.black
+        backgroundColor: colors.white
     },
     boxContainer: {
-        flex: 3,
-        backgroundColor: colors.ypsLight,
+        flex: 2,
+        backgroundColor: colors.darkGreen,
         flexDirection: 'row'
         // alignItems: 'center',
         // justifyContent: 'center'
@@ -196,29 +190,20 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'flex-end',
         marginRight: 30
-
-
     },
-    // avatarContainer: {
-    //     flex: 1,
-    //     // alignItems: 'flex-start',
-    //     justifyContent:'center',
-    //     marginLeft: 30
-    //
-    //
-    // },
     boxThree: {
         flex: 7,
         backgroundColor: colors.white
     },
     userFont: {
-        color: '#565656',
-        fontSize: 17
+        color: colors.white,
+        fontSize: 17,
+        fontFamily: 'Arial'
     },
     titleFont: {
         fontSize: 18,
         color: colors.darkblue,
-        fontFamily: 'Avenir',
+        fontFamily: 'Arial',
         marginLeft: 20
 
     },

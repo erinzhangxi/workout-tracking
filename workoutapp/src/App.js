@@ -18,6 +18,7 @@ import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator }
 import { Provider } from 'react-redux';
 import {createStore} from "redux";
 import {foodLogReducer} from "./reducers/foodLogReducer";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomeStacks = createStackNavigator({
     Home: Home,
@@ -44,11 +45,37 @@ const ProfileStacks = createStackNavigator({
 },{ headerMode: 'none' });
 
 export const MainApp = createBottomTabNavigator({
-    Home: { screen:  HomeStacks},
-    FoodLog: { screen: FoodLogsStacks },
-    Progress: { screen: ProgressStacks },
-    Profile: { screen: ProfileStacks }
-});
+        Home: { screen:  HomeStacks},
+        FoodLog: { screen: FoodLogsStacks },
+        Progress: { screen: ProgressStacks },
+        Profile: { screen: ProfileStacks }
+    },
+    {
+        navigationOptions: ({ navigation }) => ({
+            tabBarIcon: ({ focused, tintColor }) => {
+                const { routeName } = navigation.state;
+                let iconName;
+                if (routeName === 'Home') {
+                    iconName = `ios-home${focused ? '' : '-outline'}`;
+                } else if (routeName === 'FoodLog') {
+                    iconName = `ios-paper${focused ? '' : '-outline'}`;
+                } else if (routeName === 'Progress') {
+                    iconName = `ios-trending-up${focused ? '' : '-outline'}`;
+                } else if (routeName === 'Profile') {
+                    iconName = `ios-person${focused ? '' : '-outline'}`;
+                }
+
+                // You can return any component that you like here! We usually use an
+                // icon component from react-native-vector-icons
+                return <Ionicons name={iconName} size={25} color={tintColor} />;
+            },
+        }),
+        tabBarOptions: {
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+        },
+    }
+);
 
 export const AuthStack = createStackNavigator({
     Login: { screen: Login },
@@ -56,10 +83,10 @@ export const AuthStack = createStackNavigator({
 },{ headerMode: 'none' });
 
 export const Stack = createSwitchNavigator({
-    AuthLoading: AuthLoadingScreen,
-    Auth: AuthStack,
-    App: MainApp
-},
+        AuthLoading: AuthLoadingScreen,
+        Auth: AuthStack,
+        App: MainApp
+    },
     {
         initialRouteName: 'AuthLoading'
     });
@@ -76,7 +103,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                    <Stack />
+                <Stack />
             </Provider>
         );
     }

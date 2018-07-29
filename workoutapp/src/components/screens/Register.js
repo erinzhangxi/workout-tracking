@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react
 import UserService from '../../services/UserService.js'
 import cookie from 'react-cookies'
 import colors from 'Colors';
+import BackButton from '../../elements/BackButton.js'
 
 class Register extends Component {
     static navigationOptions = {
@@ -62,7 +63,9 @@ class Register extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.container}>
+                <BackButton page='Login'/>
+                <Text h3 style={styles.titleStyle}> Sign up </Text>
                 <FormLabel>Email</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({email: text})}
@@ -82,14 +85,16 @@ class Register extends Component {
                 <FormInput
                     onChangeText={text => this.updateForm({password: text})}
                     value={this.state.password}
-                    placeholder='password'/>
+                    placeholder='password'
+                    secureTextEntry={true}/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
                 <FormLabel>Confirm Password</FormLabel>
                 <FormInput
                     onChangeText={text => this.updateForm({password2: text})}
                     value={this.state.password2}
-                    placeholder='please type in the same password'/>
+                    placeholder='please type in the same password'
+                    secureTextEntry={true}/>
                 <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
 
@@ -121,8 +126,23 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colors.white
+    },
+    titleStyle: {
+        fontFamily: 'Arial',
+        fontWeight: 'bold',
+        fontSize: 25,
+        color: colors.ypsDark,
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 15,
+        marginTop: 20
+    },
     button: {
-        backgroundColor: colors.green
+        backgroundColor: colors.green,
+        marginTop: 20,
+        marginBottom: 20
     },
     buttonText: {
         fontFamily: 'Arial'

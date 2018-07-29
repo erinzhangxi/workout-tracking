@@ -111,7 +111,8 @@ export const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.green,
         height: 45,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
     },
     buttonText: {
         fontFamily: 'Arial'

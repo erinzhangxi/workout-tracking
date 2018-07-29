@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Button, FormLabel, FormInput } from 'react-native-elements'
+import { ScrollView } from 'react-native';
+import { Button, FormLabel, FormInput } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import colors from 'Colors';
@@ -9,13 +9,7 @@ import BackButton from '../../elements/BackButton.js'
 
 class EditProfile extends Component {
     static navigationOptions = {
-        title: 'Edit Profile',
-        headerTitleStyle: {
-            color: colors.charcoal
-        },
-        headerStyle: {
-            backgroundColor: colors.white,
-        },
+        title: 'Edit Profile'
     }
 
     constructor(props) {
@@ -80,32 +74,42 @@ class EditProfile extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView style={styles.profileContainer}>
                 <BackButton page='Profile'/>
-                <FormLabel>Name</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({username: text})}
                             value={this.state.username}
-                            placeholder='username'/>
+                            placeholder='username'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Email</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Email</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({email: text})}
                             value={this.state.email}
-                            placeholder='email'/>
+                            placeholder='email'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Age</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Age</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({age: text})}
                             value={this.state.age}
-                            placeholder='age'/>
+                            placeholder='age'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Current Weight</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Current Weight</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({currentWeight: text})}
                             value={this.state.currentWeight}
-                            placeholder='current weight'/>
+                            placeholder='current weight'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
-                <FormLabel>Height</FormLabel>
+                <FormLabel labelStyle={styles.formlabel}>Height</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({height: text})}
                             value={this.state.height}
-                            placeholder='current height'/>
+                            placeholder='current height'
+                            inputStyle={styles.inputStyle}
+                            containerStyle={styles.containerStyle}/>
 
                 <Button
                     onPress={this.updateProfile}
@@ -113,7 +117,7 @@ class EditProfile extends Component {
                     buttonStyle={styles.button}
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }

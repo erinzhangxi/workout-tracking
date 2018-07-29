@@ -53,7 +53,7 @@ export const MainApp = createBottomTabNavigator({
 export const AuthStack = createStackNavigator({
     Login: { screen: Login },
     Register: { screen: Register }
-});
+},{ headerMode: 'none' });
 
 export const Stack = createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,

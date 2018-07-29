@@ -51,7 +51,7 @@ class Login extends Component {
     }
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.container}>
                 {/*<FixedHeader/>*/}
                 <View style={styles.homeContainer}>
                     <View>
@@ -68,6 +68,8 @@ class Login extends Component {
                     />
                     </View>
 
+                    <Text h3 style={styles.titleText}>Welcome back to PocketTrainer,</Text>
+                    <Text h5 style={styles.subtitleText}>Live a healthier life starting today</Text>
                     <FormLabel>Username</FormLabel>
                     <FormInput  onChangeText={text => this.updateForm({username: text})}
                                 value={this.state.username}
@@ -77,7 +79,8 @@ class Login extends Component {
                     <FormInput
                         onChangeText={text => this.updateForm({password: text})}
                         value={this.state.password}
-                        placeholder='password'/>
+                        placeholder='password'
+                        secureTextEntry={true}/>
 
                     <Button
                         title='Login'
@@ -102,18 +105,59 @@ class Login extends Component {
 }
 
 export const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colors.white
+    },
     button: {
         backgroundColor: colors.green,
-        height: 45
+        height: 45,
+        marginTop: 10
     },
     buttonText: {
         fontFamily: 'Arial'
     },
+    titleText: {
+        fontFamily: 'Arial',
+        fontSize: 25,
+        color: colors.ypsDark,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 15
+    },
+    subtitleText: {
+        fontFamily: 'Arial',
+        fontSize: 16,
+        color: colors.ypsLight,
+        marginLeft: 20,
+        marginRight: 20
+    },
     fontStyle: {
-        paddingLeft: 20,
+        marginLeft: 20,
         color: colors.gray,
+        fontFamily: 'Arial',
+        marginTop: 20,
+        marginBottom: 0
+    },
+    container: {
+        backgroundColor: colors.white
+    },
+    profileContainer: {
+        backgroundColor: colors.darkGreen
+    },
+    formlabel: {
+        color: colors.white,
         fontFamily: 'Arial'
-    }
+    },
+    inputStyle: {
+        color: colors.charcoal,
+        fontFamily: 'Arial'
+    },
+    containerStyle: {
+        backgroundColor: colors.white,
+        color: colors.green
+    },
 })
 
 export default Login
+

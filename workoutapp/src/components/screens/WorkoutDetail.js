@@ -13,7 +13,6 @@ import Animation from 'lottie-react-native';
 import stars from '../../assets/animations/5_stars.json';
 import BackButton from '../../elements/BackButton.js'
 
-
 class WorkoutDetail extends Component {
     static navigationOptions = {
         title: 'Workout Details',
@@ -237,7 +236,6 @@ const styles = StyleSheet.create({
         width: 150,
         height: 80
     },
-
 });
 
 //  twitter icon

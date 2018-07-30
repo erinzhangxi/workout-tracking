@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, ImageBackground, StyleSheet, ScrollView } from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import colors from 'Colors';
-import MainApp from '../../App'
 import Animation from 'lottie-react-native';
 import gagaha from '../../assets/animations/gagaha.json';
+import bg from '../../assets/images/login.png';
 
 class Login extends Component {
     static navigationOptions = {
@@ -51,53 +51,55 @@ class Login extends Component {
     }
     render() {
         return (
-            <ScrollView style={styles.container}>
+            <ImageBackground source={bg} style={styles.backgroundImage}>
                 {/*<FixedHeader/>*/}
-                <View style={styles.homeContainer}>
-                    <View>
-                    <Animation
-                        ref={animation => {
-                            this.animation = animation;
-                        }}
-                        style={{
-                            width: 300,
-                            height: 200
-                        }}
-                        loop={true}
-                        source={gagaha}
-                    />
-                    </View>
+                <ScrollView>
+                    <View style={styles.homeContainer}>
+                        <View>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={{
+                                    width: 300,
+                                    height: 200
+                                }}
+                                loop={true}
+                                source={gagaha}
+                            />
+                        </View>
 
-                    <Text h3 style={styles.titleText}>Welcome back to PocketTrainer,</Text>
-                    <Text h5 style={styles.subtitleText}>Live a healthier life starting today</Text>
-                    <FormLabel>Username</FormLabel>
-                    <FormInput  onChangeText={text => this.updateForm({username: text})}
-                                value={this.state.username}
-                                placeholder='username'/>
+                        <Text h3 style={styles.titleText}>Welcome back to PocketTrainer,</Text>
+                        <Text h5 style={styles.subtitleText}>Live a healthier life starting today</Text>
+                        <FormLabel>Username</FormLabel>
+                        <FormInput  onChangeText={text => this.updateForm({username: text})}
+                                    value={this.state.username}
+                                    placeholder='username'/>
 
-                    <FormLabel>Password</FormLabel>
-                    <FormInput
-                        onChangeText={text => this.updateForm({password: text})}
-                        value={this.state.password}
-                        placeholder='password'
-                        secureTextEntry={true}/>
+                        <FormLabel>Password</FormLabel>
+                        <FormInput
+                            onChangeText={text => this.updateForm({password: text})}
+                            value={this.state.password}
+                            placeholder='password'
+                            secureTextEntry={true}/>
 
-                    <Button
-                        title='Login'
-                        buttonStyle={styles.button}
-                        textStyle={styles.buttonText}
-                        onPress={this.handleSubmit.bind(this)}/>
-                    <Text h5 style={styles.fontStyle}>Don't have an account?
-                    </Text>
-
-                    <Button title="Sign up here"
+                        <Button
+                            title='Login'
                             buttonStyle={styles.button}
                             textStyle={styles.buttonText}
-                            onPress={() => this.props.navigation
-                                .navigate('Register') } />
+                            onPress={this.handleSubmit.bind(this)}/>
+                        <Text h5 style={styles.fontStyle}>Don't have an account?
+                        </Text>
 
-                </View>
-            </ScrollView>
+                        <Button title="Sign up here"
+                                buttonStyle={styles.button}
+                                textStyle={styles.buttonText}
+                                onPress={() => this.props.navigation
+                                    .navigate('Register') } />
+
+                    </View>
+                </ScrollView>
+            </ImageBackground>
 
         )
     }
@@ -105,8 +107,9 @@ class Login extends Component {
 }
 
 export const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.white
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'stretch', // or 'cover'
     },
     button: {
         backgroundColor: colors.green,
@@ -120,7 +123,16 @@ export const styles = StyleSheet.create({
     titleText: {
         fontFamily: 'Arial',
         fontSize: 25,
-        color: colors.ypsDark,
+        color: colors.white,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 15
+    },
+    titleTextDarkBackground: {
+        fontFamily: 'Arial',
+        fontSize: 25,
+        color: colors.white,
         fontWeight: 'bold',
         marginLeft: 20,
         marginRight: 20,
@@ -129,13 +141,13 @@ export const styles = StyleSheet.create({
     subtitleText: {
         fontFamily: 'Arial',
         fontSize: 16,
-        color: colors.ypsLight,
+        color: colors.white,
         marginLeft: 20,
         marginRight: 20
     },
     fontStyle: {
         marginLeft: 20,
-        color: colors.gray,
+        color: colors.white,
         fontFamily: 'Arial',
         marginTop: 20,
         marginBottom: 0
@@ -151,13 +163,24 @@ export const styles = StyleSheet.create({
         fontFamily: 'Arial'
     },
     inputStyle: {
-        color: colors.charcoal,
+        color: colors.white,
         fontFamily: 'Arial'
     },
     containerStyle: {
         backgroundColor: colors.white,
         color: colors.green
     },
+    gearContainer: {
+        width: 100,
+        height: 100
+    },
+    gear: {
+        width: 100,
+        height: 100
+    },
+    profilePageHeader: {
+        flexDirection: 'row'
+    }
 })
 
 export default Login

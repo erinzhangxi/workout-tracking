@@ -90,6 +90,7 @@ class FoodLogEditor extends Component {
 
                 <BackButton page='FoodLog'/>
 
+                <Text h3 style={styles.titleFont}>Add a Meal</Text>
                 {this.renderFoodList()}
 
                 <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
@@ -171,15 +172,19 @@ const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: colors.darkGreen
     },
-    // text: {
-    //     fontSize: 18,
-    //     alignSelf: 'center',
-    //     color: colors.turqoise,
-    //     fontFamily: 'Arial'
-    // },
+    titleFont: {
+        fontFamily: 'Arial',
+        fontSize: 25,
+        color: colors.white,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 15
+    },
     button: {
         backgroundColor: colors.green,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
     },
     animationContainer:{
         width: 100,

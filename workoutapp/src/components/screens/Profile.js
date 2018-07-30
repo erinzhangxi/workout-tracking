@@ -9,6 +9,8 @@ import UserService from "../../services/UserService";
 import ImagePicker from 'react-native-image-picker'
 import Animation from 'lottie-react-native';
 import setting from '../../assets/animations/49-Settings.json';
+import notification from '../../assets/animations/Notification_Red.json';
+
 
 
 const list = [
@@ -58,7 +60,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        // this.animation.play();
+        this.animation.play();
         this.userService
             .findUserById(this.state.userId)
             .then(res => {
@@ -142,12 +144,12 @@ class Profile extends Component {
 
                         {/*<View style={styles.animationContainer}>*/}
                         {/*<Animation*/}
-                            {/*ref={animation => {*/}
-                                {/*this.animation = animation;*/}
-                            {/*}}*/}
-                            {/*style={styles.animation}*/}
-                            {/*loop={true}*/}
-                            {/*source={setting}*/}
+                        {/*ref={animation => {*/}
+                        {/*this.animation = animation;*/}
+                        {/*}}*/}
+                        {/*style={styles.animation}*/}
+                        {/*loop={true}*/}
+                        {/*source={setting}*/}
                         {/*/>*/}
                         {/*</View>*/}
                         <Icon
@@ -162,8 +164,22 @@ class Profile extends Component {
                         <Text h4 style={styles.userFont}>Current Weight {this.state.currentWeight}</Text>
                     </View>
                 </View>
-                <View style={styles.boxThree}>
-                    <Text style={styles.titleFont}>Messages from friends</Text>
+
+                <View style={styles.messageContainer}>
+                    <View style={styles.titleWithNotification}>
+                        <Text style={styles.titleFont}>Messages from friends</Text>
+                        <View style={styles.notificationContainer}>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={styles.notification}
+                                loop={true}
+                                source={notification}
+                            />
+                        </View>
+                    </View>
+
                     {this.renderFeeds()}
                 </View>
             </ScrollView>
@@ -191,7 +207,7 @@ export const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: 30
     },
-    boxThree: {
+    messageContainer: {
         flex: 7,
         backgroundColor: colors.white
     },
@@ -225,6 +241,17 @@ export const styles = StyleSheet.create({
     animation: {
         width: 200,
         height: 200
+    },
+    titleWithNotification:{
+        flexDirection: 'row'
+    },
+    notificationContainer: {
+        width: 50,
+        height: 50
+    },
+    notification: {
+        width: 150,
+        height: 150
     }
 })
 

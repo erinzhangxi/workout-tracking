@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { ScrollView } from 'react-native';
-import { Button, FormLabel, FormInput } from 'react-native-elements'
+import { ScrollView, View } from 'react-native';
+import { Button, FormLabel, FormInput, Text } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
-import colors from 'Colors';
 import {styles} from "./Login";
 import BackButton from '../../elements/BackButton.js'
+import gears from '../../assets/animations/gears.json';
+import Animation from 'lottie-react-native';
+
 
 class EditProfile extends Component {
     static navigationOptions = {
@@ -25,6 +27,11 @@ class EditProfile extends Component {
         this.userService = UserService.instance;
 
     }
+
+    componentDidMount = () => {
+        this.animation.play();
+    }
+
     // TODO age, weight, height value in input don't get updated
     componentWillMount() {
         var user = cookie.load('user');
@@ -76,6 +83,19 @@ class EditProfile extends Component {
         return (
             <ScrollView style={styles.profileContainer}>
                 <BackButton page='Profile'/>
+                <View style={styles.profilePageHeader}>
+                    <Text h3 style={styles.titleTextDarkBackground}>Edit Profile</Text>
+                    <View style={styles.gearsContainer}>
+                        <Animation
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            style={styles.gear}
+                            loop={true}
+                            source={gears}
+                        />
+                    </View>
+                </View>
                 <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({username: text})}
                             value={this.state.username}

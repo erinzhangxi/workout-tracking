@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {View, ScrollView, StyleSheet, StatusBar } from 'react-native';
-import { Text, Button } from 'react-native-elements'
+import { Text, Button, Card } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import WorkoutItem from './../../elements/WorkoutItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -84,7 +84,6 @@ class Home extends Component {
     renderWorkoutStats = () => {
         return (
             <View style={styles.statsContainer}>
-                <StatusBar barStyle="light-content"/>
                 <View>
                     <Text h4 style={styles.statsFont}>Completed</Text>
                     <Text h4 style={styles.statsFont}>Total Duration</Text>
@@ -133,13 +132,15 @@ class Home extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
+            <ScrollView style={styles.homeContainer}>
                 <View style={styles.header}>
                     <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
-
                 </View>
 
-                {this.renderWorkoutStats()}
+                <Card containerStyle={styles.cardStyle}>
+                    {this.renderWorkoutStats()}
+                </Card>
+
 
                 <ScrollView style={styles.workoutsContent}>
                     <View style={styles.searchContainer}>
@@ -174,18 +175,22 @@ class Home extends Component {
 
 
                 {/*<BottomNavBar/>*/}
-            </View>
+            </ScrollView>
         )
     }
 }
 
 export const styles = StyleSheet.create({
     homeContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.yps,
+        // flex: 1,
+        // flexDirection: 'column',
+        // backgroundColor: colors.yps,
         // justifyContent: 'space-between',
         // padding: 20
+        backgroundColor: colors.white,
+    },
+    cardStyle: {
+        backgroundColor: colors.darkGreen
     },
     header: {
         height: 80,
@@ -195,19 +200,19 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     statsContainer: {
-        height: 100,
-        backgroundColor: colors.yps,
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft:20
+        marginLeft:20,
+        height: 100
     },
     workoutsContent: {
         backgroundColor: colors.white,
     },
     statsFont: {
-        color: 'white',
+        color: colors.white,
         fontSize: 16,
-        fontFamily: 'Arial'
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
     },
     titleFont: {
         color: colors.white,
@@ -216,7 +221,8 @@ export const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: colors.green,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
 
     },
     buttonContainer: {

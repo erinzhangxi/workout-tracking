@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet} from 'react-native';
-import { Text, Button, ListItem } from 'react-native-elements'
-import BottomNavBar from '../../elements/BottomNavBar'
+import {View, ScrollView, StyleSheet } from 'react-native';
+import { Text, Button, ListItem, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import cookie from "react-cookies";
 import { LineChart, Grid } from 'react-native-svg-charts'
 import Animation from 'lottie-react-native';
-import heart from '../../assets/animations/heart_rate.json';
+import clock from '../../assets/animations/stopwatch.json';
 
 class Progress extends Component {
     static navigationOptions = {
@@ -44,7 +43,7 @@ class Progress extends Component {
     }
 
     componentDidMount() {
-        // this.animation.play();
+        this.animation.play();
         let data = [];
         this.state.weights.map((weight, index) => {
             data.push(weight.weight);
@@ -59,31 +58,50 @@ class Progress extends Component {
 
         return (
 
-                <View>
-                    <View style={styles.header}>
+            <View>
+                <View style={styles.header}>
 
-                        <Text h4 style={styles.titleFont}>Progress</Text>
-                    </View>
-
-                    {/*<View style={styles.animationContainer}>*/}
-                        {/*<Animation*/}
-                            {/*ref={animation => {*/}
-                                {/*this.animation = animation;*/}
-                            {/*}}*/}
-                            {/*style={styles.animation}*/}
-                            {/*loop={true}*/}
-                            {/*source={heart}*/}
-                        {/*/>*/}
-                    {/*</View>*/}
-
-                    <View style={styles.statsContainer}>
-                        <Text h4 style={styles.statsFont}>Current Weight</Text>
-                    </View>
-                    <View >
-                        <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
-                    </View>
-
+                    <Text h4 style={styles.titleFont}>Progress</Text>
                 </View>
+
+                {/*<View style={styles.animationContainer}>*/}
+                {/*<Animation*/}
+                {/*ref={animation => {*/}
+                {/*this.animation = animation;*/}
+                {/*}}*/}
+                {/*style={styles.animation}*/}
+                {/*loop={true}*/}
+                {/*source={heart}*/}
+                {/*/>*/}
+                {/*</View>*/}
+
+                <Card
+                    title='QUOTE OF THE DAY'>
+                    <Text style={styles.quoteFont}>
+                        Today is another chance. Make yourself proud.
+                    </Text>
+
+                    <View style={styles.animationContainer}>
+                        <Animation
+                            ref={animation => {
+                                this.animation = animation;
+                            }}
+                            style={styles.animation}
+                            loop={true}
+                            source={clock}
+                        />
+                    </View>
+
+                </Card>
+
+                <Card title='current Weight'>
+                        <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
+                </Card>
+
+
+
+
+            </View>
 
 
         )
@@ -140,11 +158,6 @@ export const styles = StyleSheet.create({
     boxContainer: {
         flex: 1
     },
-    statsContainer: {
-        flexDirection: 'row',
-        // justifyContent: 'space-around',
-        alignItems: 'center'
-    },
     MealContainerStyle: {
         flex: 5,
         backgroundColor: colors.white,
@@ -154,10 +167,11 @@ export const styles = StyleSheet.create({
     statsFont: {
         color: colors.yps,
         fontSize: 17,
-        fontFamily: 'Arial',
+        fontFamily: 'Arial'
     },
     button: {
-        backgroundColor: colors.green
+        backgroundColor: colors.green,
+        marginBottom: 20
     },
     buttonContainer: {
         backgroundColor: colors.white
@@ -171,6 +185,12 @@ export const styles = StyleSheet.create({
         width: 300,
         height: 100
     },
+    quoteFont: {
+        marginBottom: 12,
+        fontFamily: 'Arial',
+        fontWeight: 'bold',
+        color: colors.ypsDark
+    }
 })
 
 

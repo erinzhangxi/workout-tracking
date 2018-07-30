@@ -65,6 +65,7 @@ class WorkoutEditor extends Component {
         return (
             <ScrollView style={styles.formContainer}>
                 <BackButton page='Home'/>
+                <Text h3 style={styles.titleFont}>Add a workout</Text>
                 <FormLabel labelStyle={styles.formlabel}>Title</FormLabel>
                 <FormInput  onChangeText={text => this.updateForm({title: text})}
                             value={this.state.title}
@@ -141,12 +142,22 @@ const styles = StyleSheet.create({
     //     color: colors.night,
     //     fontFamily: 'Arial',
     // },
+    titleFont: {
+        fontFamily: 'Arial',
+        fontSize: 25,
+        color: colors.white,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 15
+    },
     formContainer: {
         backgroundColor: colors.darkGreen
     },
     button: {
         marginTop: 10,
-        backgroundColor: colors.green
+        backgroundColor: colors.green,
+        marginBottom: 20
     },
     inputStyle: {
         color: colors.charcoal,

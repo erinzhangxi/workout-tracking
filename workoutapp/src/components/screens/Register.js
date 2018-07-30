@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import {ScrollView, StyleSheet, TextInput} from 'react-native';
+import {ScrollView, ImageBackground, StyleSheet} from 'react-native';
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import UserService from '../../services/UserService.js'
 import cookie from 'react-cookies'
 import colors from 'Colors';
 import BackButton from '../../elements/BackButton.js'
+import bg from '../../assets/images/login.png';
 
 class Register extends Component {
     static navigationOptions = {
@@ -63,77 +64,86 @@ class Register extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <BackButton page='Login'/>
-                <Text h3 style={styles.titleStyle}> Sign up </Text>
-                <FormLabel>Email</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({email: text})}
-                    value={this.state.email}
-                    placeholder='email'/>
-                <FormValidationMessage>{'This field is required'}</FormValidationMessage>
+            <ImageBackground source={bg} style={styles.backgroundImage}>
+                <ScrollView>
+                    <BackButton page='Login'/>
+                    <Text h3 style={styles.titleStyle}> Sign up </Text>
+                    <FormLabel labelStyle={styles.formlabel}>Email</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({email: text})}
+                        value={this.state.email}
+                        placeholder='email'
+                        inputStyle={styles.inputStyle}/>
+                    <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
-                <FormLabel>Username</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({username: text})}
-                    value={this.state.username}
-                    placeholder='username'/>
-                <FormValidationMessage>{'This field is required'}</FormValidationMessage>
-
-
-                <FormLabel>Password</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({password: text})}
-                    value={this.state.password}
-                    placeholder='password'
-                    secureTextEntry={true}/>
-                <FormValidationMessage>{'This field is required'}</FormValidationMessage>
-
-                <FormLabel>Confirm Password</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({password2: text})}
-                    value={this.state.password2}
-                    placeholder='please type in the same password'
-                    secureTextEntry={true}/>
-                <FormValidationMessage>{'This field is required'}</FormValidationMessage>
+                    <FormLabel labelStyle={styles.formlabel}>Username</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({username: text})}
+                        value={this.state.username}
+                        placeholder='username'
+                        inputStyle={styles.inputStyle}/>
+                    <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
 
-                <FormLabel>Age</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({age: text})}
-                    value={this.state.age}
-                    placeholder='Age'/>
+                    <FormLabel labelStyle={styles.formlabel}>Password</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({password: text})}
+                        value={this.state.password}
+                        placeholder='password'
+                        secureTextEntry={true}
+                        inputStyle={styles.inputStyle}/>
+                    <FormValidationMessage>{'This field is required'}</FormValidationMessage>
+
+                    <FormLabel labelStyle={styles.formlabel}>Confirm Password</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({password2: text})}
+                        value={this.state.password2}
+                        placeholder='please type in the same password'
+                        secureTextEntry={true}
+                        inputStyle={styles.inputStyle}/>
+                    <FormValidationMessage>{'This field is required'}</FormValidationMessage>
 
 
-                <FormLabel>Current Weight</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({currentWeight: text})}
-                    value={this.state.currentWeight}
-                    placeholder='Current Weight'/>
+                    <FormLabel labelStyle={styles.formlabel}>Age</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({age: text})}
+                        value={this.state.age}
+                        placeholder='Age'
+                        inputStyle={styles.inputStyle}/>
 
 
-                <Button
-                    title='Register'
-                    onPress={this.handleSubmit.bind(this)}
-                    buttonStyle={styles.button}
-                    textStyle={styles.buttonText}
-                />
+                    <FormLabel labelStyle={styles.formlabel}>Current Weight</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({currentWeight: text})}
+                        value={this.state.currentWeight}
+                        placeholder='Current Weight'
+                        inputStyle={styles.inputStyle}/>
 
 
-            </ScrollView>
+                    <Button
+                        title='Register'
+                        onPress={this.handleSubmit.bind(this)}
+                        buttonStyle={styles.button}
+                        textStyle={styles.buttonText}
+                    />
+
+
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.white
+    backgroundImage: {
+        flex: 1,
+        // resizeMode: 'stretch', // or 'cover'
     },
     titleStyle: {
         fontFamily: 'Arial',
         fontWeight: 'bold',
         fontSize: 25,
-        color: colors.ypsDark,
+        color: colors.white,
         marginLeft: 20,
         marginRight: 20,
         marginBottom: 15,
@@ -145,6 +155,14 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     buttonText: {
+        fontFamily: 'Arial'
+    },
+    formlabel: {
+        color: colors.white,
+        fontFamily: 'Arial'
+    },
+    inputStyle: {
+        color: colors.white,
         fontFamily: 'Arial'
     },
 })

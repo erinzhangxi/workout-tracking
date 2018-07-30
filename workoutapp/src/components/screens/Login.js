@@ -71,17 +71,19 @@ class Login extends Component {
 
                         <Text h3 style={styles.titleText}>Welcome back to PocketTrainer,</Text>
                         <Text h5 style={styles.subtitleText}>Live a healthier life starting today</Text>
-                        <FormLabel>Username</FormLabel>
+                        <FormLabel labelStyle={styles.formlabel}>Username</FormLabel>
                         <FormInput  onChangeText={text => this.updateForm({username: text})}
                                     value={this.state.username}
-                                    placeholder='username'/>
+                                    placeholder='username'
+                                    inputStyle={styles.inputStyle}/>
 
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel labelStyle={styles.formlabel}>Password</FormLabel>
                         <FormInput
                             onChangeText={text => this.updateForm({password: text})}
                             value={this.state.password}
                             placeholder='password'
-                            secureTextEntry={true}/>
+                            secureTextEntry={true}
+                            inputStyle={styles.inputStyle}dd/>
 
                         <Button
                             title='Login'
@@ -109,7 +111,7 @@ class Login extends Component {
 export const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
-        resizeMode: 'stretch', // or 'cover'
+        // resizeMode: 'stretch', // or 'cover'
     },
     button: {
         backgroundColor: colors.green,
@@ -152,9 +154,9 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 0
     },
-    container: {
-        backgroundColor: colors.white
-    },
+    // container: {
+    //     backgroundColor: colors.white
+    // },
     profileContainer: {
         backgroundColor: colors.darkGreen
     },

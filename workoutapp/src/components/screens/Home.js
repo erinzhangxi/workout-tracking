@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet, StatusBar } from 'react-native';
-import { Text, Button, Card } from 'react-native-elements'
+import {View,StatusBar, ImageBackground, ScrollView, StyleSheet } from 'react-native';
+import { Text, Button, ButtonGroup, Card } from 'react-native-elements'
 import workoutService from '../../services/WorkoutService'
 import WorkoutItem from './../../elements/WorkoutItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -10,6 +10,7 @@ import Animation from 'lottie-react-native';
 import task from '../../assets/animations/task_done.json';
 import search from '../../assets/animations/12search.json';
 import AddButton from '../../elements/AddButton'
+import homeBG from '../../assets/images/home.png';
 
 class Home extends Component {
     static navigationOptions = {
@@ -28,9 +29,14 @@ class Home extends Component {
         this.state = {
             workouts: [],
             totalDuration: 0,
-            caloriesBurned: 0
+            caloriesBurned: 0,
+            selectedIndex: 1
         }
         this.workoutService = workoutService.instance;
+    }
+
+    updateIndex = (selectedIndex) => {
+        this.setState({selectedIndex})
     }
 
     componentWillMount() {
@@ -131,93 +137,113 @@ class Home extends Component {
     }
 
     render() {
+        const buttons = ['Monthly View', 'Daily View']
+        const { selectedIndex } = this.state
+
         return (
-            <ScrollView style={styles.homeContainer}>
+            <ImageBackground source={homeBG} style={styles.backgroundImage}>
+                <StatusBar
+                    barStyle="light-content"
+                />
+                <ScrollView>
                 <View style={styles.header}>
-                    <Text h4 style={styles.titleFont}>{this.state.username}'s Workouts history </Text>
+                    <Text h4 style={styles.titleFont}>Dashboard </Text>
+                    <ButtonGroup
+                        onPress={this.updateIndex}
+                        selectedIndex={selectedIndex}
+                        buttons={buttons}
+                        containerStyle={styles.tabStyle}
+                        containerBorderRadius={0}
+                        textStyle={{color: colors.white}}
+                    />
+                    <Text h3 style={{color: colors.white, marginTop: 20}}>{this.state.workouts.length}</Text>
+                    <Text h5 style={{color: colors.white}}>COMPLETED</Text>
                 </View>
 
-                <Card containerStyle={styles.cardStyle}>
-                    {this.renderWorkoutStats()}
-                </Card>
 
+                    {/*<Card containerStyle={styles.cardStyle}>*/}
+                        {/*{this.renderWorkoutStats()}*/}
+                    {/*</Card>*/}
 
-                <ScrollView style={styles.workoutsContent}>
-                    <View style={styles.searchContainer}>
-                        <Animation
-                            ref={animation => {
-                                this.animation = animation;
-                            }}
-                            style={styles.search}
-                            loop={true}
-                            source={search}
+                    <View style={styles.workoutsContent}>
+                        <View style={styles.searchContainer}>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={styles.search}
+                                loop={true}
+                                source={search}
+                            />
+                        </View>
+                        {this.renderWorkoutsForUser()}
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <AddButton addAction={this.handleAddWorkout}/>
+
+                        <Button
+                            onPress={this.logout}
+                            icon={
+                                <Icon
+                                    name='arrow-right'
+                                    size={15}
+                                    color='white'
+                                />
+                            }
+                            buttonStyle={styles.button}
+                            title='Log out'
                         />
                     </View>
-                    {this.renderWorkoutsForUser()}
+
+
+
+                    {/*<BottomNavBar/>*/}
                 </ScrollView>
-                <View style={styles.buttonContainer}>
-                    <AddButton addAction={this.handleAddWorkout}/>
-
-                    <Button
-                        onPress={this.logout}
-                        icon={
-                            <Icon
-                                name='arrow-right'
-                                size={15}
-                                color='white'
-                            />
-                        }
-                        buttonStyle={styles.button}
-                        title='Log out'
-                    />
-                </View>
-
-
-
-                {/*<BottomNavBar/>*/}
-            </ScrollView>
+            </ImageBackground>
         )
     }
 }
 
 export const styles = StyleSheet.create({
-    homeContainer: {
-        // flex: 1,
-        // flexDirection: 'column',
-        // backgroundColor: colors.yps,
-        // justifyContent: 'space-between',
-        // padding: 20
-        backgroundColor: colors.white,
-    },
-    cardStyle: {
-        backgroundColor: colors.darkGreen
+    backgroundImage: {
+        flex: 1,
+        // resizeMode: 'stretch', // or 'cover'
     },
     header: {
-        height: 80,
-        justifyContent: 'center',
+        height: 200,
         alignItems: 'center',
+        marginTop: 40
+    },
+    cardStyle: {
         backgroundColor: colors.darkGreen,
-        flexDirection: 'row'
+        marginTop: 100,
+        justifyContent: null,
+        alignItems: null,
+    },
+    tabStyle: {
+        height: 30,
+        backgroundColor: 'rgba(52, 52, 52, 0.6)'
     },
     statsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft:20,
+        marginLeft: 20,
         height: 100
     },
     workoutsContent: {
         backgroundColor: colors.white,
+    },
+    titleFont: {
+        color: colors.white,
+        fontSize: 20,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
     },
     statsFont: {
         color: colors.white,
         fontSize: 16,
         fontFamily: 'Arial',
         fontWeight: 'bold'
-    },
-    titleFont: {
-        color: colors.white,
-        fontSize: 16,
-        fontFamily: 'Arial'
     },
     button: {
         backgroundColor: colors.green,

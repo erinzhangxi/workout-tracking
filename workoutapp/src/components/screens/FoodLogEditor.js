@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Picker, TouchableOpacity, StyleSheet } from 'react-native'
+import { ImageBackground, ScrollView, Picker, TouchableOpacity, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, ListItem } from 'react-native-elements'
 import colors from 'Colors';
 import {connect} from "react-redux";
 import * as actions from "../../actions"
 import cookie from "react-cookies";
 import BackButton from '../../elements/BackButton.js'
-
+import bg from '../../assets/images/editor.png';
 
 const stateToPropsMapper = state => ({
     foods: state.foods
@@ -85,80 +85,78 @@ class FoodLogEditor extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.mainContainer}>
+            <ImageBackground source={bg} style={styles.backgroundImage}>
+                <ScrollView>
+                    <BackButton page='FoodLog'/>
+
+                    <Text h3 style={styles.titleFont}>Add a Meal</Text>
+                    {this.renderFoodList()}
+
+                    <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
+                    {/*<FormInput*/}
+                    {/*onChangeText={text => this.setFoodName(text)}*/}
+                    {/*placeholder='What did you eat?'/>*/}
+
+                    <FormInput
+                        ref={input => this.foodName = input}
+                        onChangeText={text => this.updateForm({currentFoodName: text})}
+                        placeholder='What did you eat?'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}/>
+
+                    <FormLabel labelStyle={styles.formlabel}>Number of Calories</FormLabel>
+                    {/*<FormInput*/}
+                    {/*onChangeText={text => this.props.setFoodCalories(text)}*/}
+                    {/*placeholder='How much calories does it have?'/>*/}
+                    <FormInput
+                        ref={input => this.foodCalories = input}
+                        onChangeText={text => this.updateForm({currentFoodCalories: text})}
+                        placeholder='How much calories does it have?'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}
+                    />
+
+                    <Button
+                        onPress={()=>
+                            this.props.addFoodItem(this.state.currentFoodName, this.state.currentFoodCalories)}
+                        title='add another food item'
+                        buttonStyle={styles.button}></Button>
 
 
-                <BackButton page='FoodLog'/>
+                    <Picker selectedValue = {this.state.mealType}
+                            onValueChange = {this.updateMealType}
+                            itemStyle={styles.pickerItem}>
+                        <Picker.Item label = "breakfast" value = "breakfast" />
+                        <Picker.Item label = "lunch" value = "lunch" />
+                        <Picker.Item label = "dinner" value = "dinner" />
+                        <Picker.Item label = "snacks" value = "snacks" />
+                    </Picker>
 
-                <Text h3 style={styles.titleFont}>Add a Meal</Text>
-                {this.renderFoodList()}
+                    <Button
+                        onPress={this.handleSubmit}
+                        title='Submit'
+                        buttonStyle={styles.button}
+                    />
 
-                <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
-                {/*<FormInput*/}
-                {/*onChangeText={text => this.setFoodName(text)}*/}
-                {/*placeholder='What did you eat?'/>*/}
+                    {/*dropdown to choose from three meals*/}
 
-                <FormInput
-                    ref={input => this.foodName = input}
-                    onChangeText={text => this.updateForm({currentFoodName: text})}
-                    placeholder='What did you eat?'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}/>
+                    {/*<FormLabel>Password</FormLabel>*/}
+                    {/*<FormInput*/}
+                    {/*ref={input => this.password = input}*/}
+                    {/*placeholder='password'/>*/}
+                    {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
-                <FormLabel labelStyle={styles.formlabel}>Number of Calories</FormLabel>
-                {/*<FormInput*/}
-                {/*onChangeText={text => this.props.setFoodCalories(text)}*/}
-                {/*placeholder='How much calories does it have?'/>*/}
-                <FormInput
-                    ref={input => this.foodCalories = input}
-                    onChangeText={text => this.updateForm({currentFoodCalories: text})}
-                    placeholder='How much calories does it have?'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}
-                />
+                    {/*<FormLabel>Confirm Password</FormLabel>*/}
+                    {/*<FormInput*/}
+                    {/*ref={input => this.password2 = input}*/}
+                    {/*placeholder='please type in the same password'/>*/}
+                    {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
-                <Button
-                    onPress={()=>
-                        this.props.addFoodItem(this.state.currentFoodName, this.state.currentFoodCalories)}
-                    title='add another food item'
-                    buttonStyle={styles.button}></Button>
-
-
-                <Picker selectedValue = {this.state.mealType}
-                        onValueChange = {this.updateMealType}
-                        itemStyle={styles.pickerItem}>
-                    <Picker.Item label = "breakfast" value = "breakfast" />
-                    <Picker.Item label = "lunch" value = "lunch" />
-                    <Picker.Item label = "dinner" value = "dinner" />
-                    <Picker.Item label = "snacks" value = "snacks" />
-                </Picker>
-
-                <Button
-                    onPress={this.handleSubmit}
-                    title='Submit'
-                    buttonStyle={styles.button}
-                />
-
-                {/*dropdown to choose from three meals*/}
-
-                {/*<FormLabel>Password</FormLabel>*/}
-                {/*<FormInput*/}
-                {/*ref={input => this.password = input}*/}
-                {/*placeholder='password'/>*/}
-                {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
-
-                {/*<FormLabel>Confirm Password</FormLabel>*/}
-                {/*<FormInput*/}
-                {/*ref={input => this.password2 = input}*/}
-                {/*placeholder='please type in the same password'/>*/}
-                {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
-
-                {/*<Button*/}
-                {/*title='Register'*/}
-                {/*onPress={this.handleSubmit.bind(this)}/>*/}
-
-
-            </ScrollView>
+                    {/*<Button*/}
+                    {/*title='Register'*/}
+                    {/*onPress={this.handleSubmit.bind(this)}/>*/}
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
@@ -169,8 +167,8 @@ const FoodLogContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Food
 export default FoodLogContainer;
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        backgroundColor: colors.darkGreen
+    backgroundImage: {
+        flex: 1,
     },
     titleFont: {
         fontFamily: 'Arial',
@@ -209,6 +207,7 @@ const styles = StyleSheet.create({
     pickerItem:{
         color: colors.white,
         fontSize:15,
-        fontFamily: 'Arial'
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
     }
 })

@@ -13,7 +13,7 @@ const colors = {
     lightcharcoal: '#353535',
     gray: '#7D7D7D',
     lightishgray: '#9D9D9D',
-    lightgray: '#D6D6D6',
+    lightgray: '#ABABAB',
     smoke: '#EEEEEE',
     white: '#FFFFFF',
     ypsDark: '#47546E',

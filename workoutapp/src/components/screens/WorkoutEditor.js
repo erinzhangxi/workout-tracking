@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, ImageBackground, StyleSheet } from 'react-native'
 import { Text, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import colors from 'Colors';
 import WorkoutService from "../../services/WorkoutService";
 import cookie from "react-cookies";
 import TrophyScreen from "./TrophyScreen";
 import BackButton from '../../elements/BackButton.js'
+import bg from '../../assets/images/editor.png';
 
 class WorkoutEditor extends Component {
     static navigationOptions = {
@@ -63,85 +64,84 @@ class WorkoutEditor extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.formContainer}>
-                <BackButton page='Home'/>
-                <Text h3 style={styles.titleFont}>Add a workout</Text>
-                <FormLabel labelStyle={styles.formlabel}>Title</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({title: text})}
-                            value={this.state.title}
-                            placeholder='What was your workout?'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+            <ImageBackground source={bg} style={styles.backgroundImage}>
+                <ScrollView>
+                    <BackButton page='Home'/>
+                    <Text h3 style={styles.titleFont}>Add a workout</Text>
+                    <FormLabel labelStyle={styles.formlabel}>Title</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({title: text})}
+                                value={this.state.title}
+                                placeholder='What was your workout?'
+                                inputStyle={styles.inputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Description</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({description: text})}
-                    value={this.state.description}
-                    placeholder='Describe your workout'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Description</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({description: text})}
+                        value={this.state.description}
+                        placeholder='Describe your workout'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Duration</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({duration: text})}
-                    value={this.state.duration}
-                    placeholder='How long was your workout?'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Duration</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({duration: text})}
+                        value={this.state.duration}
+                        placeholder='How long was your workout?'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Location</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({location: text})}
-                    value={this.state.location}
-                    placeholder='Where was your workout?'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Location</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({location: text})}
+                        value={this.state.location}
+                        placeholder='Where was your workout?'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Calories Burned</FormLabel>
-                <FormInput
-                    onChangeText={text => this.updateForm({caloriesBurned: text})}
-                    value={this.state.caloriesBurned}
-                    placeholder='How much calories did you burn?'
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Calories Burned</FormLabel>
+                    <FormInput
+                        onChangeText={text => this.updateForm({caloriesBurned: text})}
+                        value={this.state.caloriesBurned}
+                        placeholder='How much calories did you burn?'
+                        inputStyle={styles.inputStyle}
+                        containerStyle={styles.containerStyle}/>
 
 
 
-                <Button
-                    onPress={this.handleSubmit}
-                    title='Submit'
-                    buttonStyle={styles.button}
-                />
+                    <Button
+                        onPress={this.handleSubmit}
+                        title='Submit'
+                        buttonStyle={styles.button}
+                    />
 
-                {/*dropdown to choose from three meals*/}
+                    {/*dropdown to choose from three meals*/}
 
-                {/*<FormLabel>Password</FormLabel>*/}
-                {/*<FormInput*/}
-                {/*ref={input => this.password = input}*/}
-                {/*placeholder='password'/>*/}
-                {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
+                    {/*<FormLabel>Password</FormLabel>*/}
+                    {/*<FormInput*/}
+                    {/*ref={input => this.password = input}*/}
+                    {/*placeholder='password'/>*/}
+                    {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
-                {/*<FormLabel>Confirm Password</FormLabel>*/}
-                {/*<FormInput*/}
-                {/*ref={input => this.password2 = input}*/}
-                {/*placeholder='please type in the same password'/>*/}
-                {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
+                    {/*<FormLabel>Confirm Password</FormLabel>*/}
+                    {/*<FormInput*/}
+                    {/*ref={input => this.password2 = input}*/}
+                    {/*placeholder='please type in the same password'/>*/}
+                    {/*<FormValidationMessage>{'This field is required'}</FormValidationMessage>*/}
 
-                {/*<Button*/}
-                {/*title='Register'*/}
-                {/*onPress={this.handleSubmit.bind(this)}/>*/}
+                    {/*<Button*/}
+                    {/*title='Register'*/}
+                    {/*onPress={this.handleSubmit.bind(this)}/>*/}
 
-            </ScrollView>
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
 const styles = StyleSheet.create({
-    // text: {
-    //     fontSize: 20,
-    //     alignSelf: 'center',
-    //     color: colors.night,
-    //     fontFamily: 'Arial',
-    // },
+    backgroundImage: {
+        flex: 1,
+    },
     titleFont: {
         fontFamily: 'Arial',
         fontSize: 25,
@@ -150,9 +150,6 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         marginBottom: 15
-    },
-    formContainer: {
-        backgroundColor: colors.darkGreen
     },
     button: {
         marginTop: 10,

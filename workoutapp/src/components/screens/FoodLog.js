@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {ScrollView, ImageBackground, View, StyleSheet} from 'react-native';
 import { Text, Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
@@ -9,6 +9,7 @@ import cookie from "react-cookies";
 import MealItem from '../../elements/MealItem'
 import ModalDropdown from 'react-native-modal-dropdown';
 import AddButton from '../../elements/AddButton'
+import foodBG from '../../assets/images/food.png';
 
 class FoodLog extends Component {
     static navigationOptions = {
@@ -137,11 +138,12 @@ class FoodLog extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
-
+            <ImageBackground source={foodBG} style={styles.backgroundImage}>
                 <View style={styles.header}>
                     <ModalDropdown
                         dropdownTextStyle={styles.dropdownText}
+                        textStyle={styles.textStyle}
+                        dropdownStyle={styles.dropdownContainer}
                         options={['Today', 'This week', "This month", "Earlier"]}>
                         <Text h4 style={styles.titleFont}>Today </Text>
                     </ModalDropdown>
@@ -153,27 +155,27 @@ class FoodLog extends Component {
 
                     {/*<Divider style={styles.divider}/>*/}
                     {/*<View>*/}
-                        {/*<Text style={styles.paragraph}>Breakfast: {this.state.breakfasts.length}</Text>*/}
+                    {/*<Text style={styles.paragraph}>Breakfast: {this.state.breakfasts.length}</Text>*/}
                     {/*</View>*/}
                     {/*{this.renderMealsForUser(this.state.breakfasts)}*/}
 
 
                     {/*<Divider style={styles.divider}/>*/}
                     {/*<View>*/}
-                        {/*<Text style={styles.paragraph}>Lunch: {this.state.lunches.length}</Text>*/}
+                    {/*<Text style={styles.paragraph}>Lunch: {this.state.lunches.length}</Text>*/}
                     {/*</View>*/}
                     {/*{this.renderMealsForUser(this.state.lunches)}*/}
 
                     {/*<Divider style={styles.divider}/>*/}
                     {/*<View>*/}
-                        {/*<Text style={styles.paragraph}>Dinner: {this.state.dinners.length}</Text>*/}
+                    {/*<Text style={styles.paragraph}>Dinner: {this.state.dinners.length}</Text>*/}
                     {/*</View>*/}
                     {/*{this.renderMealsForUser(this.state.dinners)}*/}
                     <AddButton addAction={this.handleAddMeal}/>
 
                 </ScrollView>
                 {/*<BottomNavBar/>*/}
-            </View>
+            </ImageBackground>
         )
     }
 }
@@ -181,18 +183,14 @@ class FoodLog extends Component {
 export default FoodLog
 
 export const styles = StyleSheet.create({
-    homeContainer: {
-        flex: 1,
-        flexDirection: 'column'
-        // justifyContent: 'space-between',
-        // padding: 20
+    backgroundImage: {
+        flex: 1
     },
     header: {
-        height: 80,
-        justifyContent: 'center',
+        height: 200,
         alignItems: 'center',
-        backgroundColor: colors.darkGreen,
-        flexDirection: 'row'
+        flexDirection: 'column',
+        marginTop: 40
     },
     MealContainerStyleOne: {
         flex: 2,
@@ -205,16 +203,23 @@ export const styles = StyleSheet.create({
     },
     titleFont: {
         color: colors.white,
-        fontSize: 14,
-        fontFamily: 'Arial'
+        fontSize: 20,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
     },
     mealListContent: {
         backgroundColor: colors.white,
     },
+    dropdownContainer:{
+        backgroundColor: 'white'
+    },
     dropdownText: {
-        color: 'black',
-        fontSize: 16,
-        fontFamily: 'Arial'
+        color: colors.darkgray,
+        fontSize: 14,
+        fontFamily: 'Arial',
+    },
+    textStyle: {
+        color: colors.darkgray
     },
     paragraph: {
         color: colors.green,

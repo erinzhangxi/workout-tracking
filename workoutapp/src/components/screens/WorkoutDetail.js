@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, TouchableOpacity, Clipboard,
+import { View, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, Clipboard,
     ToastAndroid,
     AlertIOS,
     Platform } from 'react-native'
@@ -12,6 +12,7 @@ import WorkoutService from "../../services/WorkoutService";
 import Animation from 'lottie-react-native';
 import stars from '../../assets/animations/5_stars.json';
 import BackButton from '../../elements/BackButton.js'
+import workoutBG from '../../assets/images/DetailsBG.png';
 
 class WorkoutDetail extends Component {
     static navigationOptions = {
@@ -81,142 +82,138 @@ class WorkoutDetail extends Component {
         };
 
         return (
-            <ScrollView style={styles.container}>
-                <BackButton page='Home'/>
-                <Card
-                    title={this.state.title}
-                    image={require('../../assets/images/running.jpg')}>
-                    <Text style={{marginBottom: 10}}>
-                        {this.state.description}
-                    </Text>
-                    <Text style={{marginBottom: 10}}>
-                        {this.state.location}
-                    </Text>
-                    <Text style={{marginBottom: 10}}>
-                        {this.state.time}
-                    </Text>
-                    <Text style={{marginBottom: 10}}>
-                        {this.state.duration}
-                    </Text>
-                    <Text style={{marginBottom: 10}}>
-                        {this.state.caloriesBurned}
-                    </Text>
+            <ImageBackground source={workoutBG} style={styles.backgroundImage}>
+                <ScrollView>
+                    <BackButton page='Home'/>
+                    <Card
+                        title={this.state.title}
+                        image={require('../../assets/images/running.jpg')}
+                        containerStyle={styles.cardStyle}>
+                        <Text style={{marginBottom: 10}}>
+                            {this.state.description}
+                        </Text>
+                        <Text style={{marginBottom: 10}}>
+                            {this.state.location}
+                        </Text>
+                        <Text style={{marginBottom: 10}}>
+                            {this.state.time}
+                        </Text>
+                        <Text style={{marginBottom: 10}}>
+                            {this.state.duration}
+                        </Text>
+                        <Text style={{marginBottom: 10}}>
+                            {this.state.caloriesBurned}
+                        </Text>
 
-                    <View style={styles.animationContainer}>
-                        <Animation
-                            ref={animation => {
-                                this.animation = animation;
-                            }}
-                            style={styles.animation}
-                            loop={true}
-                            source={stars}
-                        />
-                    </View>
-
-                    <Button
-                        icon={<Icon name='code' color='#ffffff' />}
-                        backgroundColor='red'
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        title='Delete'
-                        onPress={params.handleDelete}/>
-
-
-                    <TouchableOpacity onPress={()=>{
-                        Share.open(shareOptions);
-                    }}>
-                        <View style={styles.instructions}>
-                            <Text style={styles.shareText}>Share</Text>
+                        <View style={styles.animationContainer}>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={styles.animation}
+                                loop={true}
+                                source={stars}
+                            />
                         </View>
-                    </TouchableOpacity>
 
-
-                    <ShareSheet visible={this.state.visible} onCancel={this.onCancel.bind(this)}>
-                        <Button iconSrc={{ uri: TWITTER_ICON }}
-                                onPress={()=>{
-                                    this.onCancel();
-                                    setTimeout(() => {
-                                        Share.shareSingle(Object.assign(shareOptions, {
-                                            "social": "twitter"
-                                        }));
-                                    },300);
-                                }}>Twitter</Button>
-                        <Button iconSrc={{ uri: FACEBOOK_ICON }}
-                                onPress={()=>{
-                                    this.onCancel();
-                                    setTimeout(() => {
-                                        Share.shareSingle(Object.assign(shareOptions, {
-                                            "social": "facebook"
-                                        }));
-                                    },300);
-                                }}>Facebook</Button>
-                        <Button iconSrc={{ uri: WHATSAPP_ICON }}
-                                onPress={()=>{
-                                    this.onCancel();
-                                    setTimeout(() => {
-                                        Share.shareSingle(Object.assign(shareOptions, {
-                                            "social": "whatsapp"
-                                        }));
-                                    },300);
-                                }}>Whatsapp</Button>
-                        <Button iconSrc={{ uri: GOOGLE_PLUS_ICON }}
-                                onPress={()=>{
-                                    this.onCancel();
-                                    setTimeout(() => {
-                                        Share.shareSingle(Object.assign(shareOptions, {
-                                            "social": "googleplus"
-                                        }));
-                                    },300);
-                                }}>Google +</Button>
-                        <Button iconSrc={{ uri: EMAIL_ICON }}
-                                onPress={()=>{
-                                    this.onCancel();
-                                    setTimeout(() => {
-                                        Share.shareSingle(Object.assign(shareOptions, {
-                                            "social": "email"
-                                        }));
-                                    },300);
-                                }}>Email</Button>
                         <Button
-                            iconSrc={{ uri: CLIPBOARD_ICON }}
-                            onPress={()=>{
-                                this.onCancel();
-                                setTimeout(() => {
-                                    if(typeof shareOptions["url"] !== undefined) {
-                                        Clipboard.setString(shareOptions["url"]);
-                                        if (Platform.OS === "android") {
-                                            ToastAndroid.show('Link copiado al portapapeles', ToastAndroid.SHORT);
-                                        } else if (Platform.OS === "ios") {
-                                            AlertIOS.alert('Link copiado al portapapeles');
-                                        }
-                                    }
-                                },300);
-                            }}>Copy Link</Button>
-                        <Button iconSrc={{ uri: MORE_ICON }}
+                            icon={<Icon name='code' color='#ffffff' />}
+                            backgroundColor='red'
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            title='Delete'
+                            onPress={params.handleDelete}/>
+
+
+                        <TouchableOpacity onPress={()=>{
+                            Share.open(shareOptions);
+                        }}>
+                            <View style={styles.instructions}>
+                                <Text style={styles.shareText}>Share</Text>
+                            </View>
+                        </TouchableOpacity>
+
+
+                        <ShareSheet visible={this.state.visible} onCancel={this.onCancel.bind(this)}>
+                            <Button iconSrc={{ uri: TWITTER_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.shareSingle(Object.assign(shareOptions, {
+                                                "social": "twitter"
+                                            }));
+                                        },300);
+                                    }}>Twitter</Button>
+                            <Button iconSrc={{ uri: FACEBOOK_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.shareSingle(Object.assign(shareOptions, {
+                                                "social": "facebook"
+                                            }));
+                                        },300);
+                                    }}>Facebook</Button>
+                            <Button iconSrc={{ uri: WHATSAPP_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.shareSingle(Object.assign(shareOptions, {
+                                                "social": "whatsapp"
+                                            }));
+                                        },300);
+                                    }}>Whatsapp</Button>
+                            <Button iconSrc={{ uri: GOOGLE_PLUS_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.shareSingle(Object.assign(shareOptions, {
+                                                "social": "googleplus"
+                                            }));
+                                        },300);
+                                    }}>Google +</Button>
+                            <Button iconSrc={{ uri: EMAIL_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.shareSingle(Object.assign(shareOptions, {
+                                                "social": "email"
+                                            }));
+                                        },300);
+                                    }}>Email</Button>
+                            <Button
+                                iconSrc={{ uri: CLIPBOARD_ICON }}
                                 onPress={()=>{
                                     this.onCancel();
                                     setTimeout(() => {
-                                        Share.open(shareOptions)
+                                        if(typeof shareOptions["url"] !== undefined) {
+                                            Clipboard.setString(shareOptions["url"]);
+                                            if (Platform.OS === "android") {
+                                                ToastAndroid.show('Link copiado al portapapeles', ToastAndroid.SHORT);
+                                            } else if (Platform.OS === "ios") {
+                                                AlertIOS.alert('Link copiado al portapapeles');
+                                            }
+                                        }
                                     },300);
-                                }}>More</Button>
-                    </ShareSheet>
-                </Card>
+                                }}>Copy Link</Button>
+                            <Button iconSrc={{ uri: MORE_ICON }}
+                                    onPress={()=>{
+                                        this.onCancel();
+                                        setTimeout(() => {
+                                            Share.open(shareOptions)
+                                        },300);
+                                    }}>More</Button>
+                        </ShareSheet>
+                    </Card>
+                </ScrollView>
+            </ImageBackground>
 
-
-
-
-            </ScrollView>
         )
     }
 
 }
 
 const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: '#F5FCFF',
-        backgroundColor: colors.darkGreen
+    backgroundImage: {
+        flex: 1,
     },
     instructions: {
         marginTop: 20,
@@ -236,6 +233,9 @@ const styles = StyleSheet.create({
         width: 150,
         height: 80
     },
+    cardStyle: {
+        borderRadius: 10
+    }
 });
 
 //  twitter icon

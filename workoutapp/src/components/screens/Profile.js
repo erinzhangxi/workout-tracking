@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {View, ScrollView, Image, StyleSheet, TouchableOpacity, PixelRatio} from 'react-native';
-import { Text, Button, ListItem } from 'react-native-elements'
+import {View, ImageBackground, ScrollView, Image, StyleSheet, TouchableOpacity, PixelRatio} from 'react-native';
+import { Text, ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PROFILE_PICTURE from '../../assets/images/profile-placeholder.png'
 import cookie from "react-cookies";
@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-picker'
 import Animation from 'lottie-react-native';
 import setting from '../../assets/animations/49-Settings.json';
 import notification from '../../assets/animations/Notification_Red.json';
-
+import profileBG from '../../assets/images/profileBG.png';
 
 
 const list = [
@@ -128,75 +128,76 @@ class Profile extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.homeContainer}>
-                <View style={[styles.boxContainer]}>
-                    <View style={styles.avatarContainer}>
+            <ImageBackground source={profileBG} style={styles.backgroundImage}>
+                <ScrollView>
+                    <View style={[styles.boxContainer]}>
+                        <View style={styles.avatarContainer}>
 
-                        <TouchableOpacity onPress={this.selectPhotoTapped}>
-                            <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-                                { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
-                                    <Image style={styles.avatar} source={this.state.avatarSource} />
-                                }
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.userContainer}>
+                            <TouchableOpacity onPress={this.selectPhotoTapped}>
+                                <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+                                    { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+                                        <Image style={styles.avatar} source={this.state.avatarSource} />
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.userContainer}>
 
-                        {/*<View style={styles.animationContainer}>*/}
-                        {/*<Animation*/}
-                        {/*ref={animation => {*/}
-                        {/*this.animation = animation;*/}
-                        {/*}}*/}
-                        {/*style={styles.animation}*/}
-                        {/*loop={true}*/}
-                        {/*source={setting}*/}
-                        {/*/>*/}
-                        {/*</View>*/}
-                        <Icon
-                            name='settings-outline'
-                            size={20}
-                            color={'white'}
-                            onPress={()=> this.props.navigation.navigate('EditProfile')}/>}
+                            {/*<View style={styles.animationContainer}>*/}
+                            {/*<Animation*/}
+                            {/*ref={animation => {*/}
+                            {/*this.animation = animation;*/}
+                            {/*}}*/}
+                            {/*style={styles.animation}*/}
+                            {/*loop={true}*/}
+                            {/*source={setting}*/}
+                            {/*/>*/}
+                            {/*</View>*/}
+                            <Icon
+                                name='settings-outline'
+                                size={20}
+                                color={'white'}
+                                onPress={()=> this.props.navigation.navigate('EditProfile')}/>}
 
 
-                        <Text h4 style={styles.userFont}>username {this.state.username}</Text>
-                        <Text h4 style={styles.userFont}>Age {this.state.age}</Text>
-                        <Text h4 style={styles.userFont}>Current Weight {this.state.currentWeight}</Text>
-                    </View>
-                </View>
-
-                <View style={styles.messageContainer}>
-                    <View style={styles.titleWithNotification}>
-                        <Text style={styles.titleFont}>Messages from friends</Text>
-                        <View style={styles.notificationContainer}>
-                            <Animation
-                                ref={animation => {
-                                    this.animation = animation;
-                                }}
-                                style={styles.notification}
-                                loop={true}
-                                source={notification}
-                            />
+                            <Text h4 style={styles.userFontTitle}>username</Text>  <Text h4 style={styles.userFont}>{this.state.username}</Text>
+                            <Text h4 style={styles.userFontTitle}>Age</Text> <Text h4 style={styles.userFont}> {this.state.age}</Text>
+                            <Text h4 style={styles.userFontTitle}>Current Weight</Text> <Text h4 style={styles.userFont}> {this.state.currentWeight}</Text>
                         </View>
                     </View>
 
-                    {this.renderFeeds()}
-                </View>
-            </ScrollView>
+                    <View style={styles.messageContainer}>
+                        <View style={styles.titleWithNotification}>
+                            <Text style={styles.titleFont}>Messages from friends</Text>
+                            <View style={styles.notificationContainer}>
+                                <Animation
+                                    ref={animation => {
+                                        this.animation = animation;
+                                    }}
+                                    style={styles.notification}
+                                    loop={true}
+                                    source={notification}
+                                />
+                            </View>
+                        </View>
+
+                        {this.renderFeeds()}
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
 
 export const styles = StyleSheet.create({
-    homeContainer: {
+    backgroundImage: {
         flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.white
+        // resizeMode: 'stretch', // or 'cover'
     },
     boxContainer: {
         flex: 2,
-        backgroundColor: colors.darkGreen,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        height: 260
         // alignItems: 'center',
         // justifyContent: 'center'
     },
@@ -211,8 +212,15 @@ export const styles = StyleSheet.create({
         flex: 7,
         backgroundColor: colors.white
     },
+    userFontTitle: {
+        marginTop: 5,
+        color: colors.lightishgray,
+        fontSize: 17,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
+    },
     userFont: {
-        color: colors.white,
+        color: colors.lightgray,
         fontSize: 17,
         fontFamily: 'Arial'
     },

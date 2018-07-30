@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View } from 'react-native';
+import { ImageBackground, ScrollView, View } from 'react-native';
 import { Button, FormLabel, FormInput, Text } from 'react-native-elements'
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
@@ -7,7 +7,7 @@ import {styles} from "./Login";
 import BackButton from '../../elements/BackButton.js'
 import gears from '../../assets/animations/gears.json';
 import Animation from 'lottie-react-native';
-
+import bg from '../../assets/images/editor.png';
 
 class EditProfile extends Component {
     static navigationOptions = {
@@ -81,63 +81,65 @@ class EditProfile extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.profileContainer}>
-                <BackButton page='Profile'/>
-                <View style={styles.profilePageHeader}>
-                    <Text h3 style={styles.titleTextDarkBackground}>Edit Profile</Text>
-                    <View style={styles.gearsContainer}>
-                        <Animation
-                            ref={animation => {
-                                this.animation = animation;
-                            }}
-                            style={styles.gear}
-                            loop={true}
-                            source={gears}
-                        />
+            <ImageBackground source={bg} style={styles.backgroundImage}>
+                <ScrollView>
+                    <BackButton page='Profile'/>
+                    <View style={styles.profilePageHeader}>
+                        <Text h3 style={styles.titleTextDarkBackground}>Edit Profile</Text>
+                        <View style={styles.gearsContainer}>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={styles.gear}
+                                loop={true}
+                                source={gears}
+                            />
+                        </View>
                     </View>
-                </View>
-                <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({username: text})}
-                            value={this.state.username}
-                            placeholder='username'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Name</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({username: text})}
+                                value={this.state.username}
+                                placeholder='username'
+                                inputStyle={styles.profileInputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Email</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({email: text})}
-                            value={this.state.email}
-                            placeholder='email'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Email</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({email: text})}
+                                value={this.state.email}
+                                placeholder='email'
+                                inputStyle={styles.profileInputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Age</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({age: text})}
-                            value={this.state.age}
-                            placeholder='age'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Age</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({age: text})}
+                                value={this.state.age}
+                                placeholder='age'
+                                inputStyle={styles.profileInputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Current Weight</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({currentWeight: text})}
-                            value={this.state.currentWeight}
-                            placeholder='current weight'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Current Weight</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({currentWeight: text})}
+                                value={this.state.currentWeight}
+                                placeholder='current weight'
+                                inputStyle={styles.profileInputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <FormLabel labelStyle={styles.formlabel}>Height</FormLabel>
-                <FormInput  onChangeText={text => this.updateForm({height: text})}
-                            value={this.state.height}
-                            placeholder='current height'
-                            inputStyle={styles.inputStyle}
-                            containerStyle={styles.containerStyle}/>
+                    <FormLabel labelStyle={styles.formlabel}>Height</FormLabel>
+                    <FormInput  onChangeText={text => this.updateForm({height: text})}
+                                value={this.state.height}
+                                placeholder='current height'
+                                inputStyle={styles.profileInputStyle}
+                                containerStyle={styles.containerStyle}/>
 
-                <Button
-                    onPress={this.updateProfile}
-                    title='Save'
-                    buttonStyle={styles.button}
-                />
+                    <Button
+                        onPress={this.updateProfile}
+                        title='Save'
+                        buttonStyle={styles.button}
+                    />
 
-            </ScrollView>
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }

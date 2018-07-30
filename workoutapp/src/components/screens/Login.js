@@ -157,15 +157,16 @@ export const styles = StyleSheet.create({
     // container: {
     //     backgroundColor: colors.white
     // },
-    profileContainer: {
-        backgroundColor: colors.darkGreen
-    },
     formlabel: {
         color: colors.white,
         fontFamily: 'Arial'
     },
     inputStyle: {
         color: colors.white,
+        fontFamily: 'Arial'
+    },
+    profileInputStyle: {
+        color: colors.charcoal,
         fontFamily: 'Arial'
     },
     containerStyle: {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {View, ScrollView, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import { Text, Button, ListItem } from 'react-native-elements'
+import {View, ImageBackground, ScrollView, TextInput, StyleSheet } from 'react-native';
 import colors from 'Colors';
 import cookie from "react-cookies";
 import UserService from "../../services/UserService";
 import SwipeoutWrapper from '../../elements/SwipeoutWrapper';
 import BackButton from '../../elements/BackButton.js'
 import AddButton from '../../elements/AddButton'
+import weightBG from '../../assets/images/DetailsBG.png';
 
 class WeightList extends Component {
     static navigationOptions = {
@@ -90,7 +90,8 @@ class WeightList extends Component {
 
     render() {
         return (
-            <View style={styles.homeContainer}>
+            <ImageBackground source={weightBG} style={styles.backgroundImage}>
+            <ScrollView>
                 <BackButton page='Progress'/>
                 <View style={styles.inputContainer}>
                     <TextInput
@@ -106,7 +107,8 @@ class WeightList extends Component {
                     {this.renderWeightList()}
 
                 </ScrollView>
-            </View>
+            </ScrollView>
+            </ImageBackground>
         )
 
     }
@@ -116,12 +118,8 @@ class WeightList extends Component {
 export default WeightList;
 
 export const styles = StyleSheet.create({
-    homeContainer: {
+    backgroundImage: {
         flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.darkGreen
-        // justifyContent: 'space-between',
-        // padding: 20
     },
     inputContainer: {
         padding: 10

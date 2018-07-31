@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { View, ScrollView, ImageBackground, StyleSheet } from 'react-native'
-import { Text, Button, Card, Icon, ListItem } from 'react-native-elements'
+import { Text, Button, Card, Icon } from 'react-native-elements'
 import cookie from "react-cookies";
 import FoodService from "../../services/FoodService";
 import Animation from 'lottie-react-native';
 import stars from '../../assets/animations/5_stars.json';
 import BackButton from '../../elements/BackButton.js'
-import colors from 'Colors';
 import mealBG from '../../assets/images/DetailsBG.png';
+import colors from 'Colors';
 
 class MealDetails extends Component {
     static navigationOptions = {
@@ -18,11 +18,9 @@ class MealDetails extends Component {
         super(props);
 
         this.state = {
-
         }
         this.foodService = FoodService.instance;
     }
-
 
     componentWillMount() {
         var user = cookie.load('user');
@@ -67,25 +65,29 @@ class MealDetails extends Component {
                 <ScrollView>
                     <BackButton page='FoodLog'/>
                     <Card
-                        title={this.state.title}
+                        title={this.state.type}
                         image={require('../../assets/images/meal-placeholder.jpg')}
                         containerStyle={styles.cardStyle}>
-                        <Text style={styles.fontStyle}>
-                            Meal Details
+
+                        <Text style={styles.titleFont}>
+                            Food List
+                        </Text>
+                        <Text style={styles.textFont}>
+                            /* Foods detail goes here */
+                            {this.renderFoodList()}
                         </Text>
 
-                        <Text style={styles.fontStyle}>
+                        <Text style={styles.titleFont}>
+                           Date
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.date}
                         </Text>
-                        <Text style={styles.fontStyle}>
-                            {this.state.type}
-                        </Text>
+
                         {/*<Text style={{marginBottom: 10}}>*/}
                         {/*Length:  {this.state.foods.length}*/}
                         {/*</Text>*/}
-
-                        /* Foods detail goes here */
-                        {this.renderFoodList()}
+                        
                         <View style={styles.animationContainer}>
                             <Animation
                                 ref={animation => {
@@ -121,12 +123,20 @@ const styles = StyleSheet.create({
         width: 150,
         height: 80
     },
-    fontStyle: {
-        fontFamily: 'Arial',
-        marginBottom: 10
-    },
     cardStyle: {
         borderRadius: 10
+    },
+    titleFont: {
+        color: colors.lightishgray,
+        fontSize: 14,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
+    },
+    textFont: {
+        marginBottom: 10,
+        color: colors.lightgray,
+        fontSize: 13,
+        fontFamily: 'Arial',
     }
 
 });

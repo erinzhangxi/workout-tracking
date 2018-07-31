@@ -7,6 +7,7 @@ import cookie from "react-cookies";
 import TrophyScreen from "./TrophyScreen";
 import BackButton from '../../elements/BackButton.js'
 import bg from '../../assets/images/editor.png';
+import moment from "moment/moment";
 
 class WorkoutEditor extends Component {
     static navigationOptions = {
@@ -37,10 +38,12 @@ class WorkoutEditor extends Component {
         }
     }
     handleSubmit = () => {
+        var now = moment(new Date()).format('YYYY MM DD');
+
         if (this.state) {
 
             let workout = {
-                time: new Date().toLocaleString(),
+                time: now,
                 duration: this.state.duration,
                 title: this.state.title,
                 description: this.state.description,

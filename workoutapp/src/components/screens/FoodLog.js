@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {ScrollView, ImageBackground, View, StyleSheet} from 'react-native';
-import { Text, Button } from 'react-native-elements'
+import { Text, Card, Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
 import FoodLogEditor from "./FoodLogEditor";
@@ -139,19 +139,22 @@ class FoodLog extends Component {
     render() {
         return (
             <ImageBackground source={foodBG} style={styles.backgroundImage}>
-                <View style={styles.header}>
-                    <ModalDropdown
-                        dropdownTextStyle={styles.dropdownText}
-                        textStyle={styles.textStyle}
-                        dropdownStyle={styles.dropdownContainer}
-                        options={['Today', 'This week', "This month", "Earlier"]}>
-                        <Text h4 style={styles.titleFont}>Today </Text>
-                    </ModalDropdown>
-                </View>
-
-                <ScrollView style={styles.mealListContent}>
-
-                    {this.renderMealsForUser(this.state.meals)}
+                <ScrollView>
+                    <View style={styles.header}>
+                        <ModalDropdown
+                            dropdownTextStyle={styles.dropdownText}
+                            textStyle={styles.textStyle}
+                            dropdownStyle={styles.dropdownContainer}
+                            options={['Today', 'This week', "This month", "Earlier"]}>
+                            <Text h4 style={styles.titleFont}>Today </Text>
+                        </ModalDropdown>
+                    </View>
+                    <Card title='TOTAL CALORIES'>
+                        <Text h4 style={styles.statsFont}>0</Text> <Text h4 style={styles.statsTitleFont}>kCal</Text>
+                    </Card>
+                    <View style={styles.mealContainer}>
+                        {this.renderMealsForUser(this.state.meals)}
+                    </View>
 
                     {/*<Divider style={styles.divider}/>*/}
                     {/*<View>*/}
@@ -187,10 +190,12 @@ export const styles = StyleSheet.create({
         flex: 1
     },
     header: {
-        height: 200,
         alignItems: 'center',
         flexDirection: 'column',
         marginTop: 40
+    },
+    mealContainer:{
+       marginTop: 50
     },
     MealContainerStyleOne: {
         flex: 2,
@@ -207,8 +212,16 @@ export const styles = StyleSheet.create({
         fontFamily: 'Arial',
         fontWeight: 'bold'
     },
-    mealListContent: {
-        backgroundColor: colors.white,
+    statsFont: {
+        color: colors.ypsDark,
+        fontSize: 32,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
+    },
+    statsTitleFont: {
+        color: colors.ypsDark,
+        fontSize: 20,
+        fontFamily: 'Arial'
     },
     dropdownContainer:{
         backgroundColor: 'white'

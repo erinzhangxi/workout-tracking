@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, ScrollView, StyleSheet } from 'react-native';
+import {View, ImageBackground, ScrollView, StyleSheet } from 'react-native';
 import { Text, Button, ListItem, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from 'Colors';
@@ -7,6 +7,7 @@ import cookie from "react-cookies";
 import { LineChart, Grid } from 'react-native-svg-charts'
 import Animation from 'lottie-react-native';
 import clock from '../../assets/animations/stopwatch.json';
+import progress from '../../assets/images/progress.png';
 
 class Progress extends Component {
     static navigationOptions = {
@@ -55,15 +56,8 @@ class Progress extends Component {
 
 
     renderWeightStats = () => {
-
         return (
-
             <View>
-                <View style={styles.header}>
-
-                    <Text h4 style={styles.titleFont}>Progress</Text>
-                </View>
-
                 {/*<View style={styles.animationContainer}>*/}
                 {/*<Animation*/}
                 {/*ref={animation => {*/}
@@ -75,32 +69,9 @@ class Progress extends Component {
                 {/*/>*/}
                 {/*</View>*/}
 
-                <Card
-                    title='QUOTE OF THE DAY'>
-                    <Text style={styles.quoteFont}>
-                        Today is another chance. Make yourself proud.
-                    </Text>
-
-                    <View style={styles.animationContainer}>
-                        <Animation
-                            ref={animation => {
-                                this.animation = animation;
-                            }}
-                            style={styles.animation}
-                            loop={true}
-                            source={clock}
-                        />
-                    </View>
-
-                </Card>
-
                 <Card title='current Weight'>
-                        <Text h4 style={styles.statsFont}>{this.state.currentWeight}</Text>
+                    <Text h4 style={styles.statsFont}>{this.state.currentWeight} lbs</Text>
                 </Card>
-
-
-
-
             </View>
 
 
@@ -109,51 +80,72 @@ class Progress extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.homeContainer}>
-                {this.renderWeightStats()}
+            <ImageBackground source={progress} style={styles.backgroundImage}>
+                <ScrollView>
+                    <View style={styles.header}>
+                        <Text h4 style={styles.titleFont}>Progress</Text>
+                    </View>
 
-                <View style={[styles.boxContainer, styles.MealContainerStyle]}>
+                    <Card
+                        title='QUOTE OF THE DAY'>
+                        <Text style={styles.quoteFont}>
+                            Today is another chance. Make yourself proud.
+                        </Text>
 
-                    <LineChart
-                        style={{ height: 200 }}
-                        data={ this.state.weightRawData }
-                        svg={{ stroke: 'rgb(134, 65, 244)' }}
-                        contentInset={{ top: 20, bottom: 20 }}
-                    >
-                        <Grid/>
-                    </LineChart>
+                        <View style={styles.animationContainer}>
+                            <Animation
+                                ref={animation => {
+                                    this.animation = animation;
+                                }}
+                                style={styles.animation}
+                                loop={true}
+                                source={clock}
+                            />
+                        </View>
 
-                </View>
+                    </Card>
 
-                <View style={styles.buttonContainer}>
-                    <Button
-                        onPress={()=> this.props.navigation.navigate('WeightList')}
-                        title='View Weight History'
-                        buttonStyle={styles.button}
-                    />
-                </View>
-            </ScrollView>
+                    {this.renderWeightStats()}
+                    <View style={[styles.boxContainer, styles.MealContainerStyle]}>
+
+                        <LineChart
+                            style={{ height: 200 }}
+                            data={ this.state.weightRawData }
+                            svg={{ stroke: 'rgb(134, 65, 244)' }}
+                            contentInset={{ top: 20, bottom: 20 }}
+                        >
+                            <Grid/>
+                        </LineChart>
+
+                    </View>
+
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            onPress={()=> this.props.navigation.navigate('WeightList')}
+                            title='View Weight History'
+                            buttonStyle={styles.button}
+                        />
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
 
 export const styles = StyleSheet.create({
-    header: {
-        height: 80,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.darkGreen,
-        flexDirection: 'row'
-    },
-    homeContainer: {
+    backgroundImage: {
         flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.white
     },
     titleFont: {
         color: colors.white,
-        fontSize: 16,
-        fontFamily: 'Arial'
+        fontSize: 20,
+        fontFamily: 'Arial',
+        marginTop: 40,
+        fontWeight: 'bold'
+    },
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     boxContainer: {
         flex: 1

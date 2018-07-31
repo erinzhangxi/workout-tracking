@@ -89,19 +89,38 @@ class WorkoutDetail extends Component {
                         title={this.state.title}
                         image={require('../../assets/images/running.jpg')}
                         containerStyle={styles.cardStyle}>
-                        <Text style={{marginBottom: 10}}>
+                        <Text style={styles.titleFont}>
+                            Description
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.description}
                         </Text>
-                        <Text style={{marginBottom: 10}}>
+
+                        <Text style={styles.titleFont}>
+                            Location
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.location}
                         </Text>
-                        <Text style={{marginBottom: 10}}>
+
+                        <Text style={styles.titleFont}>
+                            Date
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.time}
                         </Text>
-                        <Text style={{marginBottom: 10}}>
+
+                        <Text style={styles.titleFont}>
+                            Duration
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.duration}
                         </Text>
-                        <Text style={{marginBottom: 10}}>
+
+                        <Text style={styles.titleFont}>
+                            Calories Burned
+                        </Text>
+                        <Text style={styles.textFont}>
                             {this.state.caloriesBurned}
                         </Text>
 
@@ -235,6 +254,18 @@ const styles = StyleSheet.create({
     },
     cardStyle: {
         borderRadius: 10
+    },
+    titleFont: {
+        color: colors.lightishgray,
+        fontSize: 14,
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
+    },
+    textFont: {
+        marginBottom: 10,
+        color: colors.lightgray,
+        fontSize: 13,
+        fontFamily: 'Arial',
     }
 });
 
